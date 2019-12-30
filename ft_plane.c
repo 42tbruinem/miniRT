@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:10:56 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 18:54:33 by tbruinem      ########   odam.nl         */
+/*   Updated: 2019/12/30 19:45:49 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		ft_plane_addback(t_plane **list, t_plane *new)
 	iter->next = new;
 }
 
-t_plane	*ft_plane_new(void)
+t_plane		*ft_plane_new(void)
 {
 	t_plane	*new;
 
@@ -43,6 +43,8 @@ static void	*ft_plane_properties(t_plane *plane)
 	char	*properties;
 
 	properties = malloc(sizeof(void *) * 8);
+	if (!properties)
+		return (properties);
 	properties[0] = &plane->prop.pivot.x;
 	properties[1] = &plane->prop.pivot.y;
 	properties[2] = &plane->prop.pivot.z;
@@ -53,29 +55,35 @@ static void	*ft_plane_properties(t_plane *plane)
 	return ((void *)properties);
 }
 
+static int	*ft_plane_floats(void)
+{
+	char	*floats;
+
+	floats = malloc(sizeof(int) * (7 + 1));
+	if (!floats)
+		return (floats);
+	floats[0] = 0;
+	floats[1] = 1;
+	floats[2] = 2;
+	floats[3] = 3;
+	floats[4] = 4;
+	floats[5] = 5;
+	floats[6] = 6;
+	floats[7] = -1;
+	return (floats);
+}
+
 void		ft_plane_init(char *str, t_data *data)
 {
 	t_plane		*new;
 	void		*ppty;
-	int			i;
-	int			j;
+	int			*floats;
 
 	new = ft_plane_new();
 	ppty = ft_plane_properties(new);
-	i = 0;
-	j = 0;
-	while (str[i] && ((char *)ppty)[j])
-	{
-		if (str[i] != ' ' && str[i] != ',')
-		{
-			if (j != 0)
-				((int *)ppty)[j] = ft_atoi(str + i, &i);
-			else
-				((double *)ppty)[j] = ft_atod(str + i, &i);
-			j++;
-		}
-		i++;
-	}
+	floats = ft_plane_floats();
+	ft_ato_i_or_f(str, ppty, floats);
 	ft_plane_addback(&data->pln, new);
 	free(ppty);
+	free(floats);
 }

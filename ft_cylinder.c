@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:45 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 18:53:38 by tbruinem      ########   odam.nl         */
+/*   Updated: 2019/12/30 19:45:55 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	*ft_cylinder_properties(t_cylndr *cylndr)
 	char	*properties;
 
 	properties = malloc(sizeof(void *) * 9);
+	if (!properties)
+		return (properties);
 	properties[0] = &cylndr->prop.pivot.x;
 	properties[1] = &cylndr->prop.pivot.y;
 	properties[2] = &cylndr->prop.pivot.z;
@@ -57,29 +59,35 @@ static void	*ft_cylinder_properties(t_cylndr *cylndr)
 	return ((void *)properties);
 }
 
+static int	*ft_cylinder_floats(void)
+{
+	char	*floats;
+
+	floats = malloc(sizeof(int) * (7 + 1));
+	if (!floats)
+		return (floats);
+	floats[0] = 0;
+	floats[1] = 1;
+	floats[2] = 2;
+	floats[3] = 3;
+	floats[4] = 4;
+	floats[5] = 5;
+	floats[6] = 6;
+	floats[7] = -1;
+	return (floats);
+}
+
 void		ft_cylinder_init(char *str, t_data *data)
 {
 	t_cylndr	*new;
 	void		*ppty;
-	int			i;
-	int			j;
+	int			*floats;
 
 	new = ft_cylinder_new();
 	ppty = ft_cylinder_properties(new);
-	i = 0;
-	j = 0;
-	while (str[i] && ((char *)ppty)[j])
-	{
-		if (str[i] != ' ' && str[i] != ',')
-		{
-			if (j != 0)
-				((int *)ppty)[j] = ft_atoi(str + i, &i);
-			else
-				((double *)ppty)[j] = ft_atod(str + i, &i);
-			j++;
-		}
-		i++;
-	}
+	floats = ft_cylinder_floats();
+	ft_ato_i_or_f(str, ppty, floats);
 	ft_cylinder_addback(&data->sqr, new);
 	free(ppty);
+	free(floats);
 }

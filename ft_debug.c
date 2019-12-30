@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:23:47 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 19:02:28 by tbruinem      ########   odam.nl         */
+/*   Updated: 2019/12/30 19:38:21 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_cam_print(t_cam *cam)
 {
 	printf("----CAMERA-------\n");
 	printf("COORD: X%f,Y%f,Z%f\n", cam->prop.pivot.x, cam->prop.pivot.y, cam->prop.pivot.z);
-	printf("DIR:   X%f,Y%f,Z%f\n", cam->dir.x, cam->dir.y, cam->dir.z);
+	printf("DIR:   X%f,Y%f,Z%f\n", cam->prop.dir.x, cam->prop.dir.y, cam->prop.dir.z);
 	printf("FOV: %d\n", cam->fov);
 }
 
@@ -55,7 +55,7 @@ void	ft_pln_print(t_plane *obj)
 	printf("----PLANE--------\n");
 	printf("COORD: X%f,Y%f,Z%f\n", obj->prop.pivot.x, obj->prop.pivot.y, obj->prop.pivot.z);
 	printf("COLOR: R%d,G%d,B%d\n", obj->color.red, obj->color.green, obj->color.blue);
-
+	printf("DIRECTION:")
 }
 
 

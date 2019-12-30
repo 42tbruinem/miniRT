@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 18:54:11 by tbruinem      ########   odam.nl         */
+/*   Updated: 2019/12/30 19:48:38 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static void	*ft_triangle_properties(t_trngl *trngl)
 	char	*properties;
 
 	properties = malloc(sizeof(void *) * 13);
+	if (!properties)
+		return (properties);
 	properties[0] = &trngl->p1.x;
 	properties[1] = &trngl->p1.y;
 	properties[2] = &trngl->p1.z;
@@ -62,29 +64,37 @@ static void	*ft_triangle_properties(t_trngl *trngl)
 	return ((void *)properties);
 }
 
+static int	*ft_triangle_floats(void)
+{
+	char	*floats;
+
+	floats = malloc(sizeof(int) * (9 + 1));
+	if (!floats)
+		return (floats);
+	floats[0] = 0;
+	floats[1] = 1;
+	floats[2] = 2;
+	floats[3] = 3;
+	floats[4] = 4;
+	floats[5] = 5;
+	floats[6] = 6;
+	floats[7] = 7;
+	floats[8] = 8;
+	floats[9] = -1;
+	return (floats);
+}
+
 void		ft_triangle_init(char *str, t_data *data)
 {
 	t_trngl		*new;
 	void		*ppty;
-	int			i;
-	int			j;
+	int			*floats;
 
 	new = ft_triangle_new();
 	ppty = ft_triangle_properties(new);
-	i = 0;
-	j = 0;
-	while (str[i] && ((char *)ppty)[j])
-	{
-		if (str[i] != ' ' && str[i] != ',')
-		{
-			if (j != 0)
-				((int *)ppty)[j] = ft_atoi(str + i, &i);
-			else
-				((double *)ppty)[j] = ft_atod(str + i, &i);
-			j++;
-		}
-		i++;
-	}
+	floats = ft_triangle_floats();
+	ft_ato_i_or_f(str, ppty, floats);
 	ft_triangle_addback(&data->tri, new);
 	free(ppty);
+	free(floats);
 }

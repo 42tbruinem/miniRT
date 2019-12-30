@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:09:10 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 19:33:12 by tbruinem      ########   odam.nl         */
+/*   Updated: 2019/12/30 19:45:22 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static void	*ft_square_properties(t_square *square)
 	char	*properties;
 
 	properties = malloc(sizeof(void *) * 8);
+	if (!properties)
+		return (properties);
 	properties[0] = &square->prop.pivot.x;
 	properties[1] = &square->prop.pivot.y;
 	properties[2] = &square->prop.pivot.z;
@@ -55,7 +57,7 @@ static void	*ft_square_properties(t_square *square)
 	return ((void *)properties);
 }
 
-static int *ft_square_floats(void)
+static int	*ft_square_floats(void)
 {
 	char	*floats;
 
@@ -85,4 +87,5 @@ void		ft_square_init(char *str, t_data *data)
 	ft_ato_i_or_f(str, ppty, floats);
 	ft_square_addback(&data->sqr, new);
 	free(ppty);
+	free(floats);
 }

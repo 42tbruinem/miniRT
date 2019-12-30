@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:21:23 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 18:54:24 by tbruinem      ########   odam.nl         */
+/*   Updated: 2019/12/30 19:45:43 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static void	*ft_sphere_properties(t_sphere *sphere)
 	char	*properties;
 
 	properties = malloc(sizeof(void *) * 8);
+	if (!properties)
+		return (properties);
 	properties[0] = &sphere->prop.pivot.x;
 	properties[1] = &sphere->prop.pivot.y;
 	properties[2] = &sphere->prop.pivot.z;
@@ -55,29 +57,35 @@ static void	*ft_sphere_properties(t_sphere *sphere)
 	return ((void *)properties);
 }
 
+static int	*ft_sphere_floats(void)
+{
+	char	*floats;
+
+	floats = malloc(sizeof(int) * (7 + 1));
+	if (!floats)
+		return (floats);
+	floats[0] = 0;
+	floats[1] = 1;
+	floats[2] = 2;
+	floats[3] = 3;
+	floats[4] = 4;
+	floats[5] = 5;
+	floats[6] = 6;
+	floats[7] = -1;
+	return (floats);
+}
+
 void		ft_sphere_init(char *str, t_data *data)
 {
 	t_sphere	*new;
 	void		*ppty;
-	int			i;
-	int			j;
+	int			*floats;
 
 	new = ft_sphere_new();
 	ppty = ft_sphere_properties(new);
-	i = 0;
-	j = 0;
-	while (str[i] && ((char *)ppty)[j])
-	{
-		if (str[i] != ' ' && str[i] != ',')
-		{
-			if (j != 0)
-				((int *)ppty)[j] = ft_atoi(str + i, &i);
-			else
-				((double *)ppty)[j] = ft_atod(str + i, &i);
-			j++;
-		}
-		i++;
-	}
+	floats = ft_sphere_floats();
+	ft_ato_i_or_f(str, ppty, floats);
 	ft_sphere_addback(&data->sph, new);
 	free(ppty);
+	free(floats);
 }
