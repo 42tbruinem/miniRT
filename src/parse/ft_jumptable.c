@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 13:38:57 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 15:33:25 by tbruinem      ########   odam.nl         */
+/*   Updated: 2019/12/31 16:44:03 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 
 t_initf		ft_jumptable(int id)
 {
-	const t_initf functs[9] = {
-		[0] = &ft_resolution_init,
-		[1] = &ft_ambient_init,
-		[2] = &ft_camera_init,
-		[3] = &ft_light_init,
-		[4] = &ft_sphere_init,
-		[5] = &ft_plane_init,
-		[6] = &ft_square_init,
-		[7] = &ft_cylinder_init,
-		[8] = &ft_triangle_init,
+	static const t_initf functs[9] = {
+		[RES] = &ft_resolution_init,
+		[AMB] = &ft_ambient_init,
+		[CAM] = &ft_camera_init,
+		[LIGHT] = &ft_light_init,
+		[SPH] = &ft_sphere_init,
+		[PLN] = &ft_plane_init,
+		[SQR] = &ft_square_init,
+		[CYL] = &ft_cylinder_init,
+		[TRI] = &ft_triangle_init,
 	};
 
-	return (functs[id]);
+	if (id != -1)
+		return (functs[id]);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:10:56 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 19:45:49 by tbruinem      ########   odam.nl         */
+/*   Updated: 2019/12/31 16:43:35 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ft_plane_addback(t_plane **list, t_plane *new)
 	t_plane	*iter;
 
 	iter = *list;
-	if (!list)
+	if (!iter)
 	{
 		*list = new;
 		return ;
@@ -32,58 +32,46 @@ t_plane		*ft_plane_new(void)
 	t_plane	*new;
 
 	new = malloc(sizeof(t_plane));
+	if (!new)
+		return (new);
 	new->color = ft_color_init();
 	new->prop = ft_prop_init();
 	new->next = NULL;
 	return (new);
 }
 
-static void	*ft_plane_properties(t_plane *plane)
+static void	**ft_plane_properties(t_plane *plane)
 {
-	char	*properties;
+	void	**properties;
 
-	properties = malloc(sizeof(void *) * 8);
+	properties = malloc(sizeof(void *) * (9 + 1));
 	if (!properties)
 		return (properties);
 	properties[0] = &plane->prop.pivot.x;
 	properties[1] = &plane->prop.pivot.y;
 	properties[2] = &plane->prop.pivot.z;
-	properties[3] = &plane->color.red;
-	properties[4] = &plane->color.green;
-	properties[5] = &plane->color.blue;
-	properties[6] = 0;
-	return ((void *)properties);
+	properties[3] = &plane->prop.dir.x;
+	properties[4] = &plane->prop.dir.y;
+	properties[5] = &plane->prop.dir.z;
+	properties[6] = &plane->color.red;
+	properties[7] = &plane->color.green;
+	properties[8] = &plane->color.blue;
+	properties[9] = 0;
+	return ((void **)properties);
 }
 
-static int	*ft_plane_floats(void)
-{
-	char	*floats;
-
-	floats = malloc(sizeof(int) * (7 + 1));
-	if (!floats)
-		return (floats);
-	floats[0] = 0;
-	floats[1] = 1;
-	floats[2] = 2;
-	floats[3] = 3;
-	floats[4] = 4;
-	floats[5] = 5;
-	floats[6] = 6;
-	floats[7] = -1;
-	return (floats);
-}
-
-void		ft_plane_init(char *str, t_data *data)
+void		ft_plane_init(char *str, t_data *data, int i)
 {
 	t_plane		*new;
-	void		*ppty;
-	int			*floats;
+	void		**ppty;
 
 	new = ft_plane_new();
+	if (!new)
+		return ;
 	ppty = ft_plane_properties(new);
-	floats = ft_plane_floats();
-	ft_ato_i_or_f(str, ppty, floats);
+	if (!ppty)
+		return ;
+	ft_ato_i_or_f(str + i, ppty, 5);
 	ft_plane_addback(&data->pln, new);
 	free(ppty);
-	free(floats);
 }

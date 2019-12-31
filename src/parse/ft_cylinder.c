@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:45 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 19:45:55 by tbruinem      ########   odam.nl         */
+/*   Updated: 2019/12/31 16:45:43 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ft_cylinder_addback(t_cylndr **list, t_cylndr *new)
 	t_cylndr	*iter;
 
 	iter = *list;
-	if (!list)
+	if (!iter)
 	{
 		*list = new;
 		return ;
@@ -32,6 +32,8 @@ t_cylndr	*ft_cylinder_new(void)
 	t_cylndr	*new;
 
 	new = malloc(sizeof(t_cylndr));
+	if (!new)
+		return (new);
 	new->color = ft_color_init();
 	new->width = 0;
 	new->height = 0;
@@ -40,54 +42,40 @@ t_cylndr	*ft_cylinder_new(void)
 	return (new);
 }
 
-static void	*ft_cylinder_properties(t_cylndr *cylndr)
+static void	**ft_cylinder_properties(t_cylndr *cylndr)
 {
-	char	*properties;
+	void	**properties;
 
-	properties = malloc(sizeof(void *) * 9);
+	properties = malloc(sizeof(void *) * (11 + 1));
 	if (!properties)
 		return (properties);
 	properties[0] = &cylndr->prop.pivot.x;
 	properties[1] = &cylndr->prop.pivot.y;
 	properties[2] = &cylndr->prop.pivot.z;
-	properties[3] = &cylndr->width;
-	properties[4] = &cylndr->height;
-	properties[5] = &cylndr->color.red;
-	properties[6] = &cylndr->color.green;
-	properties[7] = &cylndr->color.blue;
-	properties[8] = 0;
-	return ((void *)properties);
+	properties[3] = &cylndr->prop.dir.x;
+	properties[4] = &cylndr->prop.dir.y;
+	properties[5] = &cylndr->prop.dir.z;
+	properties[6] = &cylndr->width;
+	properties[7] = &cylndr->height;
+	properties[8] = &cylndr->color.red;
+	properties[9] = &cylndr->color.green;
+	properties[10] = &cylndr->color.blue;
+	properties[11] = 0;
+	return ((void **)properties);
 }
 
-static int	*ft_cylinder_floats(void)
-{
-	char	*floats;
-
-	floats = malloc(sizeof(int) * (7 + 1));
-	if (!floats)
-		return (floats);
-	floats[0] = 0;
-	floats[1] = 1;
-	floats[2] = 2;
-	floats[3] = 3;
-	floats[4] = 4;
-	floats[5] = 5;
-	floats[6] = 6;
-	floats[7] = -1;
-	return (floats);
-}
-
-void		ft_cylinder_init(char *str, t_data *data)
+void		ft_cylinder_init(char *str, t_data *data, int i)
 {
 	t_cylndr	*new;
-	void		*ppty;
-	int			*floats;
+	void		**ppty;
 
 	new = ft_cylinder_new();
+	if (!new)
+		return ;
 	ppty = ft_cylinder_properties(new);
-	floats = ft_cylinder_floats();
-	ft_ato_i_or_f(str, ppty, floats);
-	ft_cylinder_addback(&data->sqr, new);
+	if (!ppty)
+		return ;
+	ft_ato_i_or_f(str + i, ppty, 7);
+	ft_cylinder_addback(&data->cyl, new);
 	free(ppty);
-	free(floats);
 }

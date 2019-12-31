@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:12:12 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 17:52:18 by tbruinem      ########   odam.nl         */
+/*   Updated: 2019/12/31 15:35:09 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ft_light_addback(t_light **list, t_light *new)
 	t_light	*iter;
 
 	iter = *list;
-	if (!list)
+	if (!iter)
 	{
 		*list = new;
 		return ;
@@ -41,9 +41,9 @@ t_light		*ft_light_new(void)
 	return (new);
 }
 
-static void	*ft_light_properties(t_light *light)
+static void	**ft_light_properties(t_light *light)
 {
-	char	*properties;
+	void	**properties;
 
 	properties = malloc(sizeof(void *) * 8);
 	properties[0] = &light->prop.pivot.x;
@@ -54,28 +54,26 @@ static void	*ft_light_properties(t_light *light)
 	properties[5] = &light->color.green;
 	properties[6] = &light->color.blue;
 	properties[7] = 0;
-	return ((void *)properties);
+	return ((void **)properties);
 }
 
-void		ft_light_init(char *str, t_data *data)
+void		ft_light_init(char *str, t_data *data, int i)
 {
 	t_light	*new;
-	void	*ppty;
-	int		i;
+	void	**ppty;
 	int		j;
 
 	new = ft_light_new();
 	ppty = ft_light_properties(new);
-	i = 0;
 	j = 0;
-	while (str[i] && ((char *)ppty)[j])
+	while (str[i] && (char *)(ppty[j]))
 	{
 		if (str[i] != ' ' && str[i] != ',')
 		{
-			if (j != 0)
-				((int *)ppty)[j] = ft_atoi(str + i, &i);
+			if (j <= 3)
+				*(double *)(ppty[j]) = ft_atod(str, &i);
 			else
-				((double *)ppty)[j] = ft_atod(str + i, &i);
+				*(int *)(ppty[j]) = ft_atoi(str, &i);
 			j++;
 		}
 		i++;

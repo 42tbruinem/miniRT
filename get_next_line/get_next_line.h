@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_minirt.c                                        :+:    :+:            */
+/*   get_next_line.h                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/30 12:47:02 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 17:44:33 by tbruinem      ########   odam.nl         */
+/*   Created: 2019/11/09 23:16:26 by tbruinem       #+#    #+#                */
+/*   Updated: 2019/12/21 14:34:15 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int		main(int argc, char **input)
-{
-	t_data	data;
-	int		fd;
+# include <unistd.h>
+# include <stdlib.h>
 
-	if (argc < 2 || argc > 2)
-		return (ft_error());
-	fd = open(input[1], O_RDONLY);
-	if (read(fd, (void *)0, 0) == -1)
-		return (ft_error());
-	data = ft_scene_read(fd);
-	return (0);
-}
+int		get_next_line(int fd, char **line);
+int		ft_strlen_n(char *str);
+void	clean_buffer(char *buffer, int bytes_read, int full);
+void	move_buffer(char *buffer, int bytes_read);
+char	*ft_realloc(char *str, char *buffer, int bytes_read);
+
+#endif

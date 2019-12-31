@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 19:48:38 by tbruinem      ########   odam.nl         */
+/*   Updated: 2019/12/31 15:00:28 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ft_triangle_addback(t_trngl **list, t_trngl *new)
 	t_trngl	*iter;
 
 	iter = *list;
-	if (!list)
+	if (!iter)
 	{
 		*list = new;
 		return ;
@@ -32,6 +32,8 @@ t_trngl		*ft_triangle_new(void)
 	t_trngl	*new;
 
 	new = malloc(sizeof(t_trngl));
+	if (!new)
+		return (new);
 	new->color = ft_color_init();
 	new->prop = ft_prop_init();
 	new->next = NULL;
@@ -41,9 +43,9 @@ t_trngl		*ft_triangle_new(void)
 	return (new);
 }
 
-static void	*ft_triangle_properties(t_trngl *trngl)
+static void	**ft_triangle_properties(t_trngl *trngl)
 {
-	char	*properties;
+	void	**properties;
 
 	properties = malloc(sizeof(void *) * 13);
 	if (!properties)
@@ -61,40 +63,21 @@ static void	*ft_triangle_properties(t_trngl *trngl)
 	properties[10] = &trngl->color.green;
 	properties[11] = &trngl->color.blue;
 	properties[12] = 0;
-	return ((void *)properties);
+	return ((void **)properties);
 }
 
-static int	*ft_triangle_floats(void)
-{
-	char	*floats;
-
-	floats = malloc(sizeof(int) * (9 + 1));
-	if (!floats)
-		return (floats);
-	floats[0] = 0;
-	floats[1] = 1;
-	floats[2] = 2;
-	floats[3] = 3;
-	floats[4] = 4;
-	floats[5] = 5;
-	floats[6] = 6;
-	floats[7] = 7;
-	floats[8] = 8;
-	floats[9] = -1;
-	return (floats);
-}
-
-void		ft_triangle_init(char *str, t_data *data)
+void		ft_triangle_init(char *str, t_data *data, int i)
 {
 	t_trngl		*new;
-	void		*ppty;
-	int			*floats;
+	void		**ppty;
 
 	new = ft_triangle_new();
+	if (!new)
+		return ;
 	ppty = ft_triangle_properties(new);
-	floats = ft_triangle_floats();
-	ft_ato_i_or_f(str, ppty, floats);
+	if (!ppty)
+		return ;
+	ft_ato_i_or_f(str + i, ppty, 8);
 	ft_triangle_addback(&data->tri, new);
 	free(ppty);
-	free(floats);
 }

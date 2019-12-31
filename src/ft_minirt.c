@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_string_utils.c                                  :+:    :+:            */
+/*   ft_minirt.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/30 17:28:34 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 17:29:59 by tbruinem      ########   odam.nl         */
+/*   Created: 2019/12/30 12:47:02 by tbruinem       #+#    #+#                */
+/*   Updated: 2019/12/31 16:58:30 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int		ft_strcmp(char *s1, char *s2)
+int		main(int argc, char **input)
 {
-	int i;
+	t_data	data;
+	int		fd;
 
-	i = 0;
-	while (s1[i] && s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	if (s1[i] == s2[i])
-		return (0);
+	if (argc < 2 || argc > 2)
+		return (ft_error(1));
+	fd = open(input[1], O_RDONLY);
+	if (ft_is_valid(input[1]) == 0)
+		return (ft_error(1));
+	if (read(fd, (void *)0, 0) == -1)
+		return (ft_error(1));
+	data = ft_data_get(fd);
+	ft_data_print(&data);
+	return (0);
 }

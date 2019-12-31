@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 15:59:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 19:10:39 by tbruinem      ########   odam.nl         */
+/*   Updated: 2019/12/31 15:33:31 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ft_camera_addback(t_cam **list, t_cam *new)
 	t_cam	*iter;
 
 	iter = *list;
-	if (!list)
+	if (!iter)
 	{
 		*list = new;
 		return ;
@@ -40,9 +40,9 @@ t_cam		*ft_camera_new(void)
 	return (new);
 }
 
-static void	*ft_camera_properties(t_cam *cam)
+static void	**ft_camera_properties(t_cam *cam)
 {
-	char	*properties;
+	void	**properties;
 
 	properties = malloc(sizeof(void *) * 8);
 	if (properties == NULL)
@@ -55,14 +55,13 @@ static void	*ft_camera_properties(t_cam *cam)
 	properties[5] = &cam->prop.dir.z;
 	properties[6] = &cam->fov;
 	properties[7] = 0;
-	return ((void *)properties);
+	return ((void **)properties);
 }
 
-void		ft_camera_init(char *str, t_data *data)
+void		ft_camera_init(char *str, t_data *data, int i)
 {
 	t_cam	*new;
-	void	*ppty;
-	int		i;
+	void	**ppty;
 	int		j;
 
 	new = ft_camera_new();
@@ -71,16 +70,15 @@ void		ft_camera_init(char *str, t_data *data)
 	ppty = ft_camera_properties(new);
 	if (!ppty)
 		return ;
-	i = 0;
 	j = 0;
-	while (str[i] && ((char *)ppty)[j])
+	while (str[i] && (char *)(ppty[j]))
 	{
 		if (str[i] != ' ' && str[i] != ',')
 		{
-			if (j != 0)
-				((int *)ppty)[j] = ft_atoi(str + i, &i);
+			if (j <= 5)
+				*(double *)(ppty[j]) = ft_atod(str, &i);
 			else
-				((double *)ppty)[j] = ft_atod(str + i, &i);
+				*(int *)(ppty[j]) = ft_atoi(str, &i);
 			j++;
 		}
 		i++;

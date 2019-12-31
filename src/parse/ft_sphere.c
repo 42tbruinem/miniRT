@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:21:23 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 19:45:43 by tbruinem      ########   odam.nl         */
+/*   Updated: 2019/12/31 15:00:18 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ft_sphere_addback(t_sphere **list, t_sphere *new)
 	t_sphere	*iter;
 
 	iter = *list;
-	if (!list)
+	if (!iter)
 	{
 		*list = new;
 		return ;
@@ -32,6 +32,8 @@ t_sphere	*ft_sphere_new(void)
 	t_sphere	*new;
 
 	new = malloc(sizeof(t_sphere));
+	if (!new)
+		return (new);
 	new->color = ft_color_init();
 	new->prop = ft_prop_init();
 	new->next = NULL;
@@ -39,11 +41,11 @@ t_sphere	*ft_sphere_new(void)
 	return (new);
 }
 
-static void	*ft_sphere_properties(t_sphere *sphere)
+static void	**ft_sphere_properties(t_sphere *sphere)
 {
-	char	*properties;
+	void	**properties;
 
-	properties = malloc(sizeof(void *) * 8);
+	properties = malloc(sizeof(void *) * (7 + 1));
 	if (!properties)
 		return (properties);
 	properties[0] = &sphere->prop.pivot.x;
@@ -54,38 +56,21 @@ static void	*ft_sphere_properties(t_sphere *sphere)
 	properties[5] = &sphere->color.green;
 	properties[6] = &sphere->color.blue;
 	properties[7] = 0;
-	return ((void *)properties);
+	return ((void **)properties);
 }
 
-static int	*ft_sphere_floats(void)
-{
-	char	*floats;
-
-	floats = malloc(sizeof(int) * (7 + 1));
-	if (!floats)
-		return (floats);
-	floats[0] = 0;
-	floats[1] = 1;
-	floats[2] = 2;
-	floats[3] = 3;
-	floats[4] = 4;
-	floats[5] = 5;
-	floats[6] = 6;
-	floats[7] = -1;
-	return (floats);
-}
-
-void		ft_sphere_init(char *str, t_data *data)
+void		ft_sphere_init(char *str, t_data *data, int i)
 {
 	t_sphere	*new;
-	void		*ppty;
-	int			*floats;
+	void		**ppty;
 
 	new = ft_sphere_new();
+	if (!new)
+		return ;
 	ppty = ft_sphere_properties(new);
-	floats = ft_sphere_floats();
-	ft_ato_i_or_f(str, ppty, floats);
+	if (!ppty)
+		return ;
+	ft_ato_i_or_f(str + i, ppty, 3);
 	ft_sphere_addback(&data->sph, new);
 	free(ppty);
-	free(floats);
 }

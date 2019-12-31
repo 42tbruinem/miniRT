@@ -1,0 +1,7 @@
+dispatcher returns a t_formatter
+
+formatter is an array of t_formatter pointers (*)
+
+t_formatter:
+typedef int		(*t_formatter)		(t_info *info);
+	return.		function pointer	(arguments);

@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_data.c                                          :+:    :+:            */
+/*   ft_string_utils.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/30 17:58:01 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 17:58:15 by tbruinem      ########   odam.nl         */
+/*   Created: 2019/12/30 17:28:34 by tbruinem       #+#    #+#                */
+/*   Updated: 2019/12/31 16:58:45 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	ft_data_init(t_data *data)
+int		ft_strlen(char *str)
 {
-	data->objs.sph = NULL;
-	data->objs.cyl = NULL;
-	data->objs.pln = NULL;
-	data->objs.sqr = NULL;
-	data->objs.tri = NULL;
-	data->cams = NULL;
-	data->light = NULL;
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+int		ft_strcmp(char *s1, char *s2)
+{
+	int i;
+
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (1);
+		i++;
+	}
+	if (s1[i] == 0 && s1[i] == s2[i])
+		return (0);
 }
