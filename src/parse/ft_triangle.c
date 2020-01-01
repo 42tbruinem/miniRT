@@ -6,11 +6,25 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 21:41:22 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 23:00:09 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void		ft_triangle_clear(t_trngl **list)
+{
+	t_trngl	*iter;
+	t_trngl	*del;
+
+	iter = *list;
+	while (iter)
+	{
+		del = iter;
+		iter = iter->next;
+		free(del);
+	}
+}
 
 void		ft_triangle_addback(t_trngl **list, t_trngl *new)
 {
@@ -82,6 +96,8 @@ int			ft_triangle_init(char *str, t_data *data, int i)
 	}
 	ft_ato_i_or_f(str + i, ppty, 8);
 	ft_triangle_addback(&data->tri, new);
+	if (ft_isinrange_int(0, 255, ppty[9], 3) == 0)
+		return (ERR_RANGE);
 	free(ppty);
 	return (0);
 }

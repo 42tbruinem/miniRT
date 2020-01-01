@@ -6,11 +6,25 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:09:10 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 21:40:58 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 22:59:36 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void		ft_square_clear(t_square **list)
+{
+	t_square	*iter;
+	t_square	*del;
+
+	iter = *list;
+	while (iter)
+	{
+		del = iter;
+		iter = iter->next;
+		free(del);
+	}
+}
 
 void		ft_square_addback(t_square **list, t_square *new)
 {
@@ -78,6 +92,10 @@ int			ft_square_init(char *str, t_data *data, int i)
 	}
 	ft_ato_i_or_f(str + i, ppty, 6);
 	ft_square_addback(&data->sqr, new);
+	if (ft_isinrange_double(0.0, 1.0, ppty[3], 3) == 0)
+		return (ERR_RANGE);
+	if (ft_isinrange_int(0, 255, ppty[7], 3) == 0)
+		return (ERR_RANGE);
 	free(ppty);
 	return (0);
 }

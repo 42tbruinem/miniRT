@@ -6,11 +6,25 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:21:23 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 21:40:31 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 22:59:16 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void		ft_sphere_clear(t_sphere **list)
+{
+	t_sphere	*iter;
+	t_sphere	*del;
+
+	iter = *list;
+	while (iter)
+	{
+		del = iter;
+		iter = iter->next;
+		free(del);
+	}
+}
 
 void		ft_sphere_addback(t_sphere **list, t_sphere *new)
 {
@@ -75,6 +89,8 @@ int			ft_sphere_init(char *str, t_data *data, int i)
 	}
 	ft_ato_i_or_f(str + i, ppty, 3);
 	ft_sphere_addback(&data->sph, new);
+	if (ft_isinrange_int(0, 255, ppty[4], 3) == 0)
+		return (ERR_RANGE);
 	free(ppty);
 	return (0);
 }

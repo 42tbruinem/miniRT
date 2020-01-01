@@ -20,6 +20,7 @@ int		ft_error(int error)
 		[ERR_MEM] = "Not enough memory.",
 		[ERR_NORMAL] = "One or more of the given orientation vectors are not and can not be normalized.",
 		[ERR_TYPE] = "Please supply a file with the extension: ",
+		[ERR_RANGE] = "One or more of the given values is out of range.",
 	};
 
 	write(1, "Error\n", ft_strlen("Error\n"));

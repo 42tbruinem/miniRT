@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 14:49:16 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 21:40:03 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 22:26:08 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ int	ft_resolution_init(char *str, t_data *data, int i)
 	ppty[0] = &data->width;
 	ppty[1] = &data->height;
 	ft_ato_i_or_f(str + i, ppty, -1);
+	if (ft_isinrange_int(0, MAX_WIDTH, ppty[0], 1) == 0)
+		*(int *)(ppty[0]) = MAX_WIDTH;
+	if (ft_isinrange_int(0, MAX_HEIGHT, ppty[1], 1) == 0)
+		*(int *)(ppty[1]) = MAX_HEIGHT;
 //	ft_res_print(data);
 	return (0);
 }

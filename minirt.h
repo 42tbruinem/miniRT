@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 21:41:48 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 22:33:10 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 
+# define FILE_TYPE ".rt"
+
 # define RES_ID "R"
 # define AMB_ID "A"
 # define CAM_ID "c"
@@ -31,7 +33,13 @@
 # define SQR_ID "sq"
 # define CYL_ID "cy"
 # define TRI_ID "tr"
-# define FILE_TYPE ".rt"
+
+# ifndef MAX_WIDTH
+#  define MAX_WIDTH 1920
+# endif
+# ifndef MAX_HEIGHT
+#  define MAX_HEIGHT 1080
+# endif
 
 enum	e_errors
 {
@@ -40,6 +48,7 @@ enum	e_errors
 	ERR_FILE,
 	ERR_NORMAL,
 	ERR_MEM,
+	ERR_RANGE,
 };
 
 enum	e_identifiers
@@ -166,6 +175,9 @@ void			ft_ato_i_or_f(char *str, void **ppty, int floats);
 int				ft_error(int error);
 int				ft_is_valid(char *str);
 int				ft_filter_input(int argc, char **input);
+int				ft_isinrange_int(int min, int max, void *property, int size);
+int				ft_isinrange_double(double min, double max,
+				void *property, int size);
 
 typedef int		(*t_initf)(char *str, t_data *data, int i);
 t_initf			ft_jumptable(int id);
@@ -173,6 +185,14 @@ t_initf			ft_jumptable(int id);
 t_col			ft_color_init(void);
 t_prop			ft_prop_init(void);
 t_vec			ft_vec_init(int x, int y, int z);
+
+void			ft_camera_clear(t_cam **list);
+void			ft_light_clear(t_light **list);
+void			ft_sphere_clear(t_sphere **list);
+void			ft_cylinder_clear(t_cylndr **list);
+void			ft_plane_clear(t_plane **list);
+void			ft_square_clear(t_square **list);
+void			ft_triangle_clear(t_trngl **list);
 
 int				ft_camera_init(char *str, t_data *data, int i);
 int				ft_resolution_init(char *str, t_data *data, int i);

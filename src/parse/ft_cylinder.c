@@ -6,11 +6,25 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:45 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 21:38:58 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 22:57:49 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void		ft_cylinder_clear(t_cylndr **list)
+{
+	t_cylndr	*iter;
+	t_cylndr	*del;
+
+	iter = *list;
+	while (iter)
+	{
+		del = iter;
+		iter = iter->next;
+		free(del);
+	}
+}
 
 void		ft_cylinder_addback(t_cylndr **list, t_cylndr *new)
 {
@@ -80,6 +94,10 @@ int			ft_cylinder_init(char *str, t_data *data, int i)
 	}
 	ft_ato_i_or_f(str + i, ppty, 7);
 	ft_cylinder_addback(&data->cyl, new);
+	if (ft_isinrange_double(0.0, 1.0, ppty[3], 3) == 0)
+		return (ERR_RANGE);
+	if (ft_isinrange_int(0, 255, ppty[8], 3) == 0)
+		return (ERR_RANGE);
 	free(ppty);
 	return (0);
 }

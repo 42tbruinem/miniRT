@@ -6,11 +6,25 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 15:59:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 21:38:25 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 22:53:04 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void		ft_camera_clear(t_cam **list)
+{
+	t_cam	*iter;
+	t_cam	*del;
+
+	iter = *list;
+	while (iter)
+	{
+		del = iter;
+		iter = iter->next;
+		free(del);
+	}
+}
 
 void		ft_camera_addback(t_cam **list, t_cam *new)
 {
@@ -74,6 +88,10 @@ int			ft_camera_init(char *str, t_data *data, int i)
 	}
 	ft_ato_i_or_f(str + i, ppty, 5);
 	ft_camera_addback(&data->cams, new);
+	if (ft_isinrange_double(0.0, 1.0, ppty[3], 3) == 0)
+		return (ERR_RANGE);
+	if (ft_isinrange_int(0, 180, ppty[6], 1) == 0)
+		return (ERR_RANGE);
 	free(ppty);
 	return (0);
 }

@@ -6,11 +6,25 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:12:12 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 21:39:26 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 23:02:42 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void		ft_light_clear(t_light **list)
+{
+	t_light	*iter;
+	t_light	*del;
+
+	iter = *list;
+	while (iter)
+	{
+		del = iter;
+		iter = iter->next;
+		free(del);
+	}
+}
 
 void		ft_light_addback(t_light **list, t_light *new)
 {
@@ -73,6 +87,16 @@ int			ft_light_init(char *str, t_data *data, int i)
 	}
 	ft_ato_i_or_f(str + i, ppty, 3);
 	ft_light_addback(&data->light, new);
+	if (ft_isinrange_double(0.0, 1.0, ppty[3], 1) == 0)
+	{
+		free(ppty);
+		return (ERR_RANGE);
+	}
+	if (ft_isinrange_int(0, 255, ppty[4], 3) == 0)
+	{
+		free(ppty);
+		return (ERR_RANGE);
+	}
 	free(ppty);
 	return (0);
 }

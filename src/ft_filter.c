@@ -12,6 +12,36 @@
 
 #include "minirt.h"
 
+int		ft_isinrange_double(double min, double max, void *property, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (((double *)property)[i] >= min && ((double *)property)[i] <= max)
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+int		ft_isinrange_int(int min, int max, void *property, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (((int *)property)[i] >= min && ((int *)property)[i] <= max)
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
 int		ft_is_valid(char *str)
 {
 	int i;

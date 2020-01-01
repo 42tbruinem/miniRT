@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 15:51:48 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 21:36:28 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 22:50:29 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,9 @@ int	ft_ambient_init(char *str, t_data *data, int i)
 	ppty[2] = &data->amb.color.green;
 	ppty[3] = &data->amb.color.blue;
 	ft_ato_i_or_f(str + i, ppty, 0);
+	if (ft_isinrange_double(0.0, 1.0, ppty[0], 1) == 0)
+		return (ERR_RANGE);
+	if (ft_isinrange_int(0, 255, ppty[1], 3) == 0)
+		return (ERR_RANGE);
 	return (0);
 }

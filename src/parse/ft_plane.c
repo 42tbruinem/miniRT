@@ -6,11 +6,25 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:10:56 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 21:39:50 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 22:56:30 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void		ft_plane_clear(t_plane **list)
+{
+	t_plane	*iter;
+	t_plane	*del;
+
+	iter = *list;
+	while (iter)
+	{
+		del = iter;
+		iter = iter->next;
+		free(del);
+	}
+}
 
 void		ft_plane_addback(t_plane **list, t_plane *new)
 {
@@ -76,6 +90,10 @@ int			ft_plane_init(char *str, t_data *data, int i)
 	}
 	ft_ato_i_or_f(str + i, ppty, 5);
 	ft_plane_addback(&data->pln, new);
+	if (ft_isinrange_double(0.0, 1.0, ppty[3], 3) == 0)
+		return (ERR_RANGE);
+	if (ft_isinrange_int(0, 255, ppty[6], 3) == 0)
+		return (ERR_RANGE);
 	free(ppty);
 	return (0);
 }

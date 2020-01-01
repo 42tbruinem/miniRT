@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:58:01 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 21:34:31 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 22:11:26 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,17 @@ int		ft_data_read(int fd, t_data *data, int i)
 		ret = get_next_line(fd, &line);
 		i = 0;
 	}
+}
+
+void	ft_data_clear(t_data *data)
+{
+	ft_camera_clear(&data->cams);
+	ft_light_clear(&data->light);
+	ft_plane_clear(&data->pln);
+	ft_square_clear(&data->sqr);
+	ft_sphere_clear(&data->sph);
+	ft_triangle_clear(&data->tri);
+	ft_cylinder_clear(&data->cyl);
 }
 
 int		ft_data_get(t_data *data, int fd)
