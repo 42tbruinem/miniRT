@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:30:34 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/31 16:43:22 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 23:14:10 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		ft_atoi(char *str, int *i)
 
 	n = 1;
 	ret = 0;
-//	printf("atoi str: %s\n", str + *i);
 	while ((str[*i] >= 9 && str[*i] <= 13) || (str[*i] == ' ' || str[*i] == ','))
 		(*i)++;
 	if (str[*i] == '-')
@@ -55,11 +54,9 @@ double	ft_atod(char *str, int *i)
 	double	n;
 
 	pow = 1;
-//	printf("atod str: %s\n", str + *i);
 	ret = (double)ft_atoi(str, i);
 	n = (ret < 0) ? -1.0 : 1.0;
 	ret *= n;
-//	printf("result from atoi: %f\n", ret);
 	if (str[*i] == '.')
 	{
 		(*i)++;
@@ -71,7 +68,6 @@ double	ft_atod(char *str, int *i)
 			pow++;
 		}
 	}
-//	printf("result from atod: %f\n", ret);
 	return (ret * n);
 }
 
@@ -82,7 +78,6 @@ void	ft_ato_i_or_f(char *str, void **ppty, int floats)
 
 	i = 0;
 	j = 0;
-//	printf("INPUT STR: %s\n", str);
 	while (str[i] && (char *)(ppty[j]))
 	{
 		if (str[i] != ' ' && str[i] != ',')
