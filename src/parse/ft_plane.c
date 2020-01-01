@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:10:56 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/31 16:43:35 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 21:39:50 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,22 @@ static void	**ft_plane_properties(t_plane *plane)
 	return ((void **)properties);
 }
 
-void		ft_plane_init(char *str, t_data *data, int i)
+int			ft_plane_init(char *str, t_data *data, int i)
 {
 	t_plane		*new;
 	void		**ppty;
 
 	new = ft_plane_new();
 	if (!new)
-		return ;
+		return (ERR_MEM);
 	ppty = ft_plane_properties(new);
 	if (!ppty)
-		return ;
+	{
+		free(new);
+		return (ERR_MEM);
+	}
 	ft_ato_i_or_f(str + i, ppty, 5);
 	ft_plane_addback(&data->pln, new);
 	free(ppty);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 14:49:16 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/31 14:30:56 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 21:40:03 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,13 @@ then I need to cast the (void *) to the variable type (int *)
 and then I can dereference that pointer to assign to the actual address
 */
 
-void	ft_resolution_init(char *str, t_data *data, int i)
+int	ft_resolution_init(char *str, t_data *data, int i)
 {
 	void	*ppty[3];
-	int		j;
 
 	ppty[0] = &data->width;
 	ppty[1] = &data->height;
-	j = 0;
-	while (str[i] && ppty[j])
-	{
-		if (str[i] != ' ' && str[i] != ',')
-		{
-			*((int *)(ppty[j])) = ft_atoi(str, &i);
-			j++;
-		}
-		i++;
-	}
+	ft_ato_i_or_f(str + i, ppty, -1);
 //	ft_res_print(data);
+	return (0);
 }

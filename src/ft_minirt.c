@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 12:47:02 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/31 16:58:30 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 21:27:09 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ int		main(int argc, char **input)
 {
 	t_data	data;
 	int		fd;
+	int		error;
 
-	if (argc < 2 || argc > 2)
-		return (ft_error(1));
+	error = ft_filter_input(argc, input);
+	if (error)
+		return (ft_error(error));
 	fd = open(input[1], O_RDONLY);
-	if (ft_is_valid(input[1]) == 0)
-		return (ft_error(1));
-	if (read(fd, (void *)0, 0) == -1)
-		return (ft_error(1));
-	data = ft_data_get(fd);
+	error = ft_data_get(&data, fd);
+	if (error)
+		return (ft_error(error));
 	ft_data_print(&data);
 	return (0);
 }

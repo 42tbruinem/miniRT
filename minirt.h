@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/31 16:57:37 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 21:41:48 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@
 # define CYL_ID "cy"
 # define TRI_ID "tr"
 # define FILE_TYPE ".rt"
+
+enum	e_errors
+{
+	ERR_ARG = 1,
+	ERR_TYPE,
+	ERR_FILE,
+	ERR_NORMAL,
+	ERR_MEM,
+};
 
 enum	e_identifiers
 {
@@ -156,26 +165,31 @@ void			ft_ato_i_or_f(char *str, void **ppty, int floats);
 
 int				ft_error(int error);
 int				ft_is_valid(char *str);
+int				ft_filter_input(int argc, char **input);
 
-typedef void	(*t_initf)(char *str, t_data *data, int i);
+typedef int		(*t_initf)(char *str, t_data *data, int i);
 t_initf			ft_jumptable(int id);
 
 t_col			ft_color_init(void);
 t_prop			ft_prop_init(void);
 t_vec			ft_vec_init(int x, int y, int z);
 
-void			ft_data_init(t_data *data);
-void			ft_camera_init(char *str, t_data *data, int i);
-void			ft_resolution_init(char *str, t_data *data, int i);
-void			ft_ambient_init(char *str, t_data *data, int i);
-void			ft_light_init(char *str, t_data *data, int i);
-void			ft_sphere_init(char *str, t_data *data, int i);
-void			ft_cylinder_init(char *str, t_data *data, int i);
-void			ft_plane_init(char *str, t_data *data, int i);
-void			ft_square_init(char *str, t_data *data, int i);
-void			ft_triangle_init(char *str, t_data *data, int i);
+int				ft_camera_init(char *str, t_data *data, int i);
+int				ft_resolution_init(char *str, t_data *data, int i);
+int				ft_ambient_init(char *str, t_data *data, int i);
+int				ft_light_init(char *str, t_data *data, int i);
+int				ft_sphere_init(char *str, t_data *data, int i);
+int				ft_cylinder_init(char *str, t_data *data, int i);
+int				ft_plane_init(char *str, t_data *data, int i);
+int				ft_square_init(char *str, t_data *data, int i);
+int				ft_triangle_init(char *str, t_data *data, int i);
 
-t_data			ft_data_get(int file);
+int				ft_identifier_get(char *str, int *i);
+int				ft_identifier_parse(char *id);
+
+void			ft_data_init(t_data *data);
+int				ft_data_get(t_data *data, int fd);
+int				ft_data_read(int fd, t_data *data, int i);
 
 void			ft_data_print(t_data *data);
 void			ft_res_print(t_data *data);

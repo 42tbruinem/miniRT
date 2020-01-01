@@ -21,11 +21,24 @@ int		ft_is_valid(char *str)
 	j = ft_strlen(FILE_TYPE) - 1;
 	while (str[i] && j >= 0)
 	{
-//		printf("STR: %c | VALID: %c\n", str[i], FILE_TYPE[j]);
 		if (str[i] != FILE_TYPE[j])
 			return (0);
 		j--;
 		i--;
 	}
 	return (1);
+}
+
+int		ft_filter_input(int argc, char **input)
+{
+	int fd;
+
+	if (argc < 2 || argc > 2)
+		return (ERR_ARG);
+	fd = open(input[1], O_RDONLY);
+	if (ft_is_valid(input[1]) == 0)
+		return (ERR_TYPE);
+	if (read(fd, (void *)0, 0) == -1)
+		return (ERR_FILE);
+	return (0);
 }

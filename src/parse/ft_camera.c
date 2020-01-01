@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 15:59:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/31 15:33:31 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 21:38:25 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,31 +58,22 @@ static void	**ft_camera_properties(t_cam *cam)
 	return ((void **)properties);
 }
 
-void		ft_camera_init(char *str, t_data *data, int i)
+int			ft_camera_init(char *str, t_data *data, int i)
 {
 	t_cam	*new;
 	void	**ppty;
-	int		j;
 
 	new = ft_camera_new();
 	if (!new)
-		return ;
+		return (ERR_MEM);
 	ppty = ft_camera_properties(new);
 	if (!ppty)
-		return ;
-	j = 0;
-	while (str[i] && (char *)(ppty[j]))
 	{
-		if (str[i] != ' ' && str[i] != ',')
-		{
-			if (j <= 5)
-				*(double *)(ppty[j]) = ft_atod(str, &i);
-			else
-				*(int *)(ppty[j]) = ft_atoi(str, &i);
-			j++;
-		}
-		i++;
+		free(new);
+		return (ERR_MEM);
 	}
+	ft_ato_i_or_f(str + i, ppty, 5);
 	ft_camera_addback(&data->cams, new);
 	free(ppty);
+	return (0);
 }

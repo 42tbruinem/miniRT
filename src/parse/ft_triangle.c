@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/31 15:00:28 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 21:41:22 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,22 @@ static void	**ft_triangle_properties(t_trngl *trngl)
 	return ((void **)properties);
 }
 
-void		ft_triangle_init(char *str, t_data *data, int i)
+int			ft_triangle_init(char *str, t_data *data, int i)
 {
 	t_trngl		*new;
 	void		**ppty;
 
 	new = ft_triangle_new();
 	if (!new)
-		return ;
+		return (ERR_MEM);
 	ppty = ft_triangle_properties(new);
 	if (!ppty)
-		return ;
+	{
+		free(new);
+		return (ERR_MEM);
+	}
 	ft_ato_i_or_f(str + i, ppty, 8);
 	ft_triangle_addback(&data->tri, new);
 	free(ppty);
+	return (0);
 }

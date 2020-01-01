@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:45 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/31 16:45:43 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 21:38:58 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,22 @@ static void	**ft_cylinder_properties(t_cylndr *cylndr)
 	return ((void **)properties);
 }
 
-void		ft_cylinder_init(char *str, t_data *data, int i)
+int			ft_cylinder_init(char *str, t_data *data, int i)
 {
 	t_cylndr	*new;
 	void		**ppty;
 
 	new = ft_cylinder_new();
 	if (!new)
-		return ;
+		return (ERR_MEM);
 	ppty = ft_cylinder_properties(new);
 	if (!ppty)
-		return ;
+	{
+		free(new);
+		return (ERR_MEM);
+	}
 	ft_ato_i_or_f(str + i, ppty, 7);
 	ft_cylinder_addback(&data->cyl, new);
 	free(ppty);
+	return (0);
 }

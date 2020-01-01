@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:21:23 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/31 15:00:18 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 21:40:31 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,22 @@ static void	**ft_sphere_properties(t_sphere *sphere)
 	return ((void **)properties);
 }
 
-void		ft_sphere_init(char *str, t_data *data, int i)
+int			ft_sphere_init(char *str, t_data *data, int i)
 {
 	t_sphere	*new;
 	void		**ppty;
 
 	new = ft_sphere_new();
 	if (!new)
-		return ;
+		return (ERR_MEM);
 	ppty = ft_sphere_properties(new);
 	if (!ppty)
-		return ;
+	{
+		free(new);
+		return (ERR_MEM);
+	}
 	ft_ato_i_or_f(str + i, ppty, 3);
 	ft_sphere_addback(&data->sph, new);
 	free(ppty);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:09:10 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/31 15:00:23 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/01 21:40:58 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,22 @@ static void	**ft_square_properties(t_square *square)
 	return ((void **)properties);
 }
 
-void		ft_square_init(char *str, t_data *data, int i)
+int			ft_square_init(char *str, t_data *data, int i)
 {
 	t_square	*new;
 	void		**ppty;
 
 	new = ft_square_new();
 	if (!new)
-		return ;
+		return (ERR_MEM);
 	ppty = ft_square_properties(new);
 	if (!ppty)
-		return ;
+	{
+		free(new);
+		return (ERR_MEM);
+	}
 	ft_ato_i_or_f(str + i, ppty, 6);
 	ft_square_addback(&data->sqr, new);
 	free(ppty);
+	return (0);
 }
