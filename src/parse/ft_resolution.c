@@ -6,19 +6,19 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 14:49:16 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 22:26:08 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/02 10:43:07 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
-Void pointer array
-= an array of adresses
-
-to assign to the address, I first need to dereference the array, [j]
-then I need to cast the (void *) to the variable type (int *)
-and then I can dereference that pointer to assign to the actual address
+**Void pointer array
+**= an array of adresses
+**
+**to assign to the address, I first need to dereference the array, [j]
+**then I need to cast the (void *) to the variable type (int *)
+**and then I can dereference that pointer to assign to the actual address
 */
 
 int	ft_resolution_init(char *str, t_data *data, int i)
@@ -32,6 +32,5 @@ int	ft_resolution_init(char *str, t_data *data, int i)
 		*(int *)(ppty[0]) = MAX_WIDTH;
 	if (ft_isinrange_int(0, MAX_HEIGHT, ppty[1], 1) == 0)
 		*(int *)(ppty[1]) = MAX_HEIGHT;
-//	ft_res_print(data);
 	return (0);
 }

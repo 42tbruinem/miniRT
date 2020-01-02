@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 22:24:38 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/30 22:24:38 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/02 12:07:15 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ int		ft_error(int error)
 		[ERR_ARG] = "Please (only) supply a scene file.",
 		[ERR_FILE] = "Please supply a valid file.",
 		[ERR_MEM] = "Not enough memory.",
-		[ERR_NORMAL] = "One or more of the given orientation vectors are not and can not be normalized.",
+		[ERR_NORMAL] = "Normalization error.",
 		[ERR_TYPE] = "Please supply a file with the extension: ",
 		[ERR_RANGE] = "One or more of the given values is out of range.",
+		[ERR_ID] = "Wrong identifier."
 	};
 
 	write(1, "Error\n", ft_strlen("Error\n"));

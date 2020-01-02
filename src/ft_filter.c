@@ -6,11 +6,25 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/31 16:57:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/31 16:57:04 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/02 11:01:13 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int		ft_isnormalized(t_vec orientation)
+{
+	double x;
+	double y;
+	double z;
+
+	x = orientation.x;
+	y = orientation.y;
+	z = orientation.z;
+	if (pow(x, x) + pow(y, y) + pow(z, z) == 1)
+		return (1);
+	return (0);
+}
 
 int		ft_isinrange_double(double min, double max, void *property, int size)
 {
@@ -66,9 +80,9 @@ int		ft_filter_input(int argc, char **input)
 	if (argc < 2 || argc > 2)
 		return (ERR_ARG);
 	fd = open(input[1], O_RDONLY);
-	if (ft_is_valid(input[1]) == 0)
-		return (ERR_TYPE);
 	if (read(fd, (void *)0, 0) == -1)
 		return (ERR_FILE);
+	if (ft_is_valid(input[1]) == 0)
+		return (ERR_TYPE);
 	return (0);
 }

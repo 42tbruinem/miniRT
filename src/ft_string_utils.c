@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:28:34 by tbruinem       #+#    #+#                */
-/*   Updated: 2019/12/31 16:58:45 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/02 10:34:12 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ int		ft_strcmp(char *s1, char *s2)
 	}
 	if (s1[i] == 0 && s1[i] == s2[i])
 		return (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:30:34 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 23:14:10 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/02 10:42:09 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int		ft_atoi(char *str, int *i)
 
 	n = 1;
 	ret = 0;
-	while ((str[*i] >= 9 && str[*i] <= 13) || (str[*i] == ' ' || str[*i] == ','))
+	while ((str[*i] >= 9 && str[*i] <= 13)
+			|| (str[*i] == ' ' || str[*i] == ','))
 		(*i)++;
 	if (str[*i] == '-')
 		n = -1;

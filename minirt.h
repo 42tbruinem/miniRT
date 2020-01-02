@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 22:33:10 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/02 12:24:22 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@
 # define TRI_ID "tr"
 
 # ifndef MAX_WIDTH
-#  define MAX_WIDTH 1920
+#  define MAX_WIDTH 2560
 # endif
 # ifndef MAX_HEIGHT
-#  define MAX_HEIGHT 1080
+#  define MAX_HEIGHT 1440
 # endif
 
 enum	e_errors
@@ -49,6 +49,7 @@ enum	e_errors
 	ERR_NORMAL,
 	ERR_MEM,
 	ERR_RANGE,
+	ERR_ID,
 };
 
 enum	e_identifiers
@@ -150,11 +151,18 @@ typedef struct	s_ambient
 	t_col		color;
 }				t_ambient;
 
+typedef struct	s_mlx
+{
+	void		*data;
+	void		*window;
+	void		*image;
+}				t_mlx;
+
 typedef struct	s_data
 {
 	t_cam		*cams;
 	t_light		*light;
-	char		***scene;
+	t_mlx		mlx;
 	int			width;
 	int			height;
 	t_ambient	amb;
@@ -212,8 +220,5 @@ int				ft_data_get(t_data *data, int fd);
 int				ft_data_read(int fd, t_data *data, int i);
 
 void			ft_data_print(t_data *data);
-void			ft_res_print(t_data *data);
-void			ft_amb_print(t_ambient amb);
-void			ft_cylndr_print(t_cylndr *obj);
 
 #endif
