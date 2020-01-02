@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:23:47 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 10:41:50 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/02 19:10:19 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,12 @@ void	ft_cylndr_print(t_cylndr *obj)
 void	ft_tri_print(t_trngl *obj)
 {
 	printf("----TRIANGLE-----\n");
-	printf("P1 X%f,Y%f,Z%f\n", obj->p1.x, obj->p1.y, obj->p1.z);
-	printf("P2 X%f,Y%f,Z%f\n", obj->p2.x, obj->p2.y, obj->p2.z);
-	printf("P3 X%f,Y%f,Z%f\n", obj->p3.x, obj->p3.y, obj->p3.z);
+	printf("P1 X%f,Y%f,Z%f\n", obj->p1.x, obj->p1.y,
+			obj->p1.z);
+	printf("P2 X%f,Y%f,Z%f\n", obj->p2.x, obj->p2.y,
+			obj->p2.z);
+	printf("P3 X%f,Y%f,Z%f\n", obj->p3.x, obj->p3.y,
+			obj->p3.z);
 	printf("COLOR: R%d,G%d,B%d\n", obj->color.red,
 			obj->color.green, obj->color.blue);
 }

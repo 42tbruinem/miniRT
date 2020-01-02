@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 12:24:22 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/02 19:10:42 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,8 @@ int				ft_strcmp(char *s1, char *s2);
 int				ft_atoi(char *str, int *i);
 double			ft_atod(char *str, int *i);
 void			ft_ato_i_or_f(char *str, void **ppty, int floats);
+
+void			ft_render(t_data *data);
 
 int				ft_error(int error);
 int				ft_is_valid(char *str);

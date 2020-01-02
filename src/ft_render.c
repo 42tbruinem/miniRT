@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_vector.c                                        :+:    :+:            */
+/*   ft_render.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/30 16:05:34 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 19:13:40 by tbruinem      ########   odam.nl         */
+/*   Created: 2020/01/02 12:57:02 by tbruinem       #+#    #+#                */
+/*   Updated: 2020/01/02 14:53:10 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vec	ft_vec_init(int x, int y, int z)
+void	ft_render(t_data *data)
 {
-	t_vec	new;
-
-	new.x = x;
-	new.y = y;
-	new.z = z;
-	return (new);
+//	mlx_pixel_put(data->mlx.data, data->mlx.window, data->width / 2, data->height / 2, 0x00FFFF);
+	mlx_pixel_put(data->mlx.data, data->mlx.window, data->width / 4, data->height / 4, 0x00FFFF);
+//	mlx_pixel_put(data->mlx.data, data->mlx.window, data->width / 2, data->height / 4, 0x00FFFF);
+//	mlx_pixel_put(data->mlx.data, data->mlx.window, data->width / 4, data->height / 4, 0x00FFFF);
 }

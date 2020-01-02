@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_vector.c                                        :+:    :+:            */
+/*   ft_ray.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/30 16:05:34 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 19:13:40 by tbruinem      ########   odam.nl         */
+/*   Created: 2020/01/02 12:58:11 by tbruinem       #+#    #+#                */
+/*   Updated: 2020/01/02 14:23:25 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vec	ft_vec_init(int x, int y, int z)
+int		ft_ray_cast(void)
 {
-	t_vec	new;
-
-	new.x = x;
-	new.y = y;
-	new.z = z;
-	return (new);
+	return (0);
 }
