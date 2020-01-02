@@ -6,7 +6,7 @@
 #    By: tbruinem <tbruinem@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/30 11:07:31 by tbruinem       #+#    #+#                 #
-#    Updated: 2020/01/02 12:39:34 by tbruinem      ########   odam.nl          #
+#    Updated: 2020/01/02 22:21:57 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,13 @@ $(NAME):
 	gcc $(CFLAGS) $(MLX_FLAGS) $(GNL_FLAGS) $(addprefix $(SRC_DIR)/,$(SRC)) $(addprefix $(PARSE_DIR)/,$(SRC)) -o $(NAME)
 
 clean:
+	make -C $(MLX_DIR) clean
+	make -C $(GNL_DIR) clean
 	rm -rf $(SRC:%.c=%.o)
 
 fclean: clean
+	make -C $(GNL_DIR) fclean
+	rm -rf libmlx.dylib
 	rm -rf $(NAME)
 
 re: fclean all

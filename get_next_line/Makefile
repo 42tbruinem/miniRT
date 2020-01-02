@@ -6,7 +6,7 @@
 #    By: jvan-sni <jvan-sni@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/28 16:59:45 by jvan-sni       #+#    #+#                 #
-#    Updated: 2019/12/18 12:00:19 by tbruinem      ########   odam.nl          #
+#    Updated: 2020/01/02 22:23:42 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,16 +19,17 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(FLAGS) -D BUFFER_SIZE=$(BUFFER_SIZE) $< -c -I.
+	@$(CC) $(FLAGS) -D BUFFER_SIZE=$(BUFFER_SIZE) $< -c -I.
 
 $(NAME): $(OBJ)
-	ar -rcs $(NAME) $(OBJ)
+	echo "Compiling.."
+	@ar -rcs $(NAME) $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 clean:
-	echo "Cleaning.."
-	rm -f $(OBJ)
+	@echo "Cleaning.."
+	@rm -f $(OBJ)
 
 re: fclean all
