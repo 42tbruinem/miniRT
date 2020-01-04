@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:58:01 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 12:39:52 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/04 16:47:41 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_data_read(int fd, t_data *data, int i)
 	ret = get_next_line(fd, &line);
 	while (ret != -1)
 	{
-		funct = ft_jumptable(ft_identifier_get(line, &i));
+		funct = ft_init_funct(ft_identifier_get(line, &i));
 		if (funct == NULL)
 			return (ERR_ID);
 		error = funct(line, data, i);

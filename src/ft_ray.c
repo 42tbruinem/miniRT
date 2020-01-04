@@ -5,14 +5,44 @@
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/02 12:58:11 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 14:23:25 by tbruinem      ########   odam.nl         */
+/*   Created: 2020/01/04 15:53:18 by tbruinem       #+#    #+#                */
+/*   Updated: 2020/01/04 16:38:59 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int		ft_ray_cast(void)
+/*
+**first convert to NDC ((x/y + 0.5) / width/height)
+**then convert to ScreenSpace (change the range to -1, 1 from 0, 1)
+**X: (2 * NDCx) - 1
+**Y: (1 - (2 * NDCy))
+*/
+
+/*
+**then when we add the fov and the camera orientation
+**we can convert it into worldspace
+*/
+
+/*
+to the center of the screen, the length is X
+that line, together with the point at screenwidth,screenheight / 2 (A)
+forms a triangle.
+made up of FOV + 90 + (90 - FOV)
+we know the length of the side: A (screenwidth / 2)
+*/
+
+t_vec	ft_ray_direction(t_data *data, double x, double y)
 {
-	return (0);
+	double		ratio;
+	t_vec		ray_dir;
+
+	ratio = data->width / data->height;
+	ray_dir.x = (2 * ((x + 0.5) / data->width) - 1) * ratio;
+	ray_dir.y = 1 - (2 * ((y + 0.5) / data->height));
+	ray_dir.z = -1;
+	ray_dir = ft_vec_scale(ray_dir, tan((data->cams->fov / 2) * (M_PI / 180)));
+	ray_dir = ft_vec_sub(ray_dir, data->cams->prop.pivot);
+	ray_dir = ft_normalize(ray_dir);
+	return (ray_dir);
 }

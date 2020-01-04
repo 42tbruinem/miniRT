@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:10:56 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 19:12:45 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/04 13:19:02 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_plane		*ft_plane_new(void)
 	new = malloc(sizeof(t_plane));
 	if (!new)
 		return (new);
-	new->color = ft_color_init();
+	new->col = ft_col_init();
 	new->prop = ft_prop_init();
 	new->next = NULL;
 	return (new);
@@ -67,9 +67,9 @@ static void	**ft_plane_properties(t_plane *plane)
 	properties[3] = &plane->prop.dir.x;
 	properties[4] = &plane->prop.dir.y;
 	properties[5] = &plane->prop.dir.z;
-	properties[6] = &plane->color.red;
-	properties[7] = &plane->color.green;
-	properties[8] = &plane->color.blue;
+	properties[6] = &plane->col.r;
+	properties[7] = &plane->col.g;
+	properties[8] = &plane->col.b;
 	properties[9] = 0;
 	return ((void **)properties);
 }

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 19:13:24 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/04 13:19:02 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_trngl		*ft_triangle_new(void)
 	new = malloc(sizeof(t_trngl));
 	if (!new)
 		return (new);
-	new->color = ft_color_init();
+	new->col = ft_col_init();
 	new->prop = ft_prop_init();
 	new->next = NULL;
 	new->p1 = ft_vec_init(0, 0, 0);
@@ -73,9 +73,9 @@ static void	**ft_triangle_properties(t_trngl *trngl)
 	properties[6] = &trngl->p3.x;
 	properties[7] = &trngl->p3.y;
 	properties[8] = &trngl->p3.z;
-	properties[9] = &trngl->color.red;
-	properties[10] = &trngl->color.green;
-	properties[11] = &trngl->color.blue;
+	properties[9] = &trngl->col.r;
+	properties[10] = &trngl->col.g;
+	properties[11] = &trngl->col.b;
 	properties[12] = 0;
 	return ((void **)properties);
 }

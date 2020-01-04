@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:09:10 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 19:13:08 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/04 13:19:02 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_square	*ft_square_new(void)
 	new = malloc(sizeof(t_square));
 	if (!new)
 		return (new);
-	new->color = ft_color_init();
+	new->col = ft_col_init();
 	new->prop = ft_prop_init();
 	new->next = NULL;
 	new->size = 0;
@@ -69,9 +69,9 @@ static void	**ft_square_properties(t_square *square)
 	properties[4] = &square->prop.dir.y;
 	properties[5] = &square->prop.dir.z;
 	properties[6] = &square->size;
-	properties[7] = &square->color.red;
-	properties[8] = &square->color.green;
-	properties[9] = &square->color.blue;
+	properties[7] = &square->col.r;
+	properties[8] = &square->col.g;
+	properties[9] = &square->col.b;
 	properties[10] = 0;
 	return ((void **)properties);
 }

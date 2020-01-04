@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 13:27:35 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/01 21:31:13 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/04 16:47:15 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,25 @@
 int		ft_identifier_parse(char *id)
 {
 	if (ft_strcmp(id, RES_ID) == 0)
-		return (RES);
+		return (I_RES);
 	else if (ft_strcmp(id, AMB_ID) == 0)
-		return (AMB);
+		return (I_AMB);
 	else if (ft_strcmp(id, CAM_ID) == 0)
-		return (CAM);
+		return (I_CAM);
 	else if (ft_strcmp(id, LIGHT_ID) == 0)
-		return (LIGHT);
+		return (I_LIGHT);
 	else if (ft_strcmp(id, SPH_ID) == 0)
-		return (SPH);
+		return (I_SPH);
 	else if (ft_strcmp(id, PLN_ID) == 0)
-		return (PLN);
+		return (I_PLN);
 	else if (ft_strcmp(id, SQR_ID) == 0)
-		return (SQR);
+		return (I_SQR);
 	else if (ft_strcmp(id, CYL_ID) == 0)
-		return (CYL);
+		return (I_CYL);
 	else if (ft_strcmp(id, TRI_ID) == 0)
-		return (TRI);
+		return (I_TRI);
 	else
-		return (ERROR);
+		return (I_ERROR);
 }
 
 int		ft_identifier_get(char *str, int *i)

@@ -6,14 +6,14 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 19:10:42 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/04 16:38:11 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include <mlx.h>
+//# include <mlx.h>
 # include <unistd.h>
 # include <math.h>
 # include <stdio.h>
@@ -52,18 +52,27 @@ enum	e_errors
 	ERR_ID,
 };
 
-enum	e_identifiers
+enum	e_collision
 {
-	ERROR = -1,
-	RES,
-	AMB,
-	CAM,
-	LIGHT,
-	SPH,
-	PLN,
-	SQR,
-	CYL,
-	TRI,
+	C_SPH,
+	C_PLN,
+	C_SQR,
+	C_CYL,
+	C_TRI,
+};
+
+enum	e_initialize
+{
+	I_ERROR = -1,
+	I_RES,
+	I_AMB,
+	I_CAM,
+	I_LIGHT,
+	I_SPH,
+	I_PLN,
+	I_SQR,
+	I_CYL,
+	I_TRI,
 };
 
 typedef struct	s_vec
@@ -83,9 +92,9 @@ typedef struct	s_prop
 
 typedef struct	s_col
 {
-	int			red;
-	int			green;
-	int			blue;
+	int			r;
+	int			g;
+	int			b;
 }				t_col;
 
 typedef struct	s_cam
@@ -98,7 +107,7 @@ typedef struct	s_cam
 typedef struct	s_light
 {
 	t_prop			prop;
-	t_col			color;
+	t_col			col;
 	double			bright;
 	struct s_light	*next;
 }				t_light;
@@ -106,7 +115,7 @@ typedef struct	s_light
 typedef struct	s_square
 {
 	t_prop			prop;
-	t_col			color;
+	t_col			col;
 	double			size;
 	struct s_square	*next;
 }				t_square;
@@ -114,7 +123,7 @@ typedef struct	s_square
 typedef struct	s_trngl
 {
 	t_prop			prop;
-	t_col			color;
+	t_col			col;
 	t_vec			p1;
 	t_vec			p2;
 	t_vec			p3;
@@ -124,7 +133,7 @@ typedef struct	s_trngl
 typedef struct	s_cylndr
 {
 	t_prop			prop;
-	t_col			color;
+	t_col			col;
 	double			width;
 	double			height;
 	struct s_cylndr	*next;
@@ -133,7 +142,7 @@ typedef struct	s_cylndr
 typedef struct	s_sphere
 {
 	t_prop			prop;
-	t_col			color;
+	t_col			col;
 	double			diameter;
 	struct s_sphere	*next;
 }				t_sphere;
@@ -141,14 +150,14 @@ typedef struct	s_sphere
 typedef struct	s_plane
 {
 	t_prop			prop;
-	t_col			color;
+	t_col			col;
 	struct s_plane	*next;
 }				t_plane;
 
 typedef struct	s_ambient
 {
 	double		bright;
-	t_col		color;
+	t_col		col;
 }				t_ambient;
 
 typedef struct	s_mlx
@@ -157,6 +166,12 @@ typedef struct	s_mlx
 	void		*window;
 	void		*image;
 }				t_mlx;
+
+typedef struct	s_ray
+{
+	t_vec		direction;
+	t_vec		origin;
+}				t_ray;
 
 typedef struct	s_data
 {
@@ -180,7 +195,8 @@ int				ft_atoi(char *str, int *i);
 double			ft_atod(char *str, int *i);
 void			ft_ato_i_or_f(char *str, void **ppty, int floats);
 
-void			ft_render(t_data *data);
+t_vec			ft_ray_direction(t_data *data, double x, double y);
+int				ft_render(t_data *data);
 
 int				ft_error(int error);
 int				ft_is_valid(char *str);
@@ -189,12 +205,26 @@ int				ft_isinrange_int(int min, int max, void *property, int size);
 int				ft_isinrange_double(double min, double max,
 				void *property, int size);
 
-typedef int		(*t_initf)(char *str, t_data *data, int i);
-t_initf			ft_jumptable(int id);
+typedef	int		(*t_collf)(t_ray ray, void *obj, unsigned int *col);
+t_collf			ft_coll_funct(int id);
 
-t_col			ft_color_init(void);
+typedef int		(*t_initf)(char *str, t_data *data, int i);
+t_initf			ft_init_funct(int id);
+
+unsigned long	ft_col_tohex(t_col col);
+t_col			ft_col_torgb(unsigned long hex);
+t_col			ft_col_init(void);
 t_prop			ft_prop_init(void);
+
+int				ft_cray_sphere(t_ray ray, void *obj, unsigned int *col);
+
+t_vec			ft_vec_sub(t_vec a, t_vec b);
+t_vec			ft_vec_add(t_vec a, t_vec b);
+t_vec			ft_vec_scale(t_vec vector, double scalar);
 t_vec			ft_vec_init(int x, int y, int z);
+t_vec			ft_normalize(t_vec vector);
+double			ft_vec_length(t_vec a, t_vec b);
+double			ft_dotp(t_vec a, t_vec b);
 
 void			ft_camera_clear(t_cam **list);
 void			ft_light_clear(t_light **list);

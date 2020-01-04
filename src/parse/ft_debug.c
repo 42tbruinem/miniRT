@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:23:47 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 19:10:19 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/04 13:19:02 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_amb_print(t_ambient amb)
 {
 	printf("----AMBIENT------\n");
 	printf("STRENGTH: %f\n", amb.bright);
-	printf("COLOR: R%d,G%d,B%d\n", amb.color.red,\
-			amb.color.green, amb.color.blue);
+	printf("col: R%d,G%d,B%d\n", amb.col.r,\
+			amb.col.g, amb.col.b);
 }
 
 void	ft_cam_print(t_cam *cam)
@@ -43,8 +43,8 @@ void	ft_light_print(t_light *light)
 	printf("COORD: X%f,Y%f,Z%f\n", light->prop.pivot.x,
 			light->prop.pivot.y, light->prop.pivot.z);
 	printf("BRIGHTNESS: %f\n", light->bright);
-	printf("COLOR: R%d,G%d,B%d\n", light->color.red,
-			light->color.green, light->color.blue);
+	printf("col: R%d,G%d,B%d\n", light->col.r,
+			light->col.g, light->col.b);
 }
 
 void	ft_sph_print(t_sphere *sphere)
@@ -53,8 +53,8 @@ void	ft_sph_print(t_sphere *sphere)
 	printf("COORD: X%f,Y%f,Z%f\n", sphere->prop.pivot.x,
 			sphere->prop.pivot.y, sphere->prop.pivot.z);
 	printf("DIAMETER: %f\n", sphere->diameter);
-	printf("COLOR: R%d,G%d,B%d\n", sphere->color.red,
-			sphere->color.green, sphere->color.blue);
+	printf("col: R%d,G%d,B%d\n", sphere->col.r,
+			sphere->col.g, sphere->col.b);
 }
 
 void	ft_pln_print(t_plane *obj)
@@ -64,8 +64,8 @@ void	ft_pln_print(t_plane *obj)
 			obj->prop.pivot.y, obj->prop.pivot.z);
 	printf("ORIENT: X%f,Y%f,Z%f\n", obj->prop.dir.x,
 			obj->prop.dir.y, obj->prop.dir.z);
-	printf("COLOR: R%d,G%d,B%d\n", obj->color.red,
-			obj->color.green, obj->color.blue);
+	printf("col: R%d,G%d,B%d\n", obj->col.r,
+			obj->col.g, obj->col.b);
 }
 
 void	ft_sqr_print(t_square *obj)
@@ -76,8 +76,8 @@ void	ft_sqr_print(t_square *obj)
 	printf("ORIENT: X%f,Y%f,Z%f\n", obj->prop.dir.x,
 			obj->prop.dir.y, obj->prop.dir.z);
 	printf("SIZE: %f\n", obj->size);
-	printf("COLOR: R%d,G%d,B%d\n", obj->color.red,
-			obj->color.green, obj->color.blue);
+	printf("col: R%d,G%d,B%d\n", obj->col.r,
+			obj->col.g, obj->col.b);
 }
 
 void	ft_cylndr_print(t_cylndr *obj)
@@ -89,8 +89,8 @@ void	ft_cylndr_print(t_cylndr *obj)
 			obj->prop.dir.y, obj->prop.dir.z);
 	printf("DIAMETER: %f\n", obj->width);
 	printf("HEIGHT: %f\n", obj->height);
-	printf("COLOR: R%d,G%d,B%d\n", obj->color.red,
-			obj->color.green, obj->color.blue);
+	printf("col: R%d,G%d,B%d\n", obj->col.r,
+			obj->col.g, obj->col.b);
 }
 
 void	ft_tri_print(t_trngl *obj)
@@ -102,8 +102,8 @@ void	ft_tri_print(t_trngl *obj)
 			obj->p2.z);
 	printf("P3 X%f,Y%f,Z%f\n", obj->p3.x, obj->p3.y,
 			obj->p3.z);
-	printf("COLOR: R%d,G%d,B%d\n", obj->color.red,
-			obj->color.green, obj->color.blue);
+	printf("col: R%d,G%d,B%d\n", obj->col.r,
+			obj->col.g, obj->col.b);
 }
 
 void	ft_data_print(t_data *data)

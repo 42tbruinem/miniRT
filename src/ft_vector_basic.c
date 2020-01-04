@@ -1,16 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_vector.c                                        :+:    :+:            */
+/*   ft_vector_basic.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 16:05:34 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 19:13:40 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/04 15:54:40 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+t_vec	ft_vec_add(t_vec a, t_vec b)
+{
+	a.x += b.x;
+	a.y += b.y;
+	a.z += b.z;
+	return (a);
+}
+
+t_vec	ft_vec_sub(t_vec a, t_vec b)
+{
+	a.x -= b.x;
+	a.y -= b.y;
+	a.z -= b.z;
+	return (a);
+}
+
+t_vec	ft_vec_scale(t_vec vector, double scalar)
+{
+	vector.x *= scalar;
+	vector.y *= scalar;
+	vector.z *= scalar;
+	return (vector);
+}
 
 t_vec	ft_vec_init(int x, int y, int z)
 {

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:21:23 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 19:12:56 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/04 13:19:02 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_sphere	*ft_sphere_new(void)
 	new = malloc(sizeof(t_sphere));
 	if (!new)
 		return (new);
-	new->color = ft_color_init();
+	new->col = ft_col_init();
 	new->prop = ft_prop_init();
 	new->next = NULL;
 	new->diameter = 0;
@@ -66,9 +66,9 @@ static void	**ft_sphere_properties(t_sphere *sphere)
 	properties[1] = &sphere->prop.pivot.y;
 	properties[2] = &sphere->prop.pivot.z;
 	properties[3] = &sphere->diameter;
-	properties[4] = &sphere->color.red;
-	properties[5] = &sphere->color.green;
-	properties[6] = &sphere->color.blue;
+	properties[4] = &sphere->col.r;
+	properties[5] = &sphere->col.g;
+	properties[6] = &sphere->col.b;
 	properties[7] = 0;
 	return ((void **)properties);
 }

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:12:12 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 19:12:35 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/04 13:19:02 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ t_light		*ft_light_new(void)
 
 	new = malloc(sizeof(t_light));
 	new->bright = 0.0;
-	new->color.red = 0;
-	new->color.green = 0;
-	new->color.blue = 0;
+	new->col.r = 0;
+	new->col.g = 0;
+	new->col.b = 0;
 	new->next = NULL;
 	new->prop = ft_prop_init();
 	return (new);
@@ -64,9 +64,9 @@ static void	**ft_light_properties(t_light *light)
 	properties[1] = &light->prop.pivot.y;
 	properties[2] = &light->prop.pivot.z;
 	properties[3] = &light->bright;
-	properties[4] = &light->color.red;
-	properties[5] = &light->color.green;
-	properties[6] = &light->color.blue;
+	properties[4] = &light->col.r;
+	properties[5] = &light->col.g;
+	properties[6] = &light->col.b;
 	properties[7] = 0;
 	return ((void **)properties);
 }

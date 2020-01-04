@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:45 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 19:12:00 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/04 13:19:02 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_cylndr	*ft_cylinder_new(void)
 	new = malloc(sizeof(t_cylndr));
 	if (!new)
 		return (new);
-	new->color = ft_color_init();
+	new->col = ft_col_init();
 	new->width = 0;
 	new->height = 0;
 	new->prop = ft_prop_init();
@@ -71,9 +71,9 @@ static void	**ft_cylinder_properties(t_cylndr *cylndr)
 	properties[5] = &cylndr->prop.dir.z;
 	properties[6] = &cylndr->width;
 	properties[7] = &cylndr->height;
-	properties[8] = &cylndr->color.red;
-	properties[9] = &cylndr->color.green;
-	properties[10] = &cylndr->color.blue;
+	properties[8] = &cylndr->col.r;
+	properties[9] = &cylndr->col.g;
+	properties[10] = &cylndr->col.b;
 	properties[11] = 0;
 	return ((void **)properties);
 }
