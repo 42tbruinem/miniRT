@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 12:47:02 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/04 16:24:12 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/05 17:23:02 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		main(int argc, char **input)
 //	data.mlx.data = mlx_init();
 //	data.mlx.window =	mlx_new_window(data.mlx.data,
 //						data.width, data.height, "Mini RayTracer");
-	ft_data_print(&data);
+//	ft_data_print(&data);
 	error = ft_render(&data);
 	if (error)
 		return (ft_error(error));

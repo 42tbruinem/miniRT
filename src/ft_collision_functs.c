@@ -21,8 +21,5 @@ t_collf		ft_coll_funct(int id)
 		[C_CYL] = &ft_cray_cylinder,
 		[C_TRI] = &ft_cray_triangle, */
 	};
-
-	if (id != -1)
-		return (functs[id]);
-	return (NULL);
+	return (functs[id]);
 }

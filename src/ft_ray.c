@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 15:53:18 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/04 16:38:59 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/05 17:27:08 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,29 @@ made up of FOV + 90 + (90 - FOV)
 we know the length of the side: A (screenwidth / 2)
 */
 
-t_vec	ft_ray_direction(t_data *data, double x, double y)
+t_vec	ft_ray_direction(t_data *data, int x, int y)
 {
 	double		ratio;
 	t_vec		ray_dir;
 
-	ratio = data->width / data->height;
-	ray_dir.x = (2 * ((x + 0.5) / data->width) - 1) * ratio;
+	if (data->width > data->height)
+		ratio = data->width / data->height;
+	else
+		ratio = data->height / data->width;
+	ray_dir.x = (2 * ((x + 0.5) / data->width) - 1);
+	if (data->width > data->height)
+		ray_dir.x *= ratio;
 	ray_dir.y = 1 - (2 * ((y + 0.5) / data->height));
-	ray_dir.z = -1;
+	if (data->height > data->width)
+		ray_dir.y *= ratio;
+	ray_dir.z = 1;
 	ray_dir = ft_vec_scale(ray_dir, tan((data->cams->fov / 2) * (M_PI / 180)));
-	ray_dir = ft_vec_sub(ray_dir, data->cams->prop.pivot);
+	ray_dir.z = -1;
+	ray_dir = ft_vec_sub(ray_dir, ft_vec_init(0, 0, 0));
 	ray_dir = ft_normalize(ray_dir);
+//	printf("x : %d | y: %d\n", x, y);
+//	printf("X %f\n", ray_dir.x);
+//	printf("Y %f\n", ray_dir.y);
+//	printf("Z %f\n", ray_dir.z);
 	return (ray_dir);
 }

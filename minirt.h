@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/04 16:38:11 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/05 01:04:10 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ int				ft_atoi(char *str, int *i);
 double			ft_atod(char *str, int *i);
 void			ft_ato_i_or_f(char *str, void **ppty, int floats);
 
-t_vec			ft_ray_direction(t_data *data, double x, double y);
+t_vec			ft_ray_direction(t_data *data, int x, int y);
 int				ft_render(t_data *data);
 
 int				ft_error(int error);
@@ -205,7 +205,7 @@ int				ft_isinrange_int(int min, int max, void *property, int size);
 int				ft_isinrange_double(double min, double max,
 				void *property, int size);
 
-typedef	int		(*t_collf)(t_ray ray, void *obj, unsigned int *col);
+typedef	void	(*t_collf)(t_ray ray, void *obj, unsigned int *col, t_vec *hit);
 t_collf			ft_coll_funct(int id);
 
 typedef int		(*t_initf)(char *str, t_data *data, int i);
@@ -216,7 +216,7 @@ t_col			ft_col_torgb(unsigned long hex);
 t_col			ft_col_init(void);
 t_prop			ft_prop_init(void);
 
-int				ft_cray_sphere(t_ray ray, void *obj, unsigned int *col);
+void 			ft_cray_sphere(t_ray ray, void *obj, unsigned int *col, t_vec *hit);
 
 t_vec			ft_vec_sub(t_vec a, t_vec b);
 t_vec			ft_vec_add(t_vec a, t_vec b);
