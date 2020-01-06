@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 12:57:02 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/05 17:26:43 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/06 01:19:53 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,35 @@ void	ft_ray_coll(t_data *data, t_ray ray, unsigned int *col)
 
 //this fires the rays at every X and Y coordinate.
 
+t_vec	ft_matrix_mult(t_matrix *a, t_matrix *b)
+{
+	matrix is an array of vectors (making up the rows)
+	vector is an array of doubles (making up the columns)
+
+	int index;
+	int row;
+	int col;
+	t_matrix *new;
+
+	row = 0;
+	new = ft_matrix_new(ft_length(a[0]), ft_length(b));
+	while (a[row])
+	{
+		col = 0;
+		while (b[index][col])
+		{
+			index = 0;
+			while (b[index])
+			{
+				new[row][col] += a[row][index] * b[index][col];
+				index++;
+			}
+			col++;
+		}
+		row++;
+	}
+}
+
 int		ft_render(t_data *data)
 {
 	int				x;
@@ -96,9 +125,9 @@ int		ft_render(t_data *data)
 		{
 			col = ft_col_tohex(data->amb.col) * data->amb.bright;
 			ray.direction = ft_ray_direction(data, x, y);
-			ray.origin = data->cams->prop.pivot;
+			ray.origin = ft_vec_init(0, 0, 0);
 			ft_ray_coll(data, ray, &col);
-			color = ft_col_torgb(col);
+			color = ft_col_torgb((unsigned long)col);
 			printf("%c%c%c", color.r, color.g, color.b);
 //			ft_pixel_put(data, x, y, col);
 			x++;
