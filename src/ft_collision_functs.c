@@ -14,12 +14,12 @@
 
 t_collf		ft_coll_funct(int id)
 {
-	static const t_collf functs[5] = {
-		[C_SPH] = &ft_cray_sphere,
-/* 		[C_PLN] = &ft_cray_plane,
-		[C_SQR] = &ft_cray_square,
-		[C_CYL] = &ft_cray_cylinder,
-		[C_TRI] = &ft_cray_triangle, */
+	static const t_collf functs[10] = {
+		[SPH] = &ft_cray_sphere,
+/* 		[PLN] = &ft_cray_plane,
+		[SQR] = &ft_cray_square,
+		[CYL] = &ft_cray_cylinder,
+		[TRI] = &ft_cray_triangle, */
 	};
 	return (functs[id]);
 }

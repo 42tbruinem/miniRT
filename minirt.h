@@ -6,14 +6,17 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/05 01:04:10 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/06 17:03:22 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-//# include <mlx.h>
+# include "minirt_enum.h"
+# include "minirt_struct.h"
+
+# include <mlx.h>
 # include <unistd.h>
 # include <math.h>
 # include <stdio.h>
@@ -41,153 +44,6 @@
 #  define MAX_HEIGHT 1440
 # endif
 
-enum	e_errors
-{
-	ERR_ARG = 1,
-	ERR_TYPE,
-	ERR_FILE,
-	ERR_NORMAL,
-	ERR_MEM,
-	ERR_RANGE,
-	ERR_ID,
-};
-
-enum	e_collision
-{
-	C_SPH,
-	C_PLN,
-	C_SQR,
-	C_CYL,
-	C_TRI,
-};
-
-enum	e_initialize
-{
-	I_ERROR = -1,
-	I_RES,
-	I_AMB,
-	I_CAM,
-	I_LIGHT,
-	I_SPH,
-	I_PLN,
-	I_SQR,
-	I_CYL,
-	I_TRI,
-};
-
-typedef struct	s_vec
-{
-	double		x;
-	double		y;
-	double		z;
-}				t_vec;
-
-typedef struct	s_prop
-{
-	t_vec		trans;
-	t_vec		rot;
-	t_vec		pivot;
-	t_vec		dir;
-}				t_prop;
-
-typedef struct	s_col
-{
-	int			r;
-	int			g;
-	int			b;
-}				t_col;
-
-typedef struct	s_cam
-{
-	t_prop			prop;
-	int				fov;
-	struct s_cam	*next;
-}				t_cam;
-
-typedef struct	s_light
-{
-	t_prop			prop;
-	t_col			col;
-	double			bright;
-	struct s_light	*next;
-}				t_light;
-
-typedef struct	s_square
-{
-	t_prop			prop;
-	t_col			col;
-	double			size;
-	struct s_square	*next;
-}				t_square;
-
-typedef struct	s_trngl
-{
-	t_prop			prop;
-	t_col			col;
-	t_vec			p1;
-	t_vec			p2;
-	t_vec			p3;
-	struct s_trngl	*next;
-}				t_trngl;
-
-typedef struct	s_cylndr
-{
-	t_prop			prop;
-	t_col			col;
-	double			width;
-	double			height;
-	struct s_cylndr	*next;
-}				t_cylndr;
-
-typedef struct	s_sphere
-{
-	t_prop			prop;
-	t_col			col;
-	double			diameter;
-	struct s_sphere	*next;
-}				t_sphere;
-
-typedef struct	s_plane
-{
-	t_prop			prop;
-	t_col			col;
-	struct s_plane	*next;
-}				t_plane;
-
-typedef struct	s_ambient
-{
-	double		bright;
-	t_col		col;
-}				t_ambient;
-
-typedef struct	s_mlx
-{
-	void		*data;
-	void		*window;
-	void		*image;
-}				t_mlx;
-
-typedef struct	s_ray
-{
-	t_vec		direction;
-	t_vec		origin;
-}				t_ray;
-
-typedef struct	s_data
-{
-	t_cam		*cams;
-	t_light		*light;
-	t_mlx		mlx;
-	int			width;
-	int			height;
-	t_ambient	amb;
-	t_sphere	*sph;
-	t_cylndr	*cyl;
-	t_square	*sqr;
-	t_plane		*pln;
-	t_trngl		*tri;
-}				t_data;
-
 int				get_next_line(int fd, char **line);
 int				ft_strlen(char *str);
 int				ft_strcmp(char *s1, char *s2);
@@ -195,9 +51,17 @@ int				ft_atoi(char *str, int *i);
 double			ft_atod(char *str, int *i);
 void			ft_ato_i_or_f(char *str, void **ppty, int floats);
 
-t_vec			ft_ray_direction(t_data *data, int x, int y);
-int				ft_render(t_data *data);
+void			ft_object_get(void **objects, t_data *data);
+void			*ft_object_iter(void *obj, int type);
+/*
+**Ray functions
+*/
+void			ft_ray_coll(t_data *data, t_ray ray, unsigned int *col);
+t_ray			ft_ray_init(t_data *data, int x, int y);
 
+/*
+**Input filtering
+*/
 int				ft_error(int error);
 int				ft_is_valid(char *str);
 int				ft_filter_input(int argc, char **input);
@@ -205,9 +69,12 @@ int				ft_isinrange_int(int min, int max, void *property, int size);
 int				ft_isinrange_double(double min, double max,
 				void *property, int size);
 
+/*
+**Jump tables
+*/
+
 typedef	void	(*t_collf)(t_ray ray, void *obj, unsigned int *col, t_vec *hit);
 t_collf			ft_coll_funct(int id);
-
 typedef int		(*t_initf)(char *str, t_data *data, int i);
 t_initf			ft_init_funct(int id);
 
@@ -216,8 +83,17 @@ t_col			ft_col_torgb(unsigned long hex);
 t_col			ft_col_init(void);
 t_prop			ft_prop_init(void);
 
-void 			ft_cray_sphere(t_ray ray, void *obj, unsigned int *col, t_vec *hit);
+int				ft_mlx_keypress(int keycode, void *param);
+int				ft_mlx_render(t_data *data);
+void			ft_mlx_pixtoimg(t_data *data, int x, int y, unsigned int col);
+int				ft_mlx_init(t_data *data);
 
+void			ft_cray_sphere(t_ray ray, void *obj,
+				unsigned int *col, t_vec *hit);
+
+/*
+**Vector functions
+*/
 t_vec			ft_vec_sub(t_vec a, t_vec b);
 t_vec			ft_vec_add(t_vec a, t_vec b);
 t_vec			ft_vec_scale(t_vec vector, double scalar);
@@ -250,7 +126,6 @@ int				ft_identifier_parse(char *id);
 void			ft_data_init(t_data *data);
 int				ft_data_get(t_data *data, int fd);
 int				ft_data_read(int fd, t_data *data, int i);
-
 void			ft_data_print(t_data *data);
 
 #endif
