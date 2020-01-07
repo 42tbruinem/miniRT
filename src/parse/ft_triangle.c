@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/04 13:19:02 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/07 12:27:29 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,8 @@ t_trngl		*ft_triangle_new(void)
 	return (new);
 }
 
-static void	**ft_triangle_properties(t_trngl *trngl)
+void	ft_triangle_properties(void **properties, t_trngl *trngl)
 {
-	void	**properties;
-
-	properties = malloc(sizeof(void *) * 13);
-	if (!properties)
-		return (properties);
 	properties[0] = &trngl->p1.x;
 	properties[1] = &trngl->p1.y;
 	properties[2] = &trngl->p1.z;
@@ -77,27 +72,20 @@ static void	**ft_triangle_properties(t_trngl *trngl)
 	properties[10] = &trngl->col.g;
 	properties[11] = &trngl->col.b;
 	properties[12] = 0;
-	return ((void **)properties);
 }
 
 int			ft_triangle_init(char *str, t_data *data, int i)
 {
 	t_trngl		*new;
-	void		**ppty;
+	void		*ppty[13];
 
 	new = ft_triangle_new();
 	if (!new)
 		return (ERR_MEM);
-	ppty = ft_triangle_properties(new);
-	if (!ppty)
-	{
-		free(new);
-		return (ERR_MEM);
-	}
+	ft_triangle_properties(ppty, new);
 	ft_ato_i_or_f(str + i, ppty, 8);
 	ft_triangle_addback(&data->tri, new);
 	if (ft_isinrange_int(0, 255, ppty[9], 3) == 0)
 		return (ERR_RANGE);
-	free(ppty);
 	return (0);
 }

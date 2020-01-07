@@ -29,7 +29,10 @@ void	ft_cray_sphere(t_ray ray, void *obj, unsigned int *col, t_vec *hit)
 	length = ft_vec_length(r_coll, sphere->prop.pivot);
 	if (length > (sphere->diameter / 2))
 		return ;
-	coll_t = intersect_t - sqrt(pow(sphere->diameter / 2, 2) - pow(length, 2));
+	if (pow(sphere->diameter / 2, 2) - pow(length, 2) > 0)
+		coll_t = intersect_t - sqrt(pow(sphere->diameter / 2, 2) - pow(length, 2));
+	else
+		return ;
 	r_coll = ft_vec_add(ray.origin, ft_vec_scale(ray.direction, coll_t));
 	if (ft_vec_length(ray.origin, r_coll) < ft_vec_length(ray.origin, *hit)
 		|| ft_vec_length(ray.origin, *hit) == 0)

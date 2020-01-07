@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:21:23 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/04 13:19:02 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/07 12:18:39 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,8 @@ t_sphere	*ft_sphere_new(void)
 	return (new);
 }
 
-static void	**ft_sphere_properties(t_sphere *sphere)
+void	ft_sphere_properties(void **properties, t_sphere *sphere)
 {
-	void	**properties;
-
-	properties = malloc(sizeof(void *) * (7 + 1));
-	if (!properties)
-		return (properties);
 	properties[0] = &sphere->prop.pivot.x;
 	properties[1] = &sphere->prop.pivot.y;
 	properties[2] = &sphere->prop.pivot.z;
@@ -70,27 +65,20 @@ static void	**ft_sphere_properties(t_sphere *sphere)
 	properties[5] = &sphere->col.g;
 	properties[6] = &sphere->col.b;
 	properties[7] = 0;
-	return ((void **)properties);
 }
 
 int			ft_sphere_init(char *str, t_data *data, int i)
 {
 	t_sphere	*new;
-	void		**ppty;
+	void		*ppty[8];
 
 	new = ft_sphere_new();
 	if (!new)
 		return (ERR_MEM);
-	ppty = ft_sphere_properties(new);
-	if (!ppty)
-	{
-		free(new);
-		return (ERR_MEM);
-	}
+	ft_sphere_properties(ppty, new);
 	ft_ato_i_or_f(str + i, ppty, 3);
 	ft_sphere_addback(&data->sph, new);
 	if (ft_isinrange_int(0, 255, ppty[4], 3) == 0)
 		return (ERR_RANGE);
-	free(ppty);
 	return (0);
 }

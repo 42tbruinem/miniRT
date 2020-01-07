@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 12:47:02 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/06 14:30:25 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/07 12:10:15 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		main(int argc, char **input)
 		return (ft_error(error));
 	if (ft_mlx_init(&data) == 0)
 		return (ft_error(error));
-	ft_data_print(&data);
+//	ft_data_print(&data);
 	error = ft_mlx_render(&data);
 	if (error)
 		return (ft_error(error));

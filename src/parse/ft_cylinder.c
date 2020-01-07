@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:45 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/04 13:19:02 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/07 12:15:30 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,8 @@ t_cylndr	*ft_cylinder_new(void)
 	return (new);
 }
 
-static void	**ft_cylinder_properties(t_cylndr *cylndr)
+void	ft_cylinder_properties(void **properties, t_cylndr *cylndr)
 {
-	void	**properties;
-
-	properties = malloc(sizeof(void *) * (11 + 1));
-	if (!properties)
-		return (properties);
 	properties[0] = &cylndr->prop.pivot.x;
 	properties[1] = &cylndr->prop.pivot.y;
 	properties[2] = &cylndr->prop.pivot.z;
@@ -75,29 +70,22 @@ static void	**ft_cylinder_properties(t_cylndr *cylndr)
 	properties[9] = &cylndr->col.g;
 	properties[10] = &cylndr->col.b;
 	properties[11] = 0;
-	return ((void **)properties);
 }
 
 int			ft_cylinder_init(char *str, t_data *data, int i)
 {
 	t_cylndr	*new;
-	void		**ppty;
+	void		*ppty[12];
 
 	new = ft_cylinder_new();
 	if (!new)
 		return (ERR_MEM);
-	ppty = ft_cylinder_properties(new);
-	if (!ppty)
-	{
-		free(new);
-		return (ERR_MEM);
-	}
+	ft_cylinder_properties(ppty, new);
 	ft_ato_i_or_f(str + i, ppty, 7);
 	ft_cylinder_addback(&data->cyl, new);
 	if (ft_isinrange_double(-1.0, 1.0, ppty[3], 3) == 0)
 		return (ERR_RANGE);
 	if (ft_isinrange_int(0, 255, ppty[8], 3) == 0)
 		return (ERR_RANGE);
-	free(ppty);
 	return (0);
 }

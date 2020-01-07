@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/06 17:03:22 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/07 12:06:49 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_col			ft_col_torgb(unsigned long hex);
 t_col			ft_col_init(void);
 t_prop			ft_prop_init(void);
 
+void			ft_mlx_pixel_to_img(void *img, int x, int y, unsigned int color);
 int				ft_mlx_keypress(int keycode, void *param);
 int				ft_mlx_render(t_data *data);
 void			ft_mlx_pixtoimg(t_data *data, int x, int y, unsigned int col);

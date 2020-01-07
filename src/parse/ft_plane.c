@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:10:56 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/04 13:19:02 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/07 12:17:51 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,8 @@ t_plane		*ft_plane_new(void)
 	return (new);
 }
 
-static void	**ft_plane_properties(t_plane *plane)
+void	ft_plane_properties(void **properties, t_plane *plane)
 {
-	void	**properties;
-
-	properties = malloc(sizeof(void *) * (9 + 1));
-	if (!properties)
-		return (properties);
 	properties[0] = &plane->prop.pivot.x;
 	properties[1] = &plane->prop.pivot.y;
 	properties[2] = &plane->prop.pivot.z;
@@ -71,29 +66,22 @@ static void	**ft_plane_properties(t_plane *plane)
 	properties[7] = &plane->col.g;
 	properties[8] = &plane->col.b;
 	properties[9] = 0;
-	return ((void **)properties);
 }
 
 int			ft_plane_init(char *str, t_data *data, int i)
 {
 	t_plane		*new;
-	void		**ppty;
+	void		*ppty[10];
 
 	new = ft_plane_new();
 	if (!new)
 		return (ERR_MEM);
-	ppty = ft_plane_properties(new);
-	if (!ppty)
-	{
-		free(new);
-		return (ERR_MEM);
-	}
+	ft_plane_properties(ppty, new);
 	ft_ato_i_or_f(str + i, ppty, 5);
 	ft_plane_addback(&data->pln, new);
 	if (ft_isinrange_double(-1.0, 1.0, ppty[3], 3) == 0)
 		return (ERR_RANGE);
 	if (ft_isinrange_int(0, 255, ppty[6], 3) == 0)
 		return (ERR_RANGE);
-	free(ppty);
 	return (0);
 }

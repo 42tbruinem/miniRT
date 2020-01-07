@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:12:12 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/04 13:19:02 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/07 12:17:00 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,8 @@ t_light		*ft_light_new(void)
 	return (new);
 }
 
-static void	**ft_light_properties(t_light *light)
+void	ft_light_properties(void **properties, t_light *light)
 {
-	void	**properties;
-
-	properties = malloc(sizeof(void *) * 8);
 	properties[0] = &light->prop.pivot.x;
 	properties[1] = &light->prop.pivot.y;
 	properties[2] = &light->prop.pivot.z;
@@ -68,35 +65,22 @@ static void	**ft_light_properties(t_light *light)
 	properties[5] = &light->col.g;
 	properties[6] = &light->col.b;
 	properties[7] = 0;
-	return ((void **)properties);
 }
 
 int			ft_light_init(char *str, t_data *data, int i)
 {
 	t_light	*new;
-	void	**ppty;
+	void	*ppty[8];
 
 	new = ft_light_new();
 	if (!new)
 		return (ERR_MEM);
-	ppty = ft_light_properties(new);
-	if (!ppty)
-	{
-		free(new);
-		return (ERR_MEM);
-	}
+	ft_light_properties(ppty, new);
 	ft_ato_i_or_f(str + i, ppty, 3);
 	ft_light_addback(&data->light, new);
 	if (ft_isinrange_double(0.0, 1.0, ppty[3], 1) == 0)
-	{
-		free(ppty);
 		return (ERR_RANGE);
-	}
 	if (ft_isinrange_int(0, 255, ppty[4], 3) == 0)
-	{
-		free(ppty);
 		return (ERR_RANGE);
-	}
-	free(ppty);
 	return (0);
 }

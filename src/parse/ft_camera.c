@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 15:59:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 19:11:19 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/07 12:14:23 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,8 @@ t_cam		*ft_camera_new(void)
 	return (new);
 }
 
-static void	**ft_camera_properties(t_cam *cam)
+static void	ft_camera_properties(void **properties, t_cam *cam)
 {
-	void	**properties;
-
-	properties = malloc(sizeof(void *) * 8);
-	if (properties == NULL)
-		return (NULL);
 	properties[0] = &cam->prop.pivot.x;
 	properties[1] = &cam->prop.pivot.y;
 	properties[2] = &cam->prop.pivot.z;
@@ -69,29 +64,22 @@ static void	**ft_camera_properties(t_cam *cam)
 	properties[5] = &cam->prop.dir.z;
 	properties[6] = &cam->fov;
 	properties[7] = 0;
-	return ((void **)properties);
 }
 
 int			ft_camera_init(char *str, t_data *data, int i)
 {
 	t_cam	*new;
-	void	**ppty;
+	void	*ppty[10];
 
 	new = ft_camera_new();
 	if (!new)
 		return (ERR_MEM);
-	ppty = ft_camera_properties(new);
-	if (!ppty)
-	{
-		free(new);
-		return (ERR_MEM);
-	}
+	ft_camera_properties(ppty, new);
 	ft_ato_i_or_f(str + i, ppty, 5);
 	ft_camera_addback(&data->cams, new);
 	if (ft_isinrange_double(-1.0, 1.0, ppty[3], 3) == 0)
 		return (ERR_RANGE);
 	if (ft_isinrange_int(0, 180, ppty[6], 1) == 0)
 		return (ERR_RANGE);
-	free(ppty);
 	return (0);
 }
