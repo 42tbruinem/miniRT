@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 17:02:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/06 17:02:43 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/08 13:51:53 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,12 @@ typedef struct	s_cylndr
 	double			height;
 	struct s_cylndr	*next;
 }				t_cylndr;
+
+typedef struct	s_matrix
+{
+	double		*col;
+	double		val;
+}				t_matrix;
 
 typedef struct	s_sphere
 {
