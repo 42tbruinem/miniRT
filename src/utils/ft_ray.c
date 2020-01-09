@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 15:53:18 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/06 17:13:57 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/09 11:31:08 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 */
 
 /*
-to the center of the screen, the length is X
-that line, together with the point at screenwidth,screenheight / 2 (A)
-forms a triangle.
-made up of FOV + 90 + (90 - FOV)
-we know the length of the side: A (screenwidth / 2)
+**to the center of the screen, the length is X
+**that line, together with the point at screenwidth,screenheight / 2 (A)
+**forms a triangle.
+**made up of FOV + 90 + (90 - FOV)
+**we know the length of the side: A (screenwidth / 2)
 */
 
 void	ft_ray_coll(t_data *data, t_ray ray, unsigned int *col)

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/08 22:14:06 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/09 10:43:21 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_ray			ft_ray_init(t_data *data, int x, int y);
 /*
 **Input filtering
 */
-int				ft_error(t_data data, int error);
+int				ft_error(t_data *data, int error);
 int				ft_is_valid(char *str);
 int				ft_filter_input(int argc, char **input);
 int				ft_isinrange_int(int min, int max, void *property, int size);
@@ -84,7 +84,9 @@ t_col			ft_col_torgb(unsigned long hex);
 t_col			ft_col_init(void);
 t_prop			ft_prop_init(void);
 
-void			ft_mlx_pixel_to_img(t_data *data, int x, int y, unsigned int color);
+void			ft_mlx_img_to_win(t_data *data);
+void			ft_mlx_pixel_to_img(t_data *data, int x,
+				int y, unsigned int color);
 int				ft_mlx_keypress(int keycode, void *param);
 int				ft_mlx_render(t_data *data);
 void			ft_mlx_pixtoimg(t_data *data, int x, int y, unsigned int col);

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/08 21:48:14 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/09 11:27:52 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void		ft_triangle_clear(t_trngl **list)
 	t_trngl	*iter;
 	t_trngl	*del;
 
+	if (!list)
+		return ;
 	iter = *list;
 	while (iter)
 	{
@@ -57,7 +59,7 @@ t_trngl		*ft_triangle_new(void)
 	return (new);
 }
 
-void	ft_triangle_properties(void **properties, t_trngl *trngl)
+void		ft_triangle_properties(void **properties, t_trngl *trngl)
 {
 	properties[0] = &trngl->p1.x;
 	properties[1] = &trngl->p1.y;
@@ -87,8 +89,5 @@ int			ft_triangle_init(char *str, t_data *data, int i)
 	ft_triangle_addback(&data->tri, new);
 	if (ft_isinrange_int(0, 255, ppty[9], 3) == 0)
 		return (ERR_RANGE);
-//	if (sqrt(pow(new->prop.dir.x, 2) + pow(new->prop.dir.y, 2)
-//							+ pow(new->prop.dir.z, 2)) != 1)
-//		return (ERR_NORMAL);
 	return (0);
 }

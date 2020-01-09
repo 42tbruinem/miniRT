@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:10:56 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/08 21:48:34 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/09 11:27:34 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void		ft_plane_clear(t_plane **list)
 	t_plane	*iter;
 	t_plane	*del;
 
+	if (!list)
+		return ;
 	iter = *list;
 	while (iter)
 	{
@@ -54,7 +56,7 @@ t_plane		*ft_plane_new(void)
 	return (new);
 }
 
-void	ft_plane_properties(void **properties, t_plane *plane)
+void		ft_plane_properties(void **properties, t_plane *plane)
 {
 	properties[0] = &plane->prop.pivot.x;
 	properties[1] = &plane->prop.pivot.y;
@@ -83,8 +85,7 @@ int			ft_plane_init(char *str, t_data *data, int i)
 		return (ERR_RANGE);
 	if (ft_isinrange_int(0, 255, ppty[6], 3) == 0)
 		return (ERR_RANGE);
-//	if (sqrt(pow(new->prop.dir.x, 2) + pow(new->prop.dir.y, 2)
-//							+ pow(new->prop.dir.z, 2)) != 1)
-//		return (ERR_NORMAL);
+	if (!ft_isnormalized(new->prop.dir))
+		return (ERR_NORMAL);
 	return (0);
 }

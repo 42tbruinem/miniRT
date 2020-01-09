@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 13:36:17 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/08 09:49:23 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/09 11:07:21 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ int	ft_mlx_keypress(int keycode, void *param)
 		mlx_clear_window(data->mlx.data, data->mlx.window);
 	if (keycode == ESCAPE)
 	{
+		mlx_destroy_window(data->mlx.data, data->mlx.window);
+		ft_data_clear(data);
+		mlx_destroy_image(data->mlx.data, data->mlx.image1);
+		mlx_destroy_image(data->mlx.data, data->mlx.image2);
 		mlx_destroy_window(data->mlx.data, data->mlx.window);
 		exit(0);
 	}

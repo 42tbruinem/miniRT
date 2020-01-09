@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:09:10 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/08 21:48:40 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/09 11:27:44 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void		ft_square_clear(t_square **list)
 	t_square	*iter;
 	t_square	*del;
 
+	if (!list)
+		return ;
 	iter = *list;
 	while (iter)
 	{
@@ -55,7 +57,7 @@ t_square	*ft_square_new(void)
 	return (new);
 }
 
-void	ft_square_properties(void **properties, t_square *square)
+void		ft_square_properties(void **properties, t_square *square)
 {
 	properties[0] = &square->prop.pivot.x;
 	properties[1] = &square->prop.pivot.y;
@@ -85,8 +87,7 @@ int			ft_square_init(char *str, t_data *data, int i)
 		return (ERR_RANGE);
 	if (ft_isinrange_int(0, 255, ppty[7], 3) == 0)
 		return (ERR_RANGE);
-//	if (sqrt(pow(new->prop.dir.x, 2) + pow(new->prop.dir.y, 2)
-//							+ pow(new->prop.dir.z, 2)) != 1)
-//		return (ERR_NORMAL);
+	if (!ft_isnormalized(new->prop.dir))
+		return (ERR_NORMAL);
 	return (0);
 }

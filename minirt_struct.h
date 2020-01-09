@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 17:02:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/08 21:15:53 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/09 10:42:26 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,18 +103,19 @@ typedef struct	s_ambient
 	t_col		col;
 }				t_ambient;
 
-typedef struct	s_mlx
+typedef struct		s_mlx
 {
-	void		*data;
-	void		*window;
-	void		*image1;
-	void		*image2;
-	int			bpp;
-	int			ll;
-	char		*addr1;
-	char		*addr2;
-	int			endian;
-}				t_mlx;
+	void			*data;
+	void			*window;
+	void			*image1;
+	void			*image2;
+	int				bpp;
+	int				ll;
+	char			*addr1;
+	char			*addr2;
+	int				endian;
+	unsigned long	frame;
+}					t_mlx;
 
 typedef struct	s_colldata
 {

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 12:39:43 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/08 20:52:20 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/09 11:24:00 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ double	**ft_matrix_new(int row, int col)
 	return (new);
 }
 
-double	**ft_matrix_c_to_w()
+double	**ft_matrix_c_to_w(void)
 {
 	double	**matrix;
 

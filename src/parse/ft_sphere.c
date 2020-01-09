@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:21:23 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/07 12:18:39 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/09 11:26:51 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void		ft_sphere_clear(t_sphere **list)
 	t_sphere	*iter;
 	t_sphere	*del;
 
+	if (!list)
+		return ;
 	iter = *list;
 	while (iter)
 	{
@@ -55,7 +57,7 @@ t_sphere	*ft_sphere_new(void)
 	return (new);
 }
 
-void	ft_sphere_properties(void **properties, t_sphere *sphere)
+void		ft_sphere_properties(void **properties, t_sphere *sphere)
 {
 	properties[0] = &sphere->prop.pivot.x;
 	properties[1] = &sphere->prop.pivot.y;

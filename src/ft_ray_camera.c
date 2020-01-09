@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 12:33:28 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/04 12:33:28 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/09 11:22:53 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ void	ft_cray_sphere(t_ray ray, void *obj, unsigned int *col, t_vec *hit)
 	double		coll_t;
 
 	sphere = (t_sphere *)obj;
-	intersect_t =	ft_dotp(ft_vec_sub(sphere->prop.pivot, ray.origin),
+	intersect_t = ft_dotp(ft_vec_sub(sphere->prop.pivot, ray.origin),
 					ray.direction);
 	r_coll = ft_vec_add(ray.origin, ft_vec_scale(ray.direction, intersect_t));
 	length = ft_vec_length(r_coll, sphere->prop.pivot);
 	if (length > (sphere->diameter / 2))
 		return ;
-	if (pow(sphere->diameter / 2, 2) - pow(length, 2) > 0)
-		coll_t = intersect_t - sqrt(pow(sphere->diameter / 2, 2) - pow(length, 2));
-	else
+	if (pow(sphere->diameter / 2, 2) - pow(length, 2) < 0)
 		return ;
+	coll_t = intersect_t - sqrt(pow(sphere->diameter / 2, 2)
+		- pow(length, 2));
 	r_coll = ft_vec_add(ray.origin, ft_vec_scale(ray.direction, coll_t));
 	if (ft_vec_length(ray.origin, r_coll) < ft_vec_length(ray.origin, *hit)
 		|| ft_vec_length(ray.origin, *hit) == 0)

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:45 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/08 21:48:10 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/09 11:26:30 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void		ft_cylinder_clear(t_cylndr **list)
 	t_cylndr	*iter;
 	t_cylndr	*del;
 
+	if (!list)
+		return ;
 	iter = *list;
 	while (iter)
 	{
@@ -56,7 +58,7 @@ t_cylndr	*ft_cylinder_new(void)
 	return (new);
 }
 
-void	ft_cylinder_properties(void **properties, t_cylndr *cylndr)
+void		ft_cylinder_properties(void **properties, t_cylndr *cylndr)
 {
 	properties[0] = &cylndr->prop.pivot.x;
 	properties[1] = &cylndr->prop.pivot.y;
@@ -87,8 +89,7 @@ int			ft_cylinder_init(char *str, t_data *data, int i)
 		return (ERR_RANGE);
 	if (ft_isinrange_int(0, 255, ppty[8], 3) == 0)
 		return (ERR_RANGE);
-//	if (sqrt(pow(new->prop.dir.x, 2) + pow(new->prop.dir.y, 2)
-//							+ pow(new->prop.dir.z, 2)) != 1)
-//		return (ERR_NORMAL);
+	if (!ft_isnormalized(new->prop.dir))
+		return (ERR_NORMAL);
 	return (0);
 }

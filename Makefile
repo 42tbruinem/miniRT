@@ -6,7 +6,7 @@
 #    By: tbruinem <tbruinem@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/30 11:07:31 by tbruinem       #+#    #+#                 #
-#    Updated: 2020/01/08 15:33:30 by tbruinem      ########   odam.nl          #
+#    Updated: 2020/01/09 10:30:57 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ ifndef RAW
 	@make -C $(GNL_DIR) all
 	@cp -rf $(MLX_DIR)/libmlx.dylib .
 endif
-	-gcc $(FLAGS) $(SRC) -o $(NAME) -lm -lmlx -lXext -lX11
+	-gcc $(FLAGS) $(SRC) -o $(NAME)
 
 clean:
 	@echo "Cleaning"

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:12:12 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/07 12:17:00 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/09 11:27:21 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void		ft_light_clear(t_light **list)
 	t_light	*iter;
 	t_light	*del;
 
+	if (!list)
+		return ;
 	iter = *list;
 	while (iter)
 	{
@@ -55,7 +57,7 @@ t_light		*ft_light_new(void)
 	return (new);
 }
 
-void	ft_light_properties(void **properties, t_light *light)
+void		ft_light_properties(void **properties, t_light *light)
 {
 	properties[0] = &light->prop.pivot.x;
 	properties[1] = &light->prop.pivot.y;
