@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/07 12:06:49 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/08 22:14:06 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,13 @@ t_ray			ft_ray_init(t_data *data, int x, int y);
 /*
 **Input filtering
 */
-int				ft_error(int error);
+int				ft_error(t_data data, int error);
 int				ft_is_valid(char *str);
 int				ft_filter_input(int argc, char **input);
 int				ft_isinrange_int(int min, int max, void *property, int size);
 int				ft_isinrange_double(double min, double max,
 				void *property, int size);
+int				ft_isnormalized(t_vec orientation);
 
 /*
 **Jump tables
@@ -83,7 +84,7 @@ t_col			ft_col_torgb(unsigned long hex);
 t_col			ft_col_init(void);
 t_prop			ft_prop_init(void);
 
-void			ft_mlx_pixel_to_img(void *img, int x, int y, unsigned int color);
+void			ft_mlx_pixel_to_img(t_data *data, int x, int y, unsigned int color);
 int				ft_mlx_keypress(int keycode, void *param);
 int				ft_mlx_render(t_data *data);
 void			ft_mlx_pixtoimg(t_data *data, int x, int y, unsigned int col);
@@ -124,6 +125,7 @@ int				ft_triangle_init(char *str, t_data *data, int i);
 int				ft_identifier_get(char *str, int *i);
 int				ft_identifier_parse(char *id);
 
+void			ft_data_clear(t_data *data);
 void			ft_data_init(t_data *data);
 int				ft_data_get(t_data *data, int fd);
 int				ft_data_read(int fd, t_data *data, int i);

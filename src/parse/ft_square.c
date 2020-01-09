@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:09:10 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/07 12:19:19 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/08 21:48:40 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,8 @@ int			ft_square_init(char *str, t_data *data, int i)
 		return (ERR_RANGE);
 	if (ft_isinrange_int(0, 255, ppty[7], 3) == 0)
 		return (ERR_RANGE);
+//	if (sqrt(pow(new->prop.dir.x, 2) + pow(new->prop.dir.y, 2)
+//							+ pow(new->prop.dir.z, 2)) != 1)
+//		return (ERR_NORMAL);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/31 16:57:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 19:12:20 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/08 22:15:57 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_isnormalized(t_vec orientation)
 	x = orientation.x;
 	y = orientation.y;
 	z = orientation.z;
-	if (pow(x, x) + pow(y, y) + pow(z, z) == 1)
+	if (sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2) == 1))
 		return (1);
 	return (0);
 }

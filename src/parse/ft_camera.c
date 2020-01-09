@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 15:59:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/07 12:14:23 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/08 22:16:43 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void		ft_camera_clear(t_cam **list)
 		del = iter;
 		iter = iter->next;
 		free(del);
+		del = NULL;
 	}
 }
 
@@ -81,5 +82,8 @@ int			ft_camera_init(char *str, t_data *data, int i)
 		return (ERR_RANGE);
 	if (ft_isinrange_int(0, 180, ppty[6], 1) == 0)
 		return (ERR_RANGE);
+//	if (sqrt(pow(new->prop.dir.x, 2) + pow(new->prop.dir.y, 2)
+//							+ pow(new->prop.dir.z, 2)) != 1)
+//		return (ERR_NORMAL);
 	return (0);
 }

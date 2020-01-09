@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 17:02:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/08 13:51:53 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/08 21:15:53 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ typedef struct	s_cylndr
 typedef struct	s_matrix
 {
 	double		*col;
-	double		val;
 }				t_matrix;
 
 typedef struct	s_sphere
@@ -108,10 +107,12 @@ typedef struct	s_mlx
 {
 	void		*data;
 	void		*window;
-	void		*image;
+	void		*image1;
+	void		*image2;
 	int			bpp;
 	int			ll;
-	char		*addr;
+	char		*addr1;
+	char		*addr2;
 	int			endian;
 }				t_mlx;
 

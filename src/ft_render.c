@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 12:57:02 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/08 09:45:13 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/08 22:14:46 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,15 @@ int		ft_mlx_render(t_data *data)
 		{
 			col = ft_col_tohex(data->amb.col) * data->amb.bright;
 			ray = ft_ray_init(data, x, y);
-			ray.origin = ft_vec_init(0, 0, 0);
+			if (x % 100 == 0)
+			{
+				printf("x:%d, y:%d\n", x, y);
+				printf("X: %f | Y: %f | Z: %f\n", ray.direction.x, ray.direction.y, ray.direction.z);
+				printf("normalized: %d\n", ft_isnormalized(ray.direction));
+			}
 			ft_ray_coll(data, ray, &col);
 //			color = ft_col_torgb((unsigned int)col);
-//			ft_mlx_pixel_to_img(data->mlx.image, x, y, col);
-//			ft_mlx_pixtoimg(data, x, y, col);
+//			ft_mlx_pixel_to_img(data, x, y, col);
 #ifdef RAW
 	printf("%c%c%c", (col & 0xFF000000) >> 16, (col & 0x00FF0000) >> 8, col & 0x0000FF00);
 #endif

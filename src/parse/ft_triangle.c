@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/07 12:27:29 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/08 21:48:14 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,8 @@ int			ft_triangle_init(char *str, t_data *data, int i)
 	ft_triangle_addback(&data->tri, new);
 	if (ft_isinrange_int(0, 255, ppty[9], 3) == 0)
 		return (ERR_RANGE);
+//	if (sqrt(pow(new->prop.dir.x, 2) + pow(new->prop.dir.y, 2)
+//							+ pow(new->prop.dir.z, 2)) != 1)
+//		return (ERR_NORMAL);
 	return (0);
 }

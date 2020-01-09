@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:58:01 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/04 16:47:41 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/08 21:30:14 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void	ft_data_init(t_data *data)
 	data->tri = NULL;
 	data->cams = NULL;
 	data->light = NULL;
+	data->mlx.addr1 = NULL;
+	data->mlx.addr2 = NULL;
+	data->mlx.window = NULL;
+	data->mlx.data = NULL;
+	data->mlx.image1 = NULL;
+	data->mlx.image2 = NULL;
 }
 
 int		ft_data_read(int fd, t_data *data, int i)
@@ -60,6 +66,14 @@ void	ft_data_clear(t_data *data)
 	ft_sphere_clear(&data->sph);
 	ft_triangle_clear(&data->tri);
 	ft_cylinder_clear(&data->cyl);
+	free(data->mlx.addr1);
+	free(data->mlx.addr2);
+	if (data->mlx.image1)
+		mlx_destroy_image(data->mlx.data, data->mlx.image1);
+	if (data->mlx.image2)
+		mlx_destroy_image(data->mlx.data, data->mlx.image2);
+	if (data->mlx.window)
+		mlx_destroy_window(data->mlx.data, data->mlx.window);
 }
 
 int		ft_data_get(t_data *data, int fd)

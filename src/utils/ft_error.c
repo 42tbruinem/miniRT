@@ -6,13 +6,13 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 22:24:38 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/02 12:07:15 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/08 21:27:42 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int		ft_error(int error)
+int		ft_error(t_data data, int error)
 {
 	static char	*error_msg[10] = {
 		[ERR_ARG] = "Please (only) supply a scene file.",
@@ -24,6 +24,8 @@ int		ft_error(int error)
 		[ERR_ID] = "Wrong identifier."
 	};
 
+	if (error != ERR_ARG && error != ERR_TYPE && error != ERR_FILE)
+		ft_data_clear(&data);
 	write(1, "Error\n", ft_strlen("Error\n"));
 	write(1, error_msg[error], ft_strlen(error_msg[error]));
 	if (error == ERR_TYPE)
