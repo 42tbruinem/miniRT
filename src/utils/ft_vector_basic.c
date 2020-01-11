@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 16:05:34 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/04 15:54:40 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/11 16:59:54 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ t_vec	ft_vec_init(int x, int y, int z)
 	new.x = x;
 	new.y = y;
 	new.z = z;
+	new.t = 1;
 	return (new);
 }

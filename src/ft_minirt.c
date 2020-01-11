@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 12:47:02 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 10:51:03 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/11 17:30:24 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,22 @@ int		main(int argc, char **input)
 	int		fd;
 	int		error;
 
-	error = ft_filter_input(argc, input);
+	ft_data_init(&data);
+	error = ft_filter_input(&data, argc, input);
 	if (error)
 		return (ft_error(NULL, error));
 	fd = open(input[1], O_RDONLY);
 	error = ft_data_get(&data, fd);
 	if (error)
 		return (ft_error(&data, error));
-	ft_data_print(&data);
-	if (ft_mlx_init(&data) == ERR_MEM)
-		return (ft_error(&data, ERR_MEM));
-	error = ft_mlx_render(&data);
+//	ft_data_print(&data);
+//	if (ft_mlx_init(&data) == ERR_MEM)
+//		return (ft_error(&data, ERR_MEM));
+//	error = (data.save == 1) ? ft_bmp_render(&data) : ft_mlx_render(&data);
+	error = ft_bmp_render(&data);
 	if (error)
 		return (ft_error(&data, error));
-	mlx_hook(data.mlx.window, KEY_PRESS_CODE, 1L << 0, ft_mlx_keypress, &data);
-	mlx_loop(data.mlx.data);
+//	mlx_hook(data.mlx.window, KEY_PRESS_CODE, 1L << 0, ft_mlx_keypress, &data);
+//	mlx_loop(data.mlx.data);
 	return (0);
 }

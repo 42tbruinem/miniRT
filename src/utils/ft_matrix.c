@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 12:39:43 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 11:24:00 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/11 16:46:11 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,66 +32,62 @@ int		ft_matrix_rowlen(double **rows)
 	return (i);
 }
 
-double	**ft_matrix_new(int row, int col)
+t_matrix	ft_matrix_new(int row, int col)
 {
-	double		**new;
+	t_matrix	new;
 	int			i;
 
 	i = 0;
-	new = malloc(sizeof(double *) * (row + 1));
+	new.col = col;
+	new.row = row;
+	new.mat = malloc(sizeof(double *) * row);
 	while (i < row)
 	{
-		new[i] = malloc(sizeof(double) * (col + 1));
-		new[i][col] = 0;
+		new.mat[i] = malloc(sizeof(double) * col);
 		i++;
 	}
-	new[i] = 0;
-	new[row][col] = 0;
 	return (new);
 }
 
-double	**ft_matrix_c_to_w(void)
+void		ft_matrix_init(t_matrix	*mat, double val)
 {
 	double	**matrix;
+	int		i;
+	int		j;
 
-	matrix = ft_matrix_new(4, 4);
-	matrix[0][0] = 0;
-	matrix[0][1] = 0;
-	matrix[0][2] = 0;
-	matrix[0][3] = 0;
-	matrix[1][0] = 0;
-	matrix[1][1] = 0;
-	matrix[1][2] = 0;
-	matrix[1][3] = 0;
-	matrix[2][0] = 0;
-	matrix[2][1] = 0;
-	matrix[2][2] = 0;
-	matrix[2][3] = 0;
-	matrix[3][0] = 0;
-	matrix[3][1] = 0;
-	matrix[3][2] = 0;
-	matrix[3][3] = 1;
-	return (matrix);
+	matrix = mat->mat;
+	i = 0;
+	while (i < mat->row)
+	{
+		j = 0;
+		while (j < mat->col)
+		{
+			matrix[i][j] = val;
+			j++;
+		}
+		i++;
+	}
 }
 
-double	**ft_matrix_mult(double **a, double **b)
+t_matrix	ft_matrix_mult(t_matrix a, t_matrix b)
 {
 	int			index;
 	int			row;
 	int			col;
-	double		**new;
+	t_matrix	new;
 
 	row = 0;
-	new = ft_matrix_new(ft_matrix_rowlen(a), ft_matrix_collen(b[0]));
-	while (a[row])
+	index = 0;
+	new = ft_matrix_new(a.row, b.col);
+	while (a.mat[row])
 	{
 		col = 0;
-		while (b[index][col])
+		while (b.mat[index][col])
 		{
 			index = 0;
-			while (b[index])
+			while (b.mat[index])
 			{
-				new[row][col] += a[row][index] * b[index][col];
+				new.mat[row][col] += a.mat[row][index] * b.mat[index][col];
 				index++;
 			}
 			col++;

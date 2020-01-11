@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/31 16:57:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 10:57:28 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/11 18:45:21 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,19 @@ int		ft_is_valid(char *str)
 	return (1);
 }
 
-int		ft_filter_input(int argc, char **input)
+int		ft_filter_input(t_data *data, int argc, char **input)
 {
 	int fd;
 
-	if (argc < 2 || argc > 2)
+	if (argc < 2)
 		return (ERR_ARG);
+	if (argc > 3 && ft_strcmp(input[2], "--save") == 1)
+		return (ERR_ARG);
+	else
+	{
+		data->save = 1;
+		data->fd = open("render.ppm", O_WRONLY | O_CREAT, 0644);
+	}
 	fd = open(input[1], O_RDONLY);
 	if (read(fd, (void *)0, 0) == -1)
 		return (ERR_FILE);

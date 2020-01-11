@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:58:01 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 11:17:38 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/11 17:23:10 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_data_init(t_data *data)
 {
+	data->save = 0;
+	data->fd = 1;
 	data->sph = NULL;
 	data->cyl = NULL;
 	data->pln = NULL;
@@ -74,7 +76,6 @@ int		ft_data_get(t_data *data, int fd)
 {
 	int		error;
 
-	ft_data_init(data);
 	error = ft_data_read(fd, data, 0);
 	if (error)
 		return (error);

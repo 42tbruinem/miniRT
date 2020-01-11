@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 17:02:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 10:42:26 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/11 17:09:18 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct	s_vec
 	double		x;
 	double		y;
 	double		z;
+	double		t;
 }				t_vec;
 
 typedef struct	s_prop
@@ -79,7 +80,9 @@ typedef struct	s_cylndr
 
 typedef struct	s_matrix
 {
-	double		*col;
+	double		**mat;
+	int			row;
+	int			col;
 }				t_matrix;
 
 typedef struct	s_sphere
@@ -144,6 +147,7 @@ typedef struct	s_data
 	t_plane		*pln;
 	t_trngl		*tri;
 	int			fd;
+	int			save;
 }				t_data;
 
 #endif

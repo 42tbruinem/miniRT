@@ -1,0 +1,4 @@
+int		ft_matrix_collen(double *cols)
+int		ft_matrix_rowlen(double **rows)
+double	**ft_matrix_new(int row, int col)
+t_matrix	ft_matrix_mult(t_matrix a, t_matrix b)

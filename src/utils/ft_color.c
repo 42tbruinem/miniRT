@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 11:28:07 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 11:28:09 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/11 18:45:03 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ t_col			ft_col_torgb(unsigned long hex)
 {
 	t_col	col;
 
-	col.r = ((hex >> 16) & 0xFF) / 255;
-	col.g = ((hex >> 8) & 0xFF) / 255.0;
-	col.b = (hex & 0xFF) / 255.0;
+	col.r = (hex >> 16) & 0x0000FF;
+	col.g = (hex >> 8) & 0x0000FF;
+	col.b = hex & 0x0000FF;
 	return (col);
 }
 

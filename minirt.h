@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 10:43:21 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/11 17:29:22 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,19 @@ void			*ft_object_iter(void *obj, int type);
 void			ft_ray_coll(t_data *data, t_ray ray, unsigned int *col);
 t_ray			ft_ray_init(t_data *data, int x, int y);
 
+int				ft_matrix_collen(double *cols);
+int				ft_matrix_rowlen(double **rows);
+t_matrix		ft_matrix_new(int row, int col);
+t_matrix		ft_matrix_mult(t_matrix a, t_matrix b);
+void			ft_matrix_init(t_matrix *mat, double val);
+
+
 /*
 **Input filtering
 */
 int				ft_error(t_data *data, int error);
 int				ft_is_valid(char *str);
-int				ft_filter_input(int argc, char **input);
+int				ft_filter_input(t_data *data, int argc, char **input);
 int				ft_isinrange_int(int min, int max, void *property, int size);
 int				ft_isinrange_double(double min, double max,
 				void *property, int size);
@@ -91,6 +98,7 @@ int				ft_mlx_keypress(int keycode, void *param);
 int				ft_mlx_render(t_data *data);
 void			ft_mlx_pixtoimg(t_data *data, int x, int y, unsigned int col);
 int				ft_mlx_init(t_data *data);
+int				ft_bmp_render(t_data *data);
 
 void			ft_cray_sphere(t_ray ray, void *obj,
 				unsigned int *col, t_vec *hit);
