@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 12:57:02 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/11 18:06:32 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/12 17:47:28 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,27 @@ int		ft_bmp_render(t_data *data)
 	t_col			color;
 	int				zero[4];
 
-	y = 0;
-//	ft_bmp_header(data);
-	dprintf(data->fd, "P6\n%d %d\n255\n", data->width, data->height);
-	while (y < data->height)
+	y = data->height;
+	ft_bmp_header(data);
+//	dprintf(data->fd, "P6\n%d %d\n255\n", data->width, data->height);
+	while (y >= 0)
 	{
-		x = 0;
-		while (x < data->width)
+		x = data->width;
+		while (x >= 0)
 		{
 			col = ft_col_tohex(data->amb.col) * data->amb.bright;
 			ft_ray_coll(data, ft_ray_init(data, x, y), &col);
 			color = ft_col_torgb((unsigned int)col);
-			write(data->fd, &color.r, 1);
-			write(data->fd, &color.g, 1);
+//			write(data->fd, &color.r, 1);
+//			write(data->fd, &color.g, 1);
+//			write(data->fd, &color.b, 1);
 			write(data->fd, &color.b, 1);
-//			write(data->fd, zero, 4);
-			x++;
+			write(data->fd, &color.g, 1);
+			write(data->fd, &color.r, 1);
+			write(data->fd, zero, 1);
+			x--;
 		}
-		y++;
+		y--;
 	}
 	return (0);
 

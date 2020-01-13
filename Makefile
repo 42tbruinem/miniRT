@@ -6,7 +6,7 @@
 #    By: tbruinem <tbruinem@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/30 11:07:31 by tbruinem       #+#    #+#                 #
-#    Updated: 2020/01/11 17:29:48 by tbruinem      ########   odam.nl          #
+#    Updated: 2020/01/12 17:26:52 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,6 @@ SRC = 	./src/ft_collision_functs.c \
 		./src/utils/ft_color.c \
 		./src/utils/ft_digit_utils.c \
 		./src/utils/ft_error.c \
-		./src/utils/ft_matrix.c \
 		./src/utils/ft_objects.c \
 		./src/utils/ft_property.c \
 		./src/utils/ft_ray.c \

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 12:39:43 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/11 16:46:11 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/12 13:10:26 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,24 @@ int		ft_matrix_rowlen(double **rows)
 	return (i);
 }
 
+void	ft_matrix_del(t_matrix mat)
+{
+	int	i;
+
+	i = 0;
+	while (i < mat.row)
+	{
+		free(mat.mat[i]);
+		i++;
+	}
+	free(mat.mat);
+}
+
 t_matrix	ft_matrix_new(int row, int col)
 {
 	t_matrix	new;
 	int			i;
+	int			j;
 
 	i = 0;
 	new.col = col;
@@ -43,30 +57,16 @@ t_matrix	ft_matrix_new(int row, int col)
 	new.mat = malloc(sizeof(double *) * row);
 	while (i < row)
 	{
-		new.mat[i] = malloc(sizeof(double) * col);
-		i++;
-	}
-	return (new);
-}
-
-void		ft_matrix_init(t_matrix	*mat, double val)
-{
-	double	**matrix;
-	int		i;
-	int		j;
-
-	matrix = mat->mat;
-	i = 0;
-	while (i < mat->row)
-	{
 		j = 0;
-		while (j < mat->col)
+		new.mat[i] = malloc(sizeof(double) * col);
+		while (j < col)
 		{
-			matrix[i][j] = val;
+			new.mat[i][j] = 0;
 			j++;
 		}
 		i++;
 	}
+	return (new);
 }
 
 t_matrix	ft_matrix_mult(t_matrix a, t_matrix b)
@@ -79,18 +79,18 @@ t_matrix	ft_matrix_mult(t_matrix a, t_matrix b)
 	row = 0;
 	index = 0;
 	new = ft_matrix_new(a.row, b.col);
-	while (a.mat[row])
+	while (row < a.row)
 	{
 		col = 0;
-		while (b.mat[index][col])
+		while (col < b.col)
 		{
-			index = 0;
-			while (b.mat[index])
+			while (index < b.row)
 			{
 				new.mat[row][col] += a.mat[row][index] * b.mat[index][col];
 				index++;
 			}
 			col++;
+			index = 0;
 		}
 		row++;
 	}

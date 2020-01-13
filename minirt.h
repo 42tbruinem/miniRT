@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/11 17:29:22 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/12 13:11:11 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,13 @@ int				ft_matrix_collen(double *cols);
 int				ft_matrix_rowlen(double **rows);
 t_matrix		ft_matrix_new(int row, int col);
 t_matrix		ft_matrix_mult(t_matrix a, t_matrix b);
-void			ft_matrix_init(t_matrix *mat, double val);
+void			ft_matrix_del(t_matrix mat);
 
+t_matrix		ft_matrix_rot_x(double rotation);
+t_matrix		ft_matrix_rot_y(double rotation);
+t_matrix		ft_matrix_rot_z(double rotation);
+t_matrix		ft_matrix_t(t_vec t);
+t_matrix		ft_matrix_s(t_vec s);
 
 /*
 **Input filtering

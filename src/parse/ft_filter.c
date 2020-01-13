@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/31 16:57:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/11 18:45:21 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/12 17:26:06 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		ft_filter_input(t_data *data, int argc, char **input)
 	else
 	{
 		data->save = 1;
-		data->fd = open("render.ppm", O_WRONLY | O_CREAT, 0644);
+		data->fd = open("bmpsave.bmp", O_WRONLY | O_CREAT, 0644);
 	}
 	fd = open(input[1], O_RDONLY);
 	if (read(fd, (void *)0, 0) == -1)
