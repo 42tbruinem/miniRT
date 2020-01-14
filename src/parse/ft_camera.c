@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 15:59:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/14 20:11:48 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/14 21:50:52 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			ft_camera_init(char *str, t_data *data, int i)
 	t_cam	*new;
 	void	*ppty[10];
 
-	printf("I can start initializing a camera\n");
+//	printf("I can start initializing a camera\n");
 	new = ft_camera_new();
 	if (!new)
 		return (ERR_MEM);
@@ -91,6 +91,6 @@ int			ft_camera_init(char *str, t_data *data, int i)
 	ft_lookat(new);
 	ft_matrix_print(new->c2w);
 //	ft_c2w_update(new);
-	printf("I can exit\n");
+//	printf("I can exit\n");
 	return (0);
 }
