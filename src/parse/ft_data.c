@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:58:01 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/11 17:23:10 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/14 20:09:50 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,27 @@ int		ft_data_read(int fd, t_data *data, int i)
 	char	*line;
 	t_initf	funct;
 
+	error = 0;
+	printf("I can enter the read function\n");
 	ret = get_next_line(fd, &line);
 	while (ret != -1)
 	{
 		funct = ft_init_funct(ft_identifier_get(line, &i));
 		if (funct == NULL)
-			return (ERR_ID);
-		error = funct(line, data, i);
-		if (error)
 		{
-			free(line);
-			return (error);
-		}
-		free(line);
-		if (ret == 0)
+			error = ERR_ID;
 			break ;
+		}
+		error = funct(line, data, i);
+		if (ret == 0 || error)
+			break ;
+		free(line);
 		ret = get_next_line(fd, &line);
 		i = 0;
 	}
-	return (0);
+	free(line);
+	printf("I can exit read\n");
+	return (error);
 }
 
 void	ft_data_clear(t_data *data)
@@ -76,7 +78,9 @@ int		ft_data_get(t_data *data, int fd)
 {
 	int		error;
 
+	printf("I can enter the data get function\n");
 	error = ft_data_read(fd, data, 0);
+	printf("I can exit the data get function\n");
 	if (error)
 		return (error);
 	return (0);

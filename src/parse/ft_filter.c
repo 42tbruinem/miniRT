@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/31 16:57:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/12 17:26:06 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/14 16:14:56 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,15 @@ int		ft_filter_input(t_data *data, int argc, char **input)
 
 	if (argc < 2)
 		return (ERR_ARG);
-	if (argc > 3 && ft_strcmp(input[2], "--save") == 1)
-		return (ERR_ARG);
-	else
+	if (argc > 3)
 	{
-		data->save = 1;
-		data->fd = open("bmpsave.bmp", O_WRONLY | O_CREAT, 0644);
+		if (ft_strcmp(input[2], "--save") == 1)
+			return (ERR_ARG);
+		else
+		{
+			data->save = 1;
+			data->fd = open("bmpsave.bmp", O_WRONLY | O_CREAT, 0644);
+		}
 	}
 	fd = open(input[1], O_RDONLY);
 	if (read(fd, (void *)0, 0) == -1)

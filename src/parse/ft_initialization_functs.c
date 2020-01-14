@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 13:38:57 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/06 17:08:14 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/14 20:13:22 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_initf		ft_init_funct(int id)
 		[TRI] = &ft_triangle_init,
 	};
 
+	printf("I can enter the init funct jumptable with %d\n", id);
 	if (id != -1)
 		return (functs[id]);
 	return (NULL);

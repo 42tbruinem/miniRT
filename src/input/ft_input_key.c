@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 13:36:17 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 11:07:21 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/14 20:39:55 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,36 @@ int	ft_mlx_keypress(int keycode, void *param)
 		mlx_destroy_image(data->mlx.data, data->mlx.image2);
 		mlx_destroy_window(data->mlx.data, data->mlx.window);
 		exit(0);
+	}
+	if (keycode == Z)
+	{
+		data->cams->prop.pivot.z -= 0.5;
+		ft_mlx_render(data);
+	}
+	if (keycode == X)
+	{
+		data->cams->prop.pivot.z += 0.5;
+		ft_mlx_render(data);
+	}
+	if (keycode == D)
+	{
+		data->cams->prop.pivot.x += 0.5;
+		ft_mlx_render(data);
+	}
+	if (keycode == A)
+	{
+		data->cams->prop.pivot.x -= 0.5;
+		ft_mlx_render(data);
+	}
+	if (keycode == W)
+	{
+		data->cams->prop.pivot.y += 0.5;
+		ft_mlx_render(data);
+	}
+	if (keycode == S)
+	{
+		data->cams->prop.pivot.y -= 0.5;
+		ft_mlx_render(data);
 	}
 	return (0);
 }

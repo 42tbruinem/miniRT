@@ -6,13 +6,13 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 12:39:43 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/12 13:10:26 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/14 19:41:36 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int		ft_matrix_collen(double *cols)
+/* int		ft_matrix_collen(double *cols)
 {
 	int i;
 
@@ -20,9 +20,9 @@ int		ft_matrix_collen(double *cols)
 	while (cols + i)
 		i++;
 	return (i);
-}
+} */
 
-int		ft_matrix_rowlen(double **rows)
+/* int		ft_matrix_rowlen(t_matrix rows)
 {
 	int i;
 
@@ -30,22 +30,22 @@ int		ft_matrix_rowlen(double **rows)
 	while (rows + i)
 		i++;
 	return (i);
-}
+} */
 
-void	ft_matrix_del(t_matrix mat)
+/* void	ft_matrix_del(t_matrix mat)
 {
 	int	i;
 
 	i = 0;
-	while (i < mat.row)
+	while (i < 4)
 	{
-		free(mat.mat[i]);
+		free(mat[i]);
 		i++;
 	}
-	free(mat.mat);
-}
+	free(mat);
+} */
 
-t_matrix	ft_matrix_new(int row, int col)
+/* t_matrix	ft_matrix_new(int row, int col)
 {
 	t_matrix	new;
 	int			i;
@@ -67,32 +67,88 @@ t_matrix	ft_matrix_new(int row, int col)
 		i++;
 	}
 	return (new);
+} */
+
+void		ft_matrix_print(t_matrix mat)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			printf("%8f ", mat[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 }
 
-t_matrix	ft_matrix_mult(t_matrix a, t_matrix b)
+void		ft_matrix_init(t_matrix mat)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			mat[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+}
+
+void		ft_matrix_dup(t_matrix orig, t_matrix dup)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			dup[i][j] = orig[i][j];
+			j++;
+		}
+		i++;
+	}
+}
+
+void		ft_matrix_mult(t_matrix a, t_matrix b, t_matrix new)
 {
 	int			index;
 	int			row;
 	int			col;
-	t_matrix	new;
 
 	row = 0;
 	index = 0;
-	new = ft_matrix_new(a.row, b.col);
-	while (row < a.row)
+	ft_matrix_init(new);
+	while (row < 4)
 	{
 		col = 0;
-		while (col < b.col)
+		while (col < 4)
 		{
-			while (index < b.row)
+			while (index < 4)
 			{
-				new.mat[row][col] += a.mat[row][index] * b.mat[index][col];
+//				printf("new[%d][%d] = %f\n", row, col, new[row][col]);
+//				printf("a[%d][%d]   = %f | b[%d][%d] = %f | a * b = %f\n", row, index, a[row][index], index, col, b[index][col], a[row][index] * b[index][col]);
+				new[row][col] += a[row][index] * b[index][col];
 				index++;
 			}
+//			printf("\n");
 			col++;
 			index = 0;
 		}
 		row++;
 	}
-	return (new);
 }

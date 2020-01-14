@@ -6,56 +6,106 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/11 16:57:45 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/12 13:22:50 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/14 19:26:27 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_matrix	ft_vec_to_mat(t_vec vec)
+void	ft_vec_to_mat(t_vec vec, t_matrix new)
 {
-	t_matrix	new;
+	int i;
+	int j;
 
-	new = ft_matrix_new(4, 1);
-	new.mat[0][0] = vec.x;
-	new.mat[1][0] = vec.y;
-	new.mat[2][0] = vec.z;
-	new.mat[3][0] = vec.t;
-	return (new);
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			new[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+	new[0][0] = vec.x;
+	new[1][0] = vec.y;
+	new[2][0] = vec.z;
+	new[3][0] = 1;
 }
 
 t_vec		ft_mat_to_vec(t_matrix mat)
 {
 	t_vec new;
 
-	new.x = mat.mat[0][0];
-	new.y = mat.mat[1][0];
-	new.z = mat.mat[2][0];
-	new.t = mat.mat[3][0];
+	new.x = mat[0][0];
+	new.y = mat[1][0];
+	new.z = mat[2][0];
+	new.t = 1;
 	return (new);
 }
 
-t_matrix	ft_mult_and_clean(t_matrix a, t_matrix b)
+void	ft_lookat(t_cam *cam)
 {
-	t_matrix	res;
+	t_vec	cam_r;
+	t_vec	cam_f;
+	t_vec	cam_u;
+	t_vec	tmp;
 
-	res = ft_matrix_mult(a, b);
-	ft_matrix_del(a);
-	ft_matrix_del(b);
-	return (res);
+	cam_f = cam->prop.dir;
+	if (cam_f.y != 1)
+		tmp = ft_vec_init(0, 1, 0);
+	else
+		tmp = ft_vec_init(0, 0, -1);
+	cam_r = ft_crossp(tmp, cam_f);
+	cam_u = ft_crossp(cam_f, cam_r);
+	cam->c2w[0][0] = cam_r.x;
+	cam->c2w[1][0] = cam_r.y;
+	cam->c2w[2][0] = cam_r.z;
+	cam->c2w[0][1] = cam_u.x;
+	cam->c2w[1][1] = cam_u.y;
+	cam->c2w[2][1] = cam_u.z;
+	cam->c2w[0][2] = cam_f.x;
+	cam->c2w[1][2] = cam_f.y;
+	cam->c2w[2][2] = cam_f.z;
+	cam->c2w[0][3] = cam->prop.pivot.x;
+	cam->c2w[1][3] = cam->prop.pivot.y;
+	cam->c2w[2][3] = cam->prop.pivot.z;
+	cam->c2w[3][3] = 1;
 }
 
-t_vec		ft_cam_to_w(t_vec old, t_prop properties)
+void	ft_c2w_update(t_cam *cam)
 {
-	t_matrix	res;
+	t_matrix	tmp1;
+	t_matrix	tmp2;
+
+	ft_matrix_rot_x(cam->prop.rot.x, tmp1);
+	ft_matrix_rot_y(cam->prop.rot.y, tmp2);
+	ft_matrix_mult(tmp1, tmp2, cam->c2w);
+	ft_matrix_dup(cam->c2w, tmp2);
+	ft_matrix_rot_z(cam->prop.rot.z, tmp1);
+	ft_matrix_mult(tmp1, tmp2, cam->c2w);
+	ft_matrix_dup(cam->c2w, tmp2);
+	ft_matrix_t(cam->prop.trans, tmp1);
+	ft_matrix_mult(tmp1, tmp2, cam->c2w);
+}
+
+t_vec		ft_c2w_apply(t_vec old, t_cam *cam)
+{
+	t_matrix	tmp;
+	t_matrix	fnl;
 	t_vec		new;
 
-	res = ft_mult_and_clean(ft_matrix_rot_x(properties.rot.x),
-		ft_matrix_rot_y(properties.rot.y));
-	res = ft_mult_and_clean(res, ft_matrix_rot_z(properties.rot.z));
-	res = ft_mult_and_clean(res, ft_matrix_t(properties.trans));
-	res = ft_mult_and_clean(res, ft_vec_to_mat(old));
-	new = ft_mat_to_vec(res);
-	ft_matrix_del(res);
+//	printf("original vector\n");
+//	printf("old, %f, %f, %f\n", old.x, old.y, old.z);
+	ft_vec_to_mat(old, tmp);
+//	printf("converted to matrix:\n");
+//	ft_matrix_print(tmp);
+	ft_matrix_mult(tmp, cam->c2w, fnl);
+//	printf("final matrix with transforms applied\n");
+//	ft_matrix_print(fnl);
+	new = ft_mat_to_vec(fnl);
+//	printf("matrix converted back to vector:\n");
+//	printf("old: %f, %f, %f\n", old.x, old.y, old.z);
 	return (new);
 }

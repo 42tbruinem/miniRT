@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 15:53:18 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 11:31:08 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/14 20:23:33 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,29 @@ t_ray	ft_ray_init(t_data *data, int x, int y)
 		ratio = (double)data->width / (double)data->height;
 	if (data->height > data->width)
 		ratio = (double)data->height / (double)data->width;
-	ray.direction.x = (2 * ((x + 0.5) / data->width) - 1);
+	ray.direction.x = (2.0 * ((x + 0.5) / data->width) - 1.0);
 	if (data->width > data->height)
 		ray.direction.x *= ratio;
-	ray.direction.y = 1 - (2 * ((y + 0.5) / data->height));
+	ray.direction.y = 1.0 - (2.0 * ((y + 0.5) / data->height));
 	if (data->height > data->width)
 		ray.direction.y *= ratio;
 	ray.direction.z = 1;
-	ray.origin = ft_vec_init(0, 0, 0);
+//	if (x % 50 == 0)
+//		printf("ray origin:\n");
+	ray.origin = data->cams->prop.pivot;
+//	printf("rd old: %f, %f, %f\n", ray.origin.x, ray.origin.y, ray.origin.z);
+	ray.origin = ft_c2w_apply(ray.origin, data->cams);
+//	printf("rd new: %f, %f, %f\n", ray.origin.x, ray.origin.y, ray.origin.z);
 	ray.direction = ft_vec_scale(ray.direction,
-					tan((data->cams->fov / 2) * (M_PI / 180)));
-	ray.direction.z = 1;
+					tan(((double)data->cams->fov / 2.0) * (M_PI / 180)));
 	ray.direction = ft_vec_sub(ray.direction, ray.origin);
+	ray.direction.z = 1;
 	ray.direction = ft_normalize(ray.direction);
+//	if (x % 50 == 0)
+//		printf("ray direction:\n");
+	ray.direction = ft_c2w_apply(ray.direction, data->cams);
+	ray.direction = ft_normalize(ray.direction);
+//	printf("ray direction: %f, %f, %f\n", ray.direction.x, ray.direction.y, ray.direction.z);
+//	ray.direction = ft_normalize(ft_vec_sub(ray.direction, ray.origin));
 	return (ray);
 }

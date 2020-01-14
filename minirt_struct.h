@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 17:02:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/11 17:09:18 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/14 13:40:11 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,13 @@ typedef struct	s_col
 	int			b;
 }				t_col;
 
+typedef double	t_matrix[4][4];
+
 typedef struct	s_cam
 {
 	t_prop			prop;
 	int				fov;
+	t_matrix		c2w;
 	struct s_cam	*next;
 }				t_cam;
 
@@ -78,13 +81,6 @@ typedef struct	s_cylndr
 	struct s_cylndr	*next;
 }				t_cylndr;
 
-typedef struct	s_matrix
-{
-	double		**mat;
-	int			row;
-	int			col;
-}				t_matrix;
-
 typedef struct	s_sphere
 {
 	t_prop			prop;
@@ -106,6 +102,7 @@ typedef struct	s_ambient
 	t_col		col;
 }				t_ambient;
 
+
 typedef struct		s_mlx
 {
 	void			*data;
@@ -120,12 +117,12 @@ typedef struct		s_mlx
 	unsigned long	frame;
 }					t_mlx;
 
-typedef struct	s_colldata
+/* typedef struct	s_colldata
 {
 	void		*object;
 	int			objtype;
 	t_vec		hit;
-}				t_colldata;
+}				t_colldata; */
 
 typedef struct	s_ray
 {

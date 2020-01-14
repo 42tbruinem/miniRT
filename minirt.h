@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/12 13:11:11 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/14 18:53:24 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,23 @@ void			*ft_object_iter(void *obj, int type);
 void			ft_ray_coll(t_data *data, t_ray ray, unsigned int *col);
 t_ray			ft_ray_init(t_data *data, int x, int y);
 
-int				ft_matrix_collen(double *cols);
-int				ft_matrix_rowlen(double **rows);
-t_matrix		ft_matrix_new(int row, int col);
-t_matrix		ft_matrix_mult(t_matrix a, t_matrix b);
-void			ft_matrix_del(t_matrix mat);
+//int			ft_matrix_collen(double *cols);
+//int			ft_matrix_rowlen(t_matrix rows);
+//t_matrix		ft_matrix_new(int row, int col);
+void			ft_matrix_mult(t_matrix a, t_matrix b, t_matrix new);
+//void			ft_matrix_del(t_matrix mat);
+void			ft_matrix_init(t_matrix mat);
+void			ft_matrix_dup(t_matrix orig, t_matrix dup);
+void			ft_matrix_print(t_matrix mat);
 
-t_matrix		ft_matrix_rot_x(double rotation);
-t_matrix		ft_matrix_rot_y(double rotation);
-t_matrix		ft_matrix_rot_z(double rotation);
-t_matrix		ft_matrix_t(t_vec t);
-t_matrix		ft_matrix_s(t_vec s);
+t_vec			ft_c2w_apply(t_vec old, t_cam *cam);
+void			ft_c2w_update(t_cam *cam);
+void			ft_lookat(t_cam *cam);
+void			ft_matrix_rot_x(double rotation, t_matrix new);
+void			ft_matrix_rot_y(double rotation, t_matrix new);
+void			ft_matrix_rot_z(double rotation, t_matrix new);
+void			ft_matrix_t(t_vec t, t_matrix new);
+void			ft_matrix_s(t_vec s, t_matrix new);
 
 /*
 **Input filtering
@@ -118,6 +124,7 @@ t_vec			ft_vec_init(int x, int y, int z);
 t_vec			ft_normalize(t_vec vector);
 double			ft_vec_length(t_vec a, t_vec b);
 double			ft_dotp(t_vec a, t_vec b);
+t_vec			ft_crossp(t_vec a, t_vec b);
 
 void			ft_camera_clear(t_cam **list);
 void			ft_light_clear(t_light **list);

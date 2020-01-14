@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 12:57:02 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/12 17:47:28 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/14 16:09:00 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,11 @@ int		ft_bmp_render(t_data *data)
 			write(data->fd, &color.b, 1);
 			write(data->fd, &color.g, 1);
 			write(data->fd, &color.r, 1);
-			write(data->fd, zero, 1);
 			x--;
 		}
 		y--;
 	}
 	return (0);
-
 }
 
 int		ft_mlx_render(t_data *data)
@@ -72,7 +70,7 @@ int		ft_mlx_render(t_data *data)
 		{
 			col = ft_col_tohex(data->amb.col) * data->amb.bright;
 			ft_ray_coll(data, ft_ray_init(data, x, y), &col);
-//			color = ft_col_torgb((unsigned int)col);
+//			color = ft_col_torgb(col);
 			ft_mlx_pixel_to_img(data, x, y, col);
 			x++;
 		}

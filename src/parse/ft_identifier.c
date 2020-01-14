@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 13:27:35 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/06 17:09:23 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/14 16:15:28 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		ft_identifier_get(char *str, int *i)
 	}
 	id[*i] = 0;
 	ret = ft_identifier_parse(id);
+//	printf("ID: %d\n", ret);
 	free(id);
 	return (ret);
 }
