@@ -6,7 +6,7 @@
 #    By: tbruinem <tbruinem@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/30 11:07:31 by tbruinem       #+#    #+#                 #
-#    Updated: 2020/01/14 20:27:32 by tbruinem      ########   odam.nl          #
+#    Updated: 2020/01/15 14:46:20 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,17 +50,11 @@ SRC = *.c
 # 		./src/utils/ft_string_utils.c \
 # 		./src/utils/ft_vector_advanced.c \
 # 		./src/utils/ft_vector_basic.c
-ifdef RAW
-SRC +=	./get_next_line/get_next_line.c \
-		./get_next_line/get_next_line_utils.c
-endif
 
 FLAGS = -O3 -I .
-ifndef RAW
 #FLAGS += -Wall -Wextra -Werror
 FLAGS += -L $(GNL_DIR) -lgnl
 FLAGS += -I minilibx_mms_20191025_beta -L minilibx_mms_20191025_beta -lmlx -framework OpenGL -framework AppKit
-endif
 FILES = $(addprefix $(SRC_DIR)/,$(SRC) )
 FILES += $(addprefix $(PARSE_DIR)/,$(SRC) )
 FILES += $(addprefix $(UTILS_DIR)/,$(SRC) )
@@ -84,11 +78,9 @@ all: $(NAME)
 
 $(NAME):
 	@echo "Compiling.."
-ifndef RAW
 	@make -C $(MLX_DIR) all
 	@make -C $(GNL_DIR) all
 	@cp -rf $(MLX_DIR)/libmlx.dylib .
-endif
 	-gcc $(FLAGS) $(FILES) -o $(NAME)
 
 clean:
@@ -100,8 +92,8 @@ endif
 	@rm -rf $(SRC:%.c=%.o)
 
 fclean: clean
-ifdef LIB
 	@echo "Force cleaning"
+ifdef LIB
 	@make -C $(GNL_DIR) fclean
 	@rm -rf libmlx.dylib
 endif

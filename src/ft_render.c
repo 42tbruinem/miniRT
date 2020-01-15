@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 12:57:02 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/15 14:08:09 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 14:52:56 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int		ft_mlx_render(t_data *data)
 		x = 0;
 		while (x < data->width)
 		{
+			if (x % 50 == 0)
+				printf("ray origin: %f, %f, %f\n", ft_ray_init(data, x, y).origin.x, ft_ray_init(data, x, y).origin.y, ft_ray_init(data, x, y).origin.z);
 			col = ft_col_mult(ft_col_init(1, 1, 1), data->amb.col, data->amb.bright);
 			ft_ray_coll(data, ft_ray_init(data, x, y), &col);
 //			color = ft_col_torgb(col);

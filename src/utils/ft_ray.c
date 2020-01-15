@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 15:53:18 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/15 14:27:34 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 14:57:41 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ t_ray	ft_ray_init(t_data *data, int x, int y)
 //	printf("rd new: %f, %f, %f\n", ray.origin.x, ray.origin.y, ray.origin.z);
 	ray.direction = ft_vec_scale(ray.direction,
 					tan((double)data->cams->fov * (M_PI / 180) / 2));
-	ray.origin = ft_c2w_apply(data->cams->prop.pivot, data->cams);
+	ray.direction = ft_vec_add(ray.direction, data->cams->prop.pivot);
+	ray.origin = data->cams->prop.pivot;
+//	ray.origin = ft_c2w_apply(data->cams->prop.pivot, data->cams);
 	ray.direction = ft_c2w_apply(ray.direction, data->cams);
 	ray.direction = ft_vec_sub(ray.direction, ray.origin);
 	ray.direction.z = 1;
