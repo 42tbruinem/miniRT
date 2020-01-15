@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:21:23 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 11:26:51 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 14:03:27 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_sphere	*ft_sphere_new(void)
 	new = malloc(sizeof(t_sphere));
 	if (!new)
 		return (new);
-	new->col = ft_col_init();
+	new->col = ft_col_init(0, 0, 0);
 	new->prop = ft_prop_init();
 	new->next = NULL;
 	new->diameter = 0;

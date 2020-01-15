@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/11 16:57:45 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/14 19:26:27 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 11:50:51 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ t_vec		ft_mat_to_vec(t_matrix mat)
 	new.t = 1;
 	return (new);
 }
-
+/* 
+Get camera right, up and forward
+construct a matrix based on those and the camera's starting position
+ */
 void	ft_lookat(t_cam *cam)
 {
 	t_vec	cam_r;
@@ -79,15 +82,21 @@ void	ft_c2w_update(t_cam *cam)
 	t_matrix	tmp1;
 	t_matrix	tmp2;
 
-	ft_matrix_rot_x(cam->prop.rot.x, tmp1);
-	ft_matrix_rot_y(cam->prop.rot.y, tmp2);
-	ft_matrix_mult(tmp1, tmp2, cam->c2w);
-	ft_matrix_dup(cam->c2w, tmp2);
-	ft_matrix_rot_z(cam->prop.rot.z, tmp1);
-	ft_matrix_mult(tmp1, tmp2, cam->c2w);
+//	ft_matrix_dup(cam->c2w, tmp2);
+//	ft_matrix_rot_x(cam->prop.rot.x, tmp1);
+//	ft_matrix_mult(tmp1, tmp2, cam->c2w);
+//	ft_matrix_dup(cam->c2w, tmp2);
+//	ft_matrix_rot_y(cam->prop.rot.y, tmp1);
+//	ft_matrix_mult(tmp1, tmp2, cam->c2w);
+//	ft_matrix_dup(cam->c2w, tmp2);
+//	ft_matrix_rot_z(cam->prop.rot.z, tmp1);
+//	ft_matrix_mult(tmp1, tmp2, cam->c2w);
+	ft_matrix_print(cam->c2w);
 	ft_matrix_dup(cam->c2w, tmp2);
 	ft_matrix_t(cam->prop.trans, tmp1);
+	ft_matrix_print(tmp1);
 	ft_matrix_mult(tmp1, tmp2, cam->c2w);
+	ft_matrix_print(cam->c2w);
 }
 
 t_vec		ft_c2w_apply(t_vec old, t_cam *cam)

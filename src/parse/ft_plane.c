@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:10:56 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 11:27:34 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 14:03:20 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_plane		*ft_plane_new(void)
 	new = malloc(sizeof(t_plane));
 	if (!new)
 		return (new);
-	new->col = ft_col_init();
+	new->col = ft_col_init(0, 0, 0);
 	new->prop = ft_prop_init();
 	new->next = NULL;
 	return (new);

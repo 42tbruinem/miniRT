@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:09:10 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 11:27:44 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 14:03:33 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_square	*ft_square_new(void)
 	new = malloc(sizeof(t_square));
 	if (!new)
 		return (new);
-	new->col = ft_col_init();
+	new->col = ft_col_init(0, 0, 0);
 	new->prop = ft_prop_init();
 	new->next = NULL;
 	new->size = 0;

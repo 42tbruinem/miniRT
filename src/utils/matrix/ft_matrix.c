@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 12:39:43 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/14 19:41:36 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 11:51:14 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void		ft_matrix_print(t_matrix mat)
 		printf("\n");
 		i++;
 	}
+	printf("\n");
 }
 
 void		ft_matrix_init(t_matrix mat)

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 12:57:02 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/14 16:09:00 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 14:08:09 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int		ft_bmp_render(t_data *data)
 {
 	int				x;
 	int				y;
-	unsigned int	col;
-	t_col			color;
+	t_col			col;
 	int				zero[4];
 
 	y = data->height;
@@ -40,15 +39,14 @@ int		ft_bmp_render(t_data *data)
 		x = data->width;
 		while (x >= 0)
 		{
-			col = ft_col_tohex(data->amb.col) * data->amb.bright;
+			col = ft_col_mult(ft_col_init(1, 1, 1), data->amb.col, data->amb.bright);
 			ft_ray_coll(data, ft_ray_init(data, x, y), &col);
-			color = ft_col_torgb((unsigned int)col);
-//			write(data->fd, &color.r, 1);
-//			write(data->fd, &color.g, 1);
-//			write(data->fd, &color.b, 1);
-			write(data->fd, &color.b, 1);
-			write(data->fd, &color.g, 1);
-			write(data->fd, &color.r, 1);
+//			write(data->fd, &col.r, 1);
+//			write(data->fd, &col.g, 1);
+//			write(data->fd, &col.b, 1);
+			write(data->fd, &col.b, 1);
+			write(data->fd, &col.g, 1);
+			write(data->fd, &col.r, 1);
 			x--;
 		}
 		y--;
@@ -60,7 +58,7 @@ int		ft_mlx_render(t_data *data)
 {
 	int				x;
 	int				y;
-	unsigned int	col;
+	t_col			col;
 
 	y = 0;
 	while (y < data->height)
@@ -68,7 +66,7 @@ int		ft_mlx_render(t_data *data)
 		x = 0;
 		while (x < data->width)
 		{
-			col = ft_col_tohex(data->amb.col) * data->amb.bright;
+			col = ft_col_mult(ft_col_init(1, 1, 1), data->amb.col, data->amb.bright);
 			ft_ray_coll(data, ft_ray_init(data, x, y), &col);
 //			color = ft_col_torgb(col);
 			ft_mlx_pixel_to_img(data, x, y, col);

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 12:20:13 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 10:37:46 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 14:05:14 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,18 @@ void	ft_mlx_img_to_win(t_data *data)
 			data->mlx.image1, 0, 0);
 }
 
-void	ft_mlx_pixel_to_img(t_data *data, int x, int y, unsigned int color)
+void	ft_mlx_pixel_to_img(t_data *data, int x, int y, t_col color)
 {
 	char	*image;
+	unsigned int	col;
 
+	col = ft_col_tohex(color);
 	if (data->mlx.frame % 2 == 0)
 		image = data->mlx.addr2;
 	else
 		image = data->mlx.addr1;
 	image += (y * data->mlx.ll + (x * (data->mlx.bpp / 8)));
-	*(unsigned int *)image = color;
+	*(unsigned int *)image = col;
 }
 
 int		ft_mlx_init(t_data *data)

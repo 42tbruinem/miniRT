@@ -6,11 +6,19 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 11:28:07 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/11 18:45:03 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 14:07:30 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+t_col			ft_col_mult(t_col col, t_col add, double bright)
+{
+	col.r += col.r * (add.r * bright);
+	col.g += col.g * (add.g * bright);
+	col.b += col.b * (add.b * bright);
+	return (col);
+}
 
 unsigned long	ft_col_tohex(t_col col)
 {
@@ -34,12 +42,12 @@ t_col			ft_col_torgb(unsigned long hex)
 	return (col);
 }
 
-t_col			ft_col_init(void)
+t_col			ft_col_init(int r, int g, int b)
 {
 	t_col	new;
 
-	new.r = 0;
-	new.g = 0;
-	new.b = 0;
+	new.r = r;
+	new.g = g;
+	new.b = b;
 	return (new);
 }

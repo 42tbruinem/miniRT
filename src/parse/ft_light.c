@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:12:12 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 11:27:21 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 14:03:13 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ t_light		*ft_light_new(void)
 
 	new = malloc(sizeof(t_light));
 	new->bright = 0.0;
-	new->col.r = 0;
-	new->col.g = 0;
-	new->col.b = 0;
+	new->col = ft_col_init(0, 0, 0);
 	new->next = NULL;
 	new->prop = ft_prop_init();
 	return (new);

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 13:36:17 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/14 20:44:40 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 12:13:44 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	ft_mlx_cam_move(int keycode, t_data *data)
 		data->cams->prop.pivot.y += 0.5;
 	if (keycode == S)
 		data->cams->prop.pivot.y -= 0.5;
+	ft_c2w_update(data->cams);
 	ft_mlx_render(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 13:53:31 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/09 11:30:17 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 13:53:38 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_collf		ft_coll_funct(int id)
 {
 	static const t_collf functs[10] = {
-		[SPH] = &ft_cray_sphere,
+		[SPH] = &ft_sphere_loop,
 //		[PLN] = &ft_cray_plane,
 //		[SQR] = &ft_cray_square,
 //		[CYL] = &ft_cray_cylinder,
