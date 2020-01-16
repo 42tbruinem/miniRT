@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 15:54:05 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/14 18:49:27 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/16 18:58:07 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ t_vec	ft_normalize(t_vec vector)
 	double	length;
 
 	length = sqrt(pow(vector.x, 2) + pow(vector.y, 2) + pow(vector.z, 2));
-	if (length == 0)
-		return (ft_vec_init(0, 0, 0));
 	vector.x /= length;
 	vector.y /= length;
 	vector.z /= length;

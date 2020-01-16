@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 17:00:45 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/16 00:02:34 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/16 11:20:03 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ enum	e_id
 {
 	ERROR = -1,
 	SPH,
+	TRI,
 	PLN,
 	SQR,
 	CYL,
-	TRI,
 	RES,
 	AMB,
 	CAM,

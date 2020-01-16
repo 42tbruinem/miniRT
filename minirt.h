@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/16 00:31:15 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/16 19:18:25 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@
 # define TRI_ID "tr"
 
 # ifndef MAX_WIDTH
-#  define MAX_WIDTH 2560
+#  define MAX_WIDTH 2880
 # endif
 # ifndef MAX_HEIGHT
-#  define MAX_HEIGHT 1440
+#  define MAX_HEIGHT 1620
 # endif
 
 int				get_next_line(int fd, char **line);
@@ -50,6 +50,7 @@ int				ft_strcmp(char *s1, char *s2);
 int				ft_atoi(char *str, int *i);
 double			ft_atod(char *str, int *i);
 void			ft_ato_i_or_f(char *str, void **ppty, int floats);
+double			ft_abs(double orig);
 
 void			ft_object_get(void **objects, t_data *data);
 void			*ft_object_iter(void *obj, int type);
@@ -93,8 +94,8 @@ int				ft_isnormalized(t_vec orientation);
 **Jump tables
 */
 
-/* typedef	int 	(*t_collf)(t_sphere *sphere, t_raydata *rdata);
-t_collf			ft_coll_funct(int id); */
+typedef	int		(*t_collf)(t_sphere *sphere, t_raydata *rdata);
+t_collf			ft_coll_funct(int id);
 typedef	int		(*t_loopf)(t_data *data, t_raydata *rdata, int raytype);
 t_loopf			ft_loop_funct(int id);
 typedef int		(*t_initf)(char *str, t_data *data, int i);
@@ -114,9 +115,10 @@ void			ft_mlx_pixtoimg(t_data *data, int x, int y, unsigned int col);
 int				ft_mlx_init(t_data *data);
 int				ft_bmp_render(t_data *data);
 
-int				ft_cray_sphere(t_ray ray, t_sphere *sphere, t_vec *hit);
+int				ft_cray_sphere(t_sphere *sphere, t_raydata *rdata);
 int				ft_loop_sphere(t_data *data, t_raydata *rdata, int raytype);
-
+int				ft_loop_triangle(t_data *data, t_raydata *rdata, int raytype);
+int				ft_loop_plane(t_data *data, t_raydata *rdata, int raytype);
 /*
 **Vector functions
 */

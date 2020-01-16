@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 13:53:31 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/15 23:42:53 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/16 11:37:11 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ t_loopf		ft_loop_funct(int id)
 {
 	static const t_loopf functs[10] = {
 		[SPH] = &ft_loop_sphere,
-//		[PLN] = &ft_loop_plane,
+		[PLN] = &ft_loop_plane,
 //		[SQR] = &ft_loop_square,
 //		[CYL] = &ft_loop_cylinder,
-//		[TRI] = &ft_loop_triangle,
+		[TRI] = &ft_loop_triangle,
 	};
 
 	return (functs[id]);

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 12:57:02 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/16 00:15:23 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/16 16:52:45 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		ft_bmp_render(t_data *data)
 	int				x;
 	int				y;
 	t_col			col;
+	t_raydata		rdata;
 	int				zero[4];
 
 	y = data->height;
@@ -40,7 +41,7 @@ int		ft_bmp_render(t_data *data)
 		while (x >= 0)
 		{
 			col = ft_col_mult(ft_col_init(1, 1, 1), data->amb.col, data->amb.bright);
-			ft_ray_coll(data, ft_ray_init(data, x, y), &col);
+			ft_cameraray(data, &rdata);
 //			write(data->fd, &col.r, 1);
 //			write(data->fd, &col.g, 1);
 //			write(data->fd, &col.b, 1);
@@ -70,7 +71,8 @@ int		ft_mlx_render(t_data *data)
 			rdata.col = ft_col_mult(ft_col_init(1, 1, 1), data->amb.col, data->amb.bright);
 			rdata.ray = ft_ray_init(data, x, y);
 			ft_cameraray(data, &rdata);
-			ft_mlx_pixel_to_img(data, x, y, col);
+			ft_lightray(data, &rdata);
+			ft_mlx_pixel_to_img(data, x, y, rdata.col);
 			x++;
 		}
 		y++;

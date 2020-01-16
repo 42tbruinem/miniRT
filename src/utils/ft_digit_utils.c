@@ -6,11 +6,18 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 17:30:34 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/07 17:19:19 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/16 18:47:29 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+double	ft_abs(double orig)
+{
+	if (orig < 0)
+		return (orig * -1);
+	return (orig);
+}
 
 int		ft_power(int pow)
 {

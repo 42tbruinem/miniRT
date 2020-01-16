@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/11 16:57:45 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/15 14:35:34 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/16 16:14:54 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ void	ft_c2w_update(t_cam *cam)
 //	ft_matrix_dup(cam->c2w, tmp2);
 //	ft_matrix_rot_z(cam->prop.rot.z, tmp1);
 //	ft_matrix_mult(tmp1, tmp2, cam->c2w);
-	ft_matrix_print(cam->c2w);
+//	ft_matrix_print(cam->c2w);
 	ft_matrix_dup(cam->c2w, tmp2);
 	ft_matrix_t(cam->prop.trans, tmp1);
-	ft_matrix_print(tmp1);
+//	ft_matrix_print(tmp1);
 	ft_matrix_mult(tmp1, tmp2, cam->c2w);
 	ft_matrix_print(cam->c2w);
 }

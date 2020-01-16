@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 17:02:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/15 23:55:40 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/16 18:44:55 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ typedef struct	s_ambient
 	t_col		col;
 }				t_ambient;
 
-
 typedef struct		s_mlx
 {
 	void			*data;
@@ -117,12 +116,11 @@ typedef struct		s_mlx
 	unsigned long	frame;
 }					t_mlx;
 
-/* typedef struct	s_colldata
+typedef struct	s_ray
 {
-	void		*object;
-	int			objtype;
-	t_vec		hit;
-}				t_colldata; */
+	t_vec		direction;
+	t_vec		origin;
+}				t_ray;
 
 typedef struct	s_raydata
 {
@@ -130,13 +128,8 @@ typedef struct	s_raydata
 	t_vec		hit;
 	t_col		col;
 	double		dist;
+	t_vec		normal;
 }				t_raydata;
-
-typedef struct	s_ray
-{
-	t_vec		direction;
-	t_vec		origin;
-}				t_ray;
 
 typedef struct	s_data
 {

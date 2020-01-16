@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 15:53:18 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/16 00:38:58 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/16 19:50:40 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,9 @@ int		ft_lightray(t_data *data, t_raydata *rdata)
 		rdata->dist = ft_vec_length(rdata->hit, data->light->prop.pivot);
 		rdata->ray.origin = rdata->hit;
 		rdata->ray.direction = ft_vec_sub(data->light->prop.pivot, rdata->hit);
-		if (ft_lightray_intersect(data, rdata) == 0)
-			//APPLY LIGHT COLOR AND BRIGHTNESS TO THE CURRENT COLOR;
+//		if (ft_lightray_intersect(data, rdata) == 0)
+//			rdata->col = ft_col_mult(rdata->col, data->light->col, data->light->bright *  (40 / (ft_dotp(rdata->ray.direction, rdata->normal))));
+//		return (color_mul(hit->color, light.color, intensity));
 		data->light = data->light->next;
 	}
 	data->light = root;
@@ -93,37 +94,22 @@ t_ray	ft_ray_init(t_data *data, int x, int y)
 	double		ratio;
 	t_ray		ray;
 
-	if (data->width > data->height)
+	if (data->width > data->height)											//get the ratio to scale x or y pixels up as needed
 		ratio = (double)data->width / (double)data->height;
 	if (data->height > data->width)
 		ratio = (double)data->height / (double)data->width;
-	ray.direction.x = (2.0 * ((x + 0.5) / (double)data->width) - 1.0);
+	ray.direction.x = (2.0 * (x + 0.5) / (double)data->width - 1.0);		//set the X direction for the ray
 	if (data->width > data->height)
 		ray.direction.x *= ratio;
-	ray.direction.y = 1.0 - (2.0 * ((y + 0.5) / (double)data->height));
+	ray.direction.y = 1.0 - 2.0 * (y + 0.5) / (double)data->height;			//set the Y direction for the ray
 	if (data->height > data->width)
 		ray.direction.y *= ratio;
+	ray.direction.z = 1;													//set the Z direction for the ray
+	ray.direction = ft_vec_scale(ray.direction,								//we scale the X and Y based on the tan of the FOV / 2 (since we keep the distance to the camera as 1(Z))
+					tan(((double)data->cams->fov / 2) * (M_PI / 180)));
+	ray.origin = data->cams->prop.pivot;									//this sets the ray origin to the camera's position
 	ray.direction.z = 1;
-//	if (x % 50 == 0)
-//		printf("ray origin:\n");
-//	ray.origin = data->cams->prop.pivot;
-//	printf("rd old: %f, %f, %f\n", ray.origin.x, ray.origin.y, ray.origin.z);
-//	ray.origin = ft_c2w_apply(data->cams->prop.pivot, data->cams);
-//	printf("rd new: %f, %f, %f\n", ray.origin.x, ray.origin.y, ray.origin.z);
-	ray.direction = ft_vec_scale(ray.direction,
-					tan((double)data->cams->fov * (M_PI / 180) / 2));
-	ray.direction = ft_vec_add(ray.direction, data->cams->prop.pivot);
-	ray.origin = data->cams->prop.pivot;
-//	ray.origin = ft_c2w_apply(data->cams->prop.pivot, data->cams);
-	ray.direction = ft_c2w_apply(ray.direction, data->cams);
-	ray.direction = ft_vec_sub(ray.direction, ray.origin);
-	ray.direction.z = 1;
-	ray.direction = ft_normalize(ray.direction);
-//	if (x % 50 == 0)
-//		printf("ray direction:\n");
-//	ray.direction = ft_c2w_apply(ray.direction, data->cams);
-//	ray.direction = ft_normalize(ray.direction);
-//	printf("ray direction: %f, %f, %f\n", ray.direction.x, ray.direction.y, ray.direction.z);
-//	ray.direction = ft_normalize(ft_vec_sub(ray.direction, ray.origin));
+	ray.direction = ft_c2w_apply(ray.direction, data->cams);				//this should apply the necessary rotations and translations to the ray
+	ray.direction = ft_normalize(ray.direction);							//then we normalize, ta -da
 	return (ray);
 }

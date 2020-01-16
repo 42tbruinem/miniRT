@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 13:36:17 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/15 12:13:44 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/16 16:51:46 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 int	ft_mlx_cam_move(int keycode, t_data *data)
 {
+	t_matrix	dup;
+	t_matrix	add;
+
 	if (keycode == Z)
 		data->cams->prop.pivot.z -= 0.5;
 	if (keycode == X)
@@ -23,7 +26,12 @@ int	ft_mlx_cam_move(int keycode, t_data *data)
 	if (keycode == A)
 		data->cams->prop.pivot.x -= 0.5;
 	if (keycode == W)
+	{
 		data->cams->prop.pivot.y += 0.5;
+//		ft_matrix_dup(data->cams->c2w, dup);
+//		ft_matrix_t(ft_vec_init(0, 0.5, 0), add);
+//		ft_matrix_mult(dup, add, data->cams->c2w);
+	}
 	if (keycode == S)
 		data->cams->prop.pivot.y -= 0.5;
 	ft_c2w_update(data->cams);
