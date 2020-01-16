@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 17:02:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/14 13:40:11 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 23:55:40 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,14 @@ typedef struct		s_mlx
 	int			objtype;
 	t_vec		hit;
 }				t_colldata; */
+
+typedef struct	s_raydata
+{
+	t_ray		ray;
+	t_vec		hit;
+	t_col		col;
+	double		dist;
+}				t_raydata;
 
 typedef struct	s_ray
 {

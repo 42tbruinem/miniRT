@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 15:53:18 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/15 14:57:41 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/16 00:38:58 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,60 @@
 **we know the length of the side: A (screenwidth / 2)
 */
 
-void	ft_ray_coll(t_data *data, t_ray ray, t_col *col)
+void	ft_cameraray(t_data *data, t_raydata *rdata)
 {
-	int		i;
+	int		obj;
 	t_vec	hit;
-	t_collf	funct;
+	t_loopf	funct;
 
-	i = SPH;
-	hit = ray.origin;
+	obj = SPH;
+	rdata->hit = rdata->ray.origin;
 	while (1)
 	{
-		funct = ft_coll_funct(i);
+		funct = ft_loop_funct(obj);
 		if (!funct)
 			return ;
-		funct(data, &hit, ray, col);
-		i++;
+		funct(data, rdata, CAMERA_RAY);
+		obj++;
 	}
+}
+
+int		ft_lightray_intersect(t_data *data, t_raydata *rdata)
+{
+	int			ret;
+	t_loopf		funct;
+	int			obj;
+
+	obj = SPH;
+	ret = 0;
+	while (1)
+	{
+		funct = ft_loop_funct(obj);
+		if (!funct || ret == 1)
+			break ;
+		ret = funct(data, rdata, LIGHT_RAY);
+		obj++;
+	}
+	return (ret);
+}
+
+int		ft_lightray(t_data *data, t_raydata *rdata)
+{
+	t_light		*root;
+	int			ret;
+
+	root = data->light;
+	while (data->light)
+	{
+		rdata->dist = ft_vec_length(rdata->hit, data->light->prop.pivot);
+		rdata->ray.origin = rdata->hit;
+		rdata->ray.direction = ft_vec_sub(data->light->prop.pivot, rdata->hit);
+		if (ft_lightray_intersect(data, rdata) == 0)
+			//APPLY LIGHT COLOR AND BRIGHTNESS TO THE CURRENT COLOR;
+		data->light = data->light->next;
+	}
+	data->light = root;
+	return (ret);
 }
 
 t_ray	ft_ray_init(t_data *data, int x, int y)

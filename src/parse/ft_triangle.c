@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:22:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/15 14:03:38 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/16 00:59:21 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,8 @@ int			ft_triangle_init(char *str, t_data *data, int i)
 	ft_triangle_addback(&data->tri, new);
 	if (ft_isinrange_int(0, 255, ppty[9], 3) == 0)
 		return (ERR_RANGE);
+	new->prop.pivot.x = (new->p1.x + new->p2.x + new->p3.x) / 3.0;
+	new->prop.pivot.y = (new->p1.y + new->p2.y + new->p3.y) / 3.0;
+	new->prop.pivot.z = (new->p1.z + new->p2.z + new->p3.z) / 3.0;
 	return (0);
 }

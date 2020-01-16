@@ -1,0 +1,42 @@
+
+t_raydata
+{
+	t_ray  ray;
+	t_col  col;
+	t_vec  hit;
+	double maxdist;
+}
+
+--------------------------------------------------
+
+camera_ray
+funct = ft_collfunct (= ft_sphere_loop);
+
+ft_sphere_loop
+collision?
+	update color;
+
+---------------------------------------------------
+
+light_ray
+funct = ft_collfunct (= ft_sphere_loop);
+
+ft_sphere_loop
+collision?
+	dont add light;
+
+---------------------------------------------------
+
+ft_sphere_loop:
+int	ret;
+take a pointer to function that returns an int;
+
+root = data->sph;
+loop over all spheres:
+	ret = function;
+data->sph = root;
+return (ret);
+
+-----------------------------------------------------
+
+int	ft_cray_sphere(t_data *data, t_ray ray, 

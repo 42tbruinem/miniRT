@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/31 16:57:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/14 16:14:56 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/15 22:49:18 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		ft_isinrange_int(int min, int max, void *property, int size)
 	return (1);
 }
 
-int		ft_is_valid(char *str)
+int		ft_typecheck(char *str)
 {
 	int i;
 	int j;
@@ -75,7 +75,7 @@ int		ft_is_valid(char *str)
 	return (1);
 }
 
-int		ft_filter_input(t_data *data, int argc, char **input)
+int		ft_validate_input(t_data *data, int argc, char **input)
 {
 	int fd;
 
@@ -94,7 +94,7 @@ int		ft_filter_input(t_data *data, int argc, char **input)
 	fd = open(input[1], O_RDONLY);
 	if (read(fd, (void *)0, 0) == -1)
 		return (ERR_FILE);
-	if (ft_is_valid(input[1]) == 0)
+	if (ft_typecheck(input[1]) == 0)
 		return (ERR_TYPE);
 	return (0);
 }

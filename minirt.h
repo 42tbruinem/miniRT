@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/15 14:05:25 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/16 00:31:15 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void			*ft_object_iter(void *obj, int type);
 /*
 **Ray functions
 */
-void	ft_ray_coll(t_data *data, t_ray ray, t_col *col);
+void			ft_cameraray(t_data *data, t_raydata *rdata);
+int				ft_lightray(t_data *data, t_raydata *rdata);
 t_ray			ft_ray_init(t_data *data, int x, int y);
 
 //int			ft_matrix_collen(double *cols);
@@ -81,8 +82,8 @@ void			ft_matrix_s(t_vec s, t_matrix new);
 **Input filtering
 */
 int				ft_error(t_data *data, int error);
-int				ft_is_valid(char *str);
-int				ft_filter_input(t_data *data, int argc, char **input);
+int				ft_typecheck(char *str);
+int				ft_validate_input(t_data *data, int argc, char **input);
 int				ft_isinrange_int(int min, int max, void *property, int size);
 int				ft_isinrange_double(double min, double max,
 				void *property, int size);
@@ -92,8 +93,10 @@ int				ft_isnormalized(t_vec orientation);
 **Jump tables
 */
 
-typedef	void	(*t_collf)(t_data *data, t_vec *hit, t_ray ray, t_col *col);
-t_collf			ft_coll_funct(int id);
+/* typedef	int 	(*t_collf)(t_sphere *sphere, t_raydata *rdata);
+t_collf			ft_coll_funct(int id); */
+typedef	int		(*t_loopf)(t_data *data, t_raydata *rdata, int raytype);
+t_loopf			ft_loop_funct(int id);
 typedef int		(*t_initf)(char *str, t_data *data, int i);
 t_initf			ft_init_funct(int id);
 
@@ -112,7 +115,7 @@ int				ft_mlx_init(t_data *data);
 int				ft_bmp_render(t_data *data);
 
 int				ft_cray_sphere(t_ray ray, t_sphere *sphere, t_vec *hit);
-void	ft_sphere_loop(t_data *data, t_vec *hit, t_ray ray, t_col *col);
+int				ft_loop_sphere(t_data *data, t_raydata *rdata, int raytype);
 
 /*
 **Vector functions
