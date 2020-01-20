@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 17:00:45 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/16 11:20:03 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/18 13:27:46 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,17 @@ typedef enum		e_key_code
 	A = 0,
 	S = 1,
 	D = 2,
+	H = 4,
 	Z = 6,
 	X = 7,
 	W = 13,
 	ZOOM_IN = 69,
 	ZOOM_OUT = 78,
+	U = 32,
+	J = 38,
+	K = 40,
+	N = 45,
+	M = 46,
 	SPACE = 49,
 	ESCAPE = 53,
 	NUM_LOCK_9 = 92,

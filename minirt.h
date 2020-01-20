@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/16 19:18:25 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/20 19:55:15 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,26 @@ t_ray			ft_ray_init(t_data *data, int x, int y);
 //int			ft_matrix_collen(double *cols);
 //int			ft_matrix_rowlen(t_matrix rows);
 //t_matrix		ft_matrix_new(int row, int col);
-void			ft_matrix_mult(t_matrix a, t_matrix b, t_matrix new);
+t_matrix		ft_matrix_mult(t_matrix a, t_matrix b);
 //void			ft_matrix_del(t_matrix mat);
 void			ft_matrix_init(t_matrix mat);
 void			ft_matrix_dup(t_matrix orig, t_matrix dup);
-void			ft_matrix_print(t_matrix mat);
+void			ft_matrix_print(t_matrix mat, char *name);
+t_vec			ft_matrix_apply(t_matrix mat, t_vec old);
 
 t_vec			ft_c2w_apply(t_vec old, t_cam *cam);
 void			ft_c2w_update(t_cam *cam);
-void			ft_lookat(t_cam *cam);
-void			ft_matrix_rot_x(double rotation, t_matrix new);
-void			ft_matrix_rot_y(double rotation, t_matrix new);
-void			ft_matrix_rot_z(double rotation, t_matrix new);
-void			ft_matrix_t(t_vec t, t_matrix new);
-void			ft_matrix_s(t_vec s, t_matrix new);
+t_matrix		ft_lookat(t_cam *cam);
+t_matrix		ft_matrix_rot_x(double rotation);
+t_matrix		ft_matrix_rot_y(double rotation);
+t_matrix		ft_matrix_rot_z(double rotation);
+t_matrix		ft_matrix_s(t_vec s);
+double		ft_deg2rad(double rotation);
+
+t_quat		ft_quat_mult(t_quat a, t_quat b);
+t_matrix	ft_quat_to_matrix(double w, double x, double y, double z);
+t_quat		ft_quat_new(t_vec axis, double angle);
+t_quat		ft_quat_init(double w, double x, double y, double z);
 
 /*
 **Input filtering
@@ -122,10 +128,12 @@ int				ft_loop_plane(t_data *data, t_raydata *rdata, int raytype);
 /*
 **Vector functions
 */
+
+void			ft_vec_print(t_vec a, char *name);
 t_vec			ft_vec_sub(t_vec a, t_vec b);
 t_vec			ft_vec_add(t_vec a, t_vec b);
 t_vec			ft_vec_scale(t_vec vector, double scalar);
-t_vec			ft_vec_init(int x, int y, int z);
+t_vec			ft_vec_init(double x, double y, double z);
 t_vec			ft_normalize(t_vec vector);
 double			ft_vec_length(t_vec a, t_vec b);
 double			ft_dotp(t_vec a, t_vec b);

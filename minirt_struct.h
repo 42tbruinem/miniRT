@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 17:02:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/16 18:44:55 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/20 19:32:40 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,15 @@ typedef struct	s_vec
 	double		x;
 	double		y;
 	double		z;
-	double		t;
 }				t_vec;
+
+typedef struct	s_quat
+{
+	double		w;
+	double		x;
+	double		y;
+	double		z;
+}				t_quat;
 
 typedef struct	s_prop
 {
@@ -36,7 +43,12 @@ typedef struct	s_col
 	int			b;
 }				t_col;
 
-typedef double	t_matrix[4][4];
+typedef struct	s_matrix
+{
+	t_vec		r1;
+	t_vec		r2;
+	t_vec		r3;
+}				t_matrix;
 
 typedef struct	s_cam
 {

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 15:59:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/16 16:02:18 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/18 17:37:18 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ int			ft_camera_init(char *str, t_data *data, int i)
 		return (ERR_RANGE);
 	if (!ft_isnormalized(new->prop.dir))
 		return (ERR_NORMAL);
-	ft_matrix_init(new->c2w);
-	ft_lookat(new);
+	new->c2w = ft_lookat(new);
 //	ft_matrix_print(new->c2w);
 //	ft_c2w_update(new);
 //	printf("I can exit\n");

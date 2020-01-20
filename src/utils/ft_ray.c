@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 15:53:18 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/16 19:50:40 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/18 17:52:59 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,12 @@ t_ray	ft_ray_init(t_data *data, int x, int y)
 	ray.direction.z = 1;													//set the Z direction for the ray
 	ray.direction = ft_vec_scale(ray.direction,								//we scale the X and Y based on the tan of the FOV / 2 (since we keep the distance to the camera as 1(Z))
 					tan(((double)data->cams->fov / 2) * (M_PI / 180)));
+	ray.direction.z = -1;
+//	ft_matrix_print(data->cams->c2w, "cam2world");
+//	ft_vec_print(ray.direction, "old dir");
+	ray.direction = ft_matrix_apply(data->cams->c2w, ray.direction);		//this should apply the necessary rotations and translations to the ray
 	ray.origin = data->cams->prop.pivot;									//this sets the ray origin to the camera's position
-	ray.direction.z = 1;
-	ray.direction = ft_c2w_apply(ray.direction, data->cams);				//this should apply the necessary rotations and translations to the ray
 	ray.direction = ft_normalize(ray.direction);							//then we normalize, ta -da
+//	ft_vec_print(ray.direction, "new dir");
 	return (ray);
 }

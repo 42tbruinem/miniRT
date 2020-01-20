@@ -6,11 +6,29 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 13:36:17 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/16 16:51:46 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/20 10:52:45 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	ft_mlx_cam_rot(int keycode, t_data *data)
+{
+	if (keycode == H)
+		data->cams->c2w = ft_matrix_mult(data->cams->c2w, ft_matrix_rot_y(-5));
+	if (keycode == U)
+		data->cams->c2w = ft_matrix_mult(data->cams->c2w, ft_matrix_rot_x(5));
+	if (keycode == J)
+		data->cams->c2w = ft_matrix_mult(data->cams->c2w, ft_matrix_rot_x(-5));
+	if (keycode == K)
+		data->cams->c2w = ft_matrix_mult(data->cams->c2w, ft_matrix_rot_y(5));
+	if (keycode == N)
+		data->cams->c2w = ft_matrix_mult(data->cams->c2w, ft_matrix_rot_z(-5));
+	if (keycode == M)
+		data->cams->c2w = ft_matrix_mult(data->cams->c2w, ft_matrix_rot_z(5));
+	ft_mlx_render(data);
+	return (1);
+}
 
 int	ft_mlx_cam_move(int keycode, t_data *data)
 {
@@ -26,15 +44,9 @@ int	ft_mlx_cam_move(int keycode, t_data *data)
 	if (keycode == A)
 		data->cams->prop.pivot.x -= 0.5;
 	if (keycode == W)
-	{
 		data->cams->prop.pivot.y += 0.5;
-//		ft_matrix_dup(data->cams->c2w, dup);
-//		ft_matrix_t(ft_vec_init(0, 0.5, 0), add);
-//		ft_matrix_mult(dup, add, data->cams->c2w);
-	}
 	if (keycode == S)
 		data->cams->prop.pivot.y -= 0.5;
-	ft_c2w_update(data->cams);
 	ft_mlx_render(data);
 	return (0);
 }
@@ -60,5 +72,8 @@ int	ft_mlx_keypress(int keycode, void *param)
 	if (keycode == Z || keycode == X || keycode == W ||
 		keycode == S || keycode == A || keycode == D)
 		return (ft_mlx_cam_move(keycode, data));
+	if (keycode == U || keycode == H || keycode == J ||
+		keycode == K || keycode == N || keycode == M)
+		return (ft_mlx_cam_rot(keycode, data));
 	return (0);
 }
