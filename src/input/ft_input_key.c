@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 13:36:17 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/20 10:52:45 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/21 18:39:08 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 int	ft_mlx_cam_rot(int keycode, t_data *data)
 {
 	if (keycode == H)
-		data->cams->c2w = ft_matrix_mult(data->cams->c2w, ft_matrix_rot_y(-5));
-	if (keycode == U)
-		data->cams->c2w = ft_matrix_mult(data->cams->c2w, ft_matrix_rot_x(5));
-	if (keycode == J)
-		data->cams->c2w = ft_matrix_mult(data->cams->c2w, ft_matrix_rot_x(-5));
+		data->cams->c2w = ft_newrotate(data, ft_quat_new(0, 1, 0, -ROT_SPEED));
 	if (keycode == K)
-		data->cams->c2w = ft_matrix_mult(data->cams->c2w, ft_matrix_rot_y(5));
+		data->cams->c2w = ft_newrotate(data, ft_quat_new(0, 1, 0, ROT_SPEED));
+	if (keycode == U)
+		data->cams->c2w = ft_newrotate(data, ft_quat_new(1, 0, 0, ROT_SPEED));
+	if (keycode == J)
+		data->cams->c2w = ft_newrotate(data, ft_quat_new(1, 0, 0, -ROT_SPEED));
 	if (keycode == N)
-		data->cams->c2w = ft_matrix_mult(data->cams->c2w, ft_matrix_rot_z(-5));
+		data->cams->c2w = ft_newrotate(data, ft_quat_new(0, 0, 1, ROT_SPEED));
 	if (keycode == M)
-		data->cams->c2w = ft_matrix_mult(data->cams->c2w, ft_matrix_rot_z(5));
+		data->cams->c2w = ft_newrotate(data, ft_quat_new(0, 0, 1, -ROT_SPEED));
+	ft_quat_print(data->cams->quat, "after adding a rotation");
+	ft_matrix_print(data->cams->c2w, "matrix from quat");
 	ft_mlx_render(data);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/20 19:55:15 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/21 19:09:26 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <sys/types.h>
 
 # define FILE_TYPE ".rt"
+# define ROT_SPEED 5
 
 # define RES_ID "R"
 # define AMB_ID "A"
@@ -79,11 +80,16 @@ t_matrix		ft_matrix_rot_y(double rotation);
 t_matrix		ft_matrix_rot_z(double rotation);
 t_matrix		ft_matrix_s(t_vec s);
 double		ft_deg2rad(double rotation);
+double		ft_rad2deg(double rotation);
 
 t_quat		ft_quat_mult(t_quat a, t_quat b);
-t_matrix	ft_quat_to_matrix(double w, double x, double y, double z);
-t_quat		ft_quat_new(t_vec axis, double angle);
+t_matrix	ft_quat_to_matrix(t_quat quat);
+t_quat		ft_quat_new(double x, double y, double z, double angle);
 t_quat		ft_quat_init(double w, double x, double y, double z);
+t_quat		ft_quat_lookat(t_vec to, t_vec from);
+t_matrix	ft_newrotate(t_data *data, t_quat tmp);
+void		ft_quat_print(t_quat quat, char *name);
+t_quat		ft_quat_normalize(t_quat a);
 
 /*
 **Input filtering
@@ -134,7 +140,7 @@ t_vec			ft_vec_sub(t_vec a, t_vec b);
 t_vec			ft_vec_add(t_vec a, t_vec b);
 t_vec			ft_vec_scale(t_vec vector, double scalar);
 t_vec			ft_vec_init(double x, double y, double z);
-t_vec			ft_normalize(t_vec vector);
+t_vec			ft_vec_normalize(t_vec vector);
 double			ft_vec_length(t_vec a, t_vec b);
 double			ft_dotp(t_vec a, t_vec b);
 t_vec			ft_crossp(t_vec a, t_vec b);

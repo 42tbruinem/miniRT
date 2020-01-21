@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 12:39:43 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/20 20:06:33 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/21 16:31:57 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,11 @@ t_matrix	ft_matrix_mult(t_matrix a, t_matrix b)
 	new.r3.x = a.r1.x * b.r3.x + a.r2.x * b.r3.y + a.r3.x * b.r3.z;
 	new.r3.y = a.r1.y * b.r3.x + a.r2.x * b.r3.y + a.r3.y * b.r3.z;
 	new.r3.z = a.r1.y * b.r3.x + a.r2.x * b.r3.y + a.r3.z * b.r3.z;
-	new.r1 = ft_normalize(new.r1);
-	new.r2 = ft_normalize(new.r2);
-	new.r3 = ft_normalize(new.r3);
+	new.r1 = ft_vec_normalize(new.r1);
+	new.r2 = ft_vec_normalize(new.r2);
+	new.r3 = ft_vec_normalize(new.r3);
 	ft_matrix_print(new, "new c2w");
 	return (new);
-}
-
-t_matrix	ft_lookat_quat(t_cam *cam)
-{
-	t_matrix	from_quat;
-	t_vec		axis;
-	t_vec		to;
-	double		angle;
-	double 		normal;
-
-	to = vec3_normalize(vec3_sub(target, position));		//subtract target from position, to get the forward direction
-	angle = acos(dotproduct(vec3_new(0.0, 0.0, 1.0), to));	//take the dotproduct of 0,0,1 and the forward direction, then acos to get the angle between those
-	axis = vec3_normalize(crossproduct(vec3_new(0.0, 0.0, 1.0), to));	//cross of 0,0,1 and forward
-//	if (vec3_sqr(axis) > -EPSILON && vec3_sqr(axis) < EPSILON)			//if they're the same or close to the same
-//	{
-//		printvec(axis, "axis be on that EPSILON shit, setting to [0,1,0] now");
-//		axis = vec3_new(0.0, 1.0, 0.0);
-//	}
-//	normal = sqrt(1.0 / (pow(cos(angle), 2.0) + pow(axis.x * sin(angle), 2.0) + pow(axis.y * sin(angle), 2.0) + pow(axis.z * sin(angle), 2.0)));
-//	from_quat = quat_to_matrix(cos(angle) * normal, axis.x * sin(angle) * normal, axis.y * sin(angle) * normal, axis.z * sin(angle) * normal);
-	return (mat4_mulrbx(from_quat, position));
-}	
 }
 
 t_matrix	ft_lookat(t_cam *cam)
@@ -88,11 +66,12 @@ t_matrix	ft_lookat(t_cam *cam)
 	t_vec		cam_u;
 
 	ft_vec_print(cam->prop.dir, "direction");
-	cam_f = ft_normalize(ft_vec_sub(cam->prop.pivot,
+	cam_f = ft_vec_normalize(ft_vec_sub(cam->prop.pivot,
 			ft_vec_add(cam->prop.pivot, cam->prop.dir)));
 	ft_vec_print(cam_f, "camera forward");
 	cam_r = ft_crossp(ft_vec_init(0, 1, 0), cam_f);
 	cam_u = ft_crossp(cam_f, cam_r);
+	ft_vec_print(cam_u, "lookat up vector");
 	new.r1.x = cam_r.x;
 	new.r1.y = cam_u.x;
 	new.r1.z = cam_f.x;

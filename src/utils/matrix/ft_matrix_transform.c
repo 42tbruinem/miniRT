@@ -6,11 +6,16 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/11 16:23:57 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/18 18:20:06 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/21 17:50:49 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+double		ft_rad2deg(double rotation)
+{
+	return (rotation * (180 / M_PI));
+}
 
 double		ft_deg2rad(double rotation)
 {

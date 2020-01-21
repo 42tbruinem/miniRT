@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 17:02:04 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/20 19:32:40 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/21 15:49:16 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct	s_cam
 	int				fov;
 	t_matrix		c2w;
 	struct s_cam	*next;
+	t_quat			quat;
 }				t_cam;
 
 typedef struct	s_light

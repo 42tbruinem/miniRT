@@ -6,13 +6,13 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 15:54:05 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/16 18:58:07 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/21 15:24:36 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vec	ft_normalize(t_vec vector)
+t_vec	ft_vec_normalize(t_vec vector)
 {
 	double	length;
 
