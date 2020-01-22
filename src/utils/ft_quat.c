@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/20 15:27:02 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/21 20:54:47 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/22 16:25:31 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_quat		ft_quat_new(double x, double y, double z, double angle)
 {
 	t_quat	new;
 
-	angle = ft_deg2rad(angle);
+	angle = ft_deg2rad(angle / 2);
 	new.w = cos(angle);
 	new.x = x * sin(angle);
 	new.y = y * sin(angle);
@@ -88,6 +88,15 @@ t_matrix	ft_quat_to_matrix(t_quat quat)
 	return (new);
 }
 
+t_quat		ft_quat_scale(t_quat a, double scalar)
+{
+	a.w *= scalar;
+	a.x *= scalar;
+	a.y *= scalar;
+	a.z *= scalar;
+	return (a);
+}
+
 t_quat		ft_quat_mult(t_quat a, t_quat b)
 {
 	t_quat	new;
@@ -114,14 +123,29 @@ t_quat		ft_quat_lookat(t_vec to, t_vec from)
 	else
 		up = ft_crossp(to, from);
 	return (ft_quat_normalize(ft_quat_init(sum, up.x, up.y, up.z))); */
-	double	angle;
+/* 	double	angle;
 	t_vec	up;
 
 	angle = acos(ft_dotp(ft_vec_normalize(to), ft_vec_normalize(from)));
 	up = ft_vec_normalize(ft_crossp(to, from));
-//	ft_vec_print(up, "quat lookat up vector");
-	ft_quat_print(ft_quat_new(up.x, up.y, up.z, ft_rad2deg(angle)), "lookat quat");
-	return (ft_quat_new(up.x, up.y, up.z, ft_rad2deg(angle)));
+//	ft_quat_print(ft_quat_new(up.x, up.y, up.z, ft_rad2deg(angle)), "lookat quat");
+	return (ft_quat_new(up.x, up.y, up.z, ft_rad2deg(angle))); */
+	double	angle;
+	double	length;
+	t_vec	axis;
+	t_quat	lookat;
+
+	angle = acos(ft_dotp(ft_vec_normalize(to), ft_vec_normalize(from)));
+	axis = ft_vec_normalize(ft_crossp(to, from));
+	length = ft_vec_length(ft_vec_init(0, 0, 0), axis);
+	printf("length of up vector %f\n", length);
+	if (length > -EPSILON && length < EPSILON)
+	{
+		printf("pepsi land\n");
+		axis = ft_vec_init(0, 0, -1);
+	}
+	lookat = ft_quat_new(axis.x, axis.y, axis.z, ft_rad2deg(angle * 2));
+	return (lookat);
 }
 
 t_matrix	ft_newrotate(t_data *data, t_quat new)

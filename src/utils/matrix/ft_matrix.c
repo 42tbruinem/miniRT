@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 12:39:43 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/21 16:31:57 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/21 21:00:28 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_vec		ft_matrix_apply(t_matrix mat, t_vec old)
 	new.x = old.x * mat.r1.x + old.y * mat.r2.x + old.z * mat.r3.x;
 	new.y = old.x * mat.r1.y + old.y * mat.r2.y + old.z * mat.r3.y;
 	new.z = old.x * mat.r1.z + old.y * mat.r2.z + old.z * mat.r3.z;
-	new.x *= -1;
 	return (new);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 10:44:24 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/21 19:09:26 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/22 16:45:01 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 # define FILE_TYPE ".rt"
 # define ROT_SPEED 5
+# define EPSILON 1e-6
 
 # define RES_ID "R"
 # define AMB_ID "A"

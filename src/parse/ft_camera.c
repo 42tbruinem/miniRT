@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 15:59:30 by tbruinem       #+#    #+#                */
-/*   Updated: 2020/01/21 19:09:44 by tbruinem      ########   odam.nl         */
+/*   Updated: 2020/01/22 16:18:54 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ int			ft_camera_init(char *str, t_data *data, int i)
 	if (!ft_isnormalized(new->prop.dir))
 		return (ERR_NORMAL);
 	new->quat = ft_quat_init(1, 0, 0, 0);
-	new->quat = ft_quat_mult(ft_quat_normalize(ft_quat_lookat(ft_vec_init(1, 0, 0),
-				new->prop.dir)), new->quat);
+	new->quat = ft_quat_mult(ft_quat_lookat(ft_vec_init(1, 0, 0),
+				new->prop.dir), new->quat);
 	ft_quat_print(new->quat, "init * lookat = ");
 	new->c2w = ft_quat_to_matrix(new->quat);
 	ft_matrix_print(new->c2w, "matrix from quat");
